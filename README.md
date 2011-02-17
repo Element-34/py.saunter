@@ -32,7 +32,7 @@ With Page Objects
 
 As you can see, not only is the script that uses POs [slightly] more human readable, but it is much more maintainable since it really does separate the page interface from the implementation so that _when_ something on the page changes only the POs themselves need to change and not ten billion scripts.
 
-For more information on Page Objects in Python see [this article I wrote for the Pragmatic Magazine] (http://www.pragprog.com/magazines/2010-08/page-objects-in-python) -- which has some bugs and I've evolved it a bit, but its the basis for everything else.
+For more information on Page Objects in Python see [this article I wrote for the Pragmatic Magazine](http://www.pragprog.com/magazines/2010-08/page-objects-in-python) -- which has some bugs and I've evolved it a bit, but its the basis for everything else.
 
 Installation
 ------------
@@ -83,14 +83,14 @@ When working on a specific script it is often useful to add a tag of 'debug' or 
 Jenkins Integration
 -------------------
 Integration with the Jenkins CI server (http://jenkins-ci.org/) is a snap
-# Create a new 'free-style' job
-# Configure the job as you would normally providing it the necessary SVN credentials, polling, etc.
-# as the build step you want something like
+1. Create a new 'free-style' job
+2. Configure the job as you would normally providing it the necessary SVN credentials, polling, etc.
+3. as the build step you want something like
 
-./run.sh tags=foo -a tags=bar
+    ./run.sh tags=foo -a tags=bar
 
-# the junit report is in logs/latest.xml. Even though each run produces its own result, a copy is made to latest.xml. A clone of which is stored in the job-specific directory
-# I would suggest three chained jobs like:
+4. the junit report is in logs/latest.xml. Even though each run produces its own result, a copy is made to latest.xml. A clone of which is stored in the job-specific directory
+5. I would suggest three chained jobs like:
 * unit
   * tags=deep
   * tags=shallow
@@ -99,15 +99,15 @@ Config files
 ------------
 By default, the framework will look in support/conf for a file called selenium.ini. There should never be a file with that name checked in to make it slightly more environment-proof. Instead, create a symlink or copy a file in place and rename it.
 
-Adam-Gouchers-MacBook:conf adam$ ls -l
-total 16
-lrwxr-xr-x  1 adam  staff  17  4 Jan 11:18 selenium.ini -> selenium.ini.default
--rw-r--r--@ 1 adam  staff  85  4 Jan 10:18 selenium.ini.default
-Adam-Gouchers-MacBook:conf adam$ 
+    Adam-Gouchers-MacBook:conf adam$ ls -l
+    total 16
+    lrwxr-xr-x  1 adam  staff  17  4 Jan 11:18 selenium.ini -> selenium.ini.default
+    -rw-r--r--@ 1 adam  staff  85  4 Jan 10:18 selenium.ini.default
+    Adam-Gouchers-MacBook:conf adam$ 
 
 This allows for individual config values as well as ones for various CI jobs. For implementation information and usage see http://element34.ca/blog/configuration-files-in-python but the gist of it is any class that inherits from CustomTestCase will have a self.cf attribute which has access to the config file information.
 
-self.cf.get("SauceLabs", "ondemand")
+    self.cf.get("SauceLabs", "ondemand")
 
 will for instance read the 'ondemand' key from the 'SauceLabs' section.
 
@@ -115,9 +115,9 @@ Documentation
 -------------
 
 The Page Objects are all documented using [Sphinx](http://sphinx.pocoo.org/). To generate the docs
-- make sure your PYTHONPATH includes both support/selenium and modules as things need to be importable for parsing
-- cd docs
-- make html
+* make sure your PYTHONPATH includes both the scripts and modules dirs as things need to be importable for parsing
+* cd docs
+* make html
 
 The generated docs will be readable from docs/build/html/index.html.
 
