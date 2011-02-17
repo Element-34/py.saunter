@@ -91,7 +91,7 @@ Integration with the Jenkins CI server (http://jenkins-ci.org/) is a snap
 
 4. the junit report is in logs/latest.xml. Even though each run produces its own result, a copy is made to latest.xml. A clone of which is stored in the job-specific directory
 5. I would suggest three chained jobs like:
-* unit
+  * unit
   * tags=deep
   * tags=shallow
 
@@ -143,8 +143,8 @@ It has been pointed out to me that what I have done to share the established con
 
 The actual scripts have no need to know about the connection.
 
-Intermediary Parent
--------------------
+Custom super class
+------------------
 If you look at the the actual script you'll notice that it extends _CustomTestCase_ and not _unittest.TestCase_ as you might expect. This little layer of redirection lets us add custom asserts and/or exceptions for readability in our scripts.
 
 Custom synchronization would go in the _BasePage_ class as our scripts will no longer need to worry about it -- that a responsibility of the PO.
