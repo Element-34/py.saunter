@@ -176,3 +176,12 @@ Selenium IDE has this notion of verify* which are apparently what are called 'so
 Logging
 -------
 Logging is done through the standard [logging](http://docs.python.org/library/logging.html). Use logging intelligently in your scripts. As in, use it _very_ sparingly. I coach people to basically only use it to log things that matter and were randomly generated (like usernames, passwords, email addresses) that could assist in debugging a script failure.
+
+Server Control
+--------------
+One way to make sure that the Selenium Server is on the machine _and running_ is to use Puppet or similar configuration management tools. Another way to to embed it in the repo with the rest of the script and then write a little wrapper around it. Which I have done.
+
+    python modules/SeleniumServer.py --check
+    if [ $? = 1 ]; then
+      python modules/SeleniumServer.py --start
+    fi

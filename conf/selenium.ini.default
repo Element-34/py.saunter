@@ -1,0 +1,12 @@
+[General]
+ondemand: false 
+
+[Selenium]
+server_host: localhost
+server_port: 4444
+browser: *firefox
+base_url: https://saucelabs.com/
+ 
+[SauceLabs]
+username: adam@element34.ca
+password: monkey
