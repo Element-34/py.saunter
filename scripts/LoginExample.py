@@ -39,7 +39,7 @@ class LoginExample(CustomTestCase.CustomTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @attr(tags=['deep', 'website', 'login', 'adam'])
+    @attr(tags=['deep', 'website', 'login'])
     def incorrect_login_from_csv(self):
         h = HomePage()
         h.open_default_url()
@@ -51,5 +51,20 @@ class LoginExample(CustomTestCase.CustomTestCase):
         l.username = data['username']
         l.password = data['password']
         
+        l.do_login()
+        self.assertEqual(l.error_message, "Incorrect username or password.")
+
+    @attr(tags=['deep', 'website', 'login', 'adam'])
+    def incorrect_login_from_sqlite3(self):
+        h = HomePage()
+        h.open_default_url()
+        l = h.go_to_login_page()
+
+        from providers.sqlite3_provider import DBProvider
+        p = DBProvider()
+        data = p.get_random_user()
+        l.username = data['username']
+        l.password = data['password']
+
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")

@@ -204,3 +204,6 @@ _django provider_
 One reason to use Python as the language for automation with Selenium is if you are using Django. By being able to access the Models of the application you can source information from the Django itself.
 
 By using this integration you can also nicely address the 'oracle problem' by validating what is seen in the browser is also in the database.
+
+_database provider_
+If you are not using Django, then you have to reach into the database itself. In this example, the database is a sqlite3 one, but the Python database API is standardized so its just a matter of switching out the initial connection
