@@ -13,7 +13,7 @@ class CustomTestCase(unittest.TestCase):
     def setUp(self):
         self.verificationErrors = []
         self.cf = ConfigWrapper.ConfigWrapper().config
-        if self.cf.get("SauceLabs", "ondemand"):
+        if self.cf.getboolean("SauceLabs", "ondemand"):
             host = self.cf.get("SauceLabs", "server_host")
             port = self.cf.get("SauceLabs", "server_port")
             j = {}
