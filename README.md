@@ -38,10 +38,10 @@ Installation
 ------------
 In order to make the most out of Selenium and Python; and to use the example code here, you need to
 
-sudo pip install nose
-sudo pip install unittest2
-sudo pip install sphinx
-sudo pip install selenium
+* sudo pip install nose
+* sudo pip install unittest2
+* sudo pip install sphinx
+* sudo pip install selenium
 
 Note: On OSX, use something other than the default Python installation; it doesn't like easy_install/pip much
 
