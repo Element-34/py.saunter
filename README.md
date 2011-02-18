@@ -196,3 +196,6 @@ Hard-coded data is all sorts of evil. There are a number of ways to address this
 
 _random generators
 If you are going to seriously automate, you need to read, and understand the Python's [random module](http://docs.python.org/library/random.html). It is used in conjunction of with the [string module](http://docs.python.org/library/string.html) to create random strings -- with the possibility of whitespace in it in the StringData 'generator'. Add and tailor to suit.
+
+_csv provider_
+Another option is to load data from an external source, like a csv file.

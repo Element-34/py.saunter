@@ -2,8 +2,6 @@ import CustomTestCase
 
 from pages.HomePage import HomePage
 
-from providers.StringData import random_string
-
 from nose.plugins.attrib import attr
 from nose.plugins.skip import SkipTest
 
@@ -33,7 +31,25 @@ class LoginExample(CustomTestCase.CustomTestCase):
         h = HomePage()
         h.open_default_url()
         l = h.go_to_login_page()
+        
+        from generators.StringData import random_string
         l.username = random_string(5)
         l.password = random_string()
+        
+        l.do_login()
+        self.assertEqual(l.error_message, "Incorrect username or password.")
+
+    @attr(tags=['deep', 'website', 'login', 'adam'])
+    def incorrect_login_from_csv(self):
+        h = HomePage()
+        h.open_default_url()
+        l = h.go_to_login_page()
+        
+        from providers.csv_provider import CSVProvider
+        p = CSVProvider('invalid_usernames.csv')
+        data = p.randomRow()
+        l.username = data['username']
+        l.password = data['password']
+        
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
