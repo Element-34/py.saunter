@@ -6,6 +6,7 @@ base_url: https://saucelabs.com/
  
 [SauceLabs]
 ondemand: true
+get_video: true
 username: your_username
 key: your-key
 server_host: ondemand.saucelabs.com 
