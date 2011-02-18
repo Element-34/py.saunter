@@ -26,3 +26,9 @@ class CustomTestCase(unittest.TestCase):
         """
         self.selenium.stop()
         self.assertEqual([], self.verificationErrors)
+
+    def verifyEqual(self, want, got):
+        try:
+            self.assertEqual(want, got)
+        except AssertionError, e:
+            self.verificationErrors.append(str(e))
