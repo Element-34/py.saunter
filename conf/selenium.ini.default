@@ -10,3 +10,7 @@ base_url: https://saucelabs.com/
 [SauceLabs]
 username: adam@element34.ca
 password: monkey
+
+[Django]
+installation: /path/to/django/install
+app: app_name

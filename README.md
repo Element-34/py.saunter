@@ -199,3 +199,8 @@ If you are going to seriously automate, you need to read, and understand the Pyt
 
 _csv provider_
 Another option is to load data from an external source, like a csv file.
+
+_django provider_
+One reason to use Python as the language for automation with Selenium is if you are using Django. By being able to access the Models of the application you can source information from the Django itself.
+
+By using this integration you can also nicely address the 'oracle problem' by validating what is seen in the browser is also in the database.
