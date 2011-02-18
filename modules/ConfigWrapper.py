@@ -11,7 +11,7 @@ class ConfigWrapper(object):
 
     def configure(self, config = "selenium.ini"):
         self.config = ConfigParser.RawConfigParser()
-        self.config.readfp(open(os.path.join("..", "support", "conf", config)))
+        self.config.readfp(open(os.path.join("..", "conf", config)))
 
 # initialize the singleton
 cf = ConfigWrapper().configure()

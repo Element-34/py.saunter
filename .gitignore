@@ -1,2 +1,3 @@
 conf/*.ini
 *.pyc
+logs/*.xml

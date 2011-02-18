@@ -188,4 +188,4 @@ One way to make sure that the Selenium Server is on the machine _and running_ is
     
 Exceptions
 ----------
-Selenium will happily throw a standard exception when something times out or an incorrect locator. But since this is going to be customized for your own project, it makes sense that the project should have its own set of exceptions. Custom synchronization methods should all throw their own custom exceptions. This sample project provides a base exception for that tree
+Selenium will happily throw a standard exception when something times out or an incorrect locator. But since this is going to be customized for your own project, it makes sense that the project should have its own set of exceptions. Custom synchronization methods should all throw their own custom exceptions. This sample project provides a base exception for that tree.

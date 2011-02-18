@@ -2,9 +2,7 @@ import unittest2 as unittest
 
 import logging
 
-from pages.login_page import LoginPage
 from SeleniumWrapper import SeleniumWrapper as wrapper
-from providers.LoginProviders import StaticProvider
 
 import ConfigWrapper
 import string
