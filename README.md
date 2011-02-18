@@ -189,3 +189,10 @@ One way to make sure that the Selenium Server is on the machine _and running_ is
 Exceptions
 ----------
 Selenium will happily throw a standard exception when something times out or an incorrect locator. But since this is going to be customized for your own project, it makes sense that the project should have its own set of exceptions. Custom synchronization methods should all throw their own custom exceptions. This sample project provides a base exception for that tree.
+
+Data Providers
+--------------
+Hard-coded data is all sorts of evil. There are a number of ways to address this.
+
+_random_
+If you are going to seriously automate, you need to read, and understand the Python's [random module](http://docs.python.org/library/random.html). It is used in conjunction of with the [string module](http://docs.python.org/library/string.html) to create random strings -- with the possibility of whitespace in it in the StringData 'provider'
