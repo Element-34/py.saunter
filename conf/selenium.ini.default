@@ -1,6 +1,3 @@
-[General]
-ondemand: false 
-
 [Selenium]
 server_host: localhost
 server_port: 4444
@@ -8,8 +5,14 @@ browser: *firefox
 base_url: https://saucelabs.com/
  
 [SauceLabs]
-username: adam@element34.ca
-password: monkey
+ondemand: true
+username: your_username
+key: your-key
+server_host: ondemand.saucelabs.com 
+server_port: 4444
+os: Windows 2003
+browser: *firefox
+browser_version: 3.6.
 
 [Django]
 installation: /path/to/django/install
