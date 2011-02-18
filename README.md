@@ -151,17 +151,19 @@ Custom synchronization would go in the _BasePage_ class as our scripts will no l
 
 Sauce Labs OnDemand
 -------------------
-Running your scripts locally or in the OnDemand cloud is simply a matter of setting 
+Running your scripts locally or in the OnDemand cloud is simply a matter of setting the various bits in the SauceLabs section of your selenium.ini file
 
     [SauceLabs]
-    ondemand: True
-    username: adamgouhcer
-    key: my_key
-    ...
-    
-to _True_ and adjusting for which OS and browser combination you desire. 
+    ondemand: true
+    username: your_username
+    key: your-key
+    server_host: ondemand.saucelabs.com 
+    server_port: 4444
+    os: Windows 2003
+    browser: *firefox
+    browser_version: 3.6.
 
-Notice as well that in the intermediary class, the teardown method will set the OnDemand job name and other interesting bits as well.
+During teardown, the job name, result and tags are set in the OnDemand job information
 
 Soft Asserts
 ------------

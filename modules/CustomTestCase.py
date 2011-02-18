@@ -1,19 +1,18 @@
 import unittest2 as unittest
 
-import json
 import logging
 
 from SeleniumWrapper import SeleniumWrapper as wrapper
 
 import ConfigWrapper
-import string
-import random
 
 class CustomTestCase(unittest.TestCase):
     def setUp(self):
         self.verificationErrors = []
         self.cf = ConfigWrapper.ConfigWrapper().config
         if self.cf.getboolean("SauceLabs", "ondemand"):
+            import json
+            
             host = self.cf.get("SauceLabs", "server_host")
             port = self.cf.get("SauceLabs", "server_port")
             j = {}
@@ -37,6 +36,23 @@ class CustomTestCase(unittest.TestCase):
         """
         This method runs after every 'test' method
         """
+        if self.cf.getboolean("SauceLabs", "ondemand"):
+            j = {}
+
+            # name
+            j["name"] = self._testMethodName
+
+            # result
+            if (len(self._resultForDoCleanups.result.failures) != 0) or \
+               (len(self._resultForDoCleanups.result.errors) != 0) or \
+               (len(self.verificationErrors) != 0):
+                j["passed"] = False
+            else:
+                j["passed"] = True
+
+            # tags
+            j["tags"] = getattr(getattr(self, self._testMethodName), 'tags')
+            self.selenium.set_context('sauce: job-info=%s' % json.dumps(j))
         self.selenium.stop()
         self.assertEqual([], self.verificationErrors)
 

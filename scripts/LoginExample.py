@@ -54,7 +54,7 @@ class LoginExample(CustomTestCase.CustomTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @attr(tags=['deep', 'website', 'login', 'adam'])
+    @attr(tags=['deep', 'website', 'login'])
     def incorrect_login_from_sqlite3(self):
         h = HomePage()
         h.open_default_url()
@@ -68,3 +68,13 @@ class LoginExample(CustomTestCase.CustomTestCase):
 
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
+        
+    @attr(tags=['deep', 'website', 'login'])
+    def incorrect_login_fails(self):
+        h = HomePage()
+        h.open_default_url()
+        l = h.go_to_login_page()
+        l.username = "foo"
+        l.password = "bar"
+        l.do_login()
+        self.assertEqual(l.error_message, "This message is deliberately incorrect to trigger a failed test.")
