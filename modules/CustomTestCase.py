@@ -62,35 +62,41 @@ class CustomTestCase(unittest.TestCase):
         self.selenium.stop()
 
         if self.cf.getboolean("SauceLabs", "ondemand"):
-            if self.cf.getboolean("SauceLabs", "get_video"):
-                import os.path
-                import time
-                import urllib2
+            if self.cf.getboolean("SauceLabs", "get_video") or self.cf.getboolean("SauceLabs", "get_log"):
+                def fetch_artifact(which):
+                    import os.path
+                    import time
+                    import urllib2
+
+                    auth_handler = urllib2.HTTPBasicAuthHandler()
+                    auth_handler.add_password("Sauce", "https://saucelabs.com/", self.cf.get("SauceLabs", "username"), self.cf.get("SauceLabs", "key"))
+                    opener = urllib2.build_opener(auth_handler)
+                    urllib2.install_opener(opener)
+
+                    which_url = "https://saucelabs.com/rest/%s/jobs/%s/results/%s" % (self.cf.get("SauceLabs", "username"), self.sauce_session, which)
+                    code = 404
+                    while code == 404:
+                        req = urllib2.Request(which_url)
+                        try:
+                            response = urllib2.urlopen(req)
+                            # implicit
+                            code = 200
+                        except urllib2.URLError, e:
+                            if e.code == 404:
+                                code = e.code
+                                time.sleep(2)
+                            if e.code == 401:
+                                print("401'ing -- this shouldn't be happening...")
+                                break
+
+                    artifact = open(os.path.join(os.path.dirname(__file__), "..", "logs", which), "wb")
+                    artifact.write(response.read())
+                    
+                if self.cf.getboolean("SauceLabs", "get_video"):
+                    fetch_artifact("video.flv")
                 
-                auth_handler = urllib2.HTTPBasicAuthHandler()
-                auth_handler.add_password("Sauce", "https://saucelabs.com/", self.cf.get("SauceLabs", "username"), self.cf.get("SauceLabs", "key"))
-                opener = urllib2.build_opener(auth_handler)
-                urllib2.install_opener(opener)
-
-                video_url = "https://saucelabs.com/rest/%s/jobs/%s/results/video.flv" % (self.cf.get("SauceLabs", "username"), self.sauce_session)
-                code = 404
-                while code == 404:
-                    req = urllib2.Request(video_url)
-                    try:
-                        response = urllib2.urlopen(req)
-                        # implicit
-                        code = 200
-                    except urllib2.URLError, e:
-                        if e.code == 404:
-                            code = e.code
-                            time.sleep(2)
-                        if e.code == 401:
-                            print("401'ing -- this shouldn't be happening...")
-                            break
-                            
-                video = open(os.path.join(os.path.dirname(__file__), "..", "logs", "video.flv"), "wb")
-                video.write(response.read())
-
+                if self.cf.getboolean("SauceLabs", "get_log"):
+                    fetch_artifact("selenium-server.log")
         
         self.assertEqual([], self.verificationErrors)
 
