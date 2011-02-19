@@ -6,7 +6,7 @@ from nose.plugins.attrib import attr
 from nose.plugins.skip import SkipTest
 
 class LoginExample(CustomTestCase.CustomTestCase):
-    @attr(tags=['deep', 'website', 'login'])
+    @attr(tags=['deep', 'website', 'login', 'adam'])
     def incorrect_login(self):
         h = HomePage()
         h.open_default_url()

@@ -1,7 +1,14 @@
+"""
+===============
+SeleniumWrapper
+===============
+"""
 from selenium import selenium
 
 class SeleniumWrapper(object):
-    # singleton
+    """
+    Singleton reference to the config information
+    """
     _instance = None
     def __new__(cls, *args, **kwargs):
         if not cls._instance:

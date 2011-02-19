@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Page Objects &mdash; Python and Selenium v.7 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Python and Selenium v.7 documentation" href="index.html" />
+    <link rel="next" title="Generators" href="generators.html" />
+    <link rel="prev" title="Base Objects" href="base.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generators.html" title="Generators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="base.html" title="Base Objects"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Python and Selenium v.7 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pages.HomePage">
+<span id="page-objects"></span><h1>Page Objects<a class="headerlink" href="#module-pages.HomePage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="homepage">
+<h2>HomePage<a class="headerlink" href="#homepage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pages.HomePage.HomePage">
+<em class="property">class </em><tt class="descclassname">pages.HomePage.</tt><tt class="descname">HomePage</tt><a class="headerlink" href="#pages.HomePage.HomePage" title="Permalink to this definition">¶</a></dt>
+<dd><p>PO for the Home/Landing page</p>
+<dl class="method">
+<dt id="pages.HomePage.HomePage.go_to_login_page">
+<tt class="descname">go_to_login_page</tt><big>(</big><big>)</big><a class="headerlink" href="#pages.HomePage.HomePage.go_to_login_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Goes to the login page</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#pages.LoginPage.LoginPage" title="pages.LoginPage.LoginPage"><tt class="xref py py-class docutils literal"><span class="pre">pages.LoginPage.LoginPage</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pages.HomePage.HomePage.open_default_url">
+<tt class="descname">open_default_url</tt><big>(</big><big>)</big><a class="headerlink" href="#pages.HomePage.HomePage.open_default_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Goes to the default url for this PO</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-pages.LoginPage"></span><div class="section" id="loginpage">
+<h2>LoginPage<a class="headerlink" href="#loginpage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pages.LoginPage.LoginPage">
+<em class="property">class </em><tt class="descclassname">pages.LoginPage.</tt><tt class="descname">LoginPage</tt><a class="headerlink" href="#pages.LoginPage.LoginPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>PO for the Login page</p>
+<dl class="method">
+<dt id="pages.LoginPage.LoginPage.do_login">
+<tt class="descname">do_login</tt><big>(</big><big>)</big><a class="headerlink" href="#pages.LoginPage.LoginPage.do_login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does the form submission</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pages.LoginPage.LoginPage.error_message">
+<tt class="descname">error_message</tt><a class="headerlink" href="#pages.LoginPage.LoginPage.error_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>incorrect login message</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pages.LoginPage.LoginPage.password">
+<tt class="descname">password</tt><a class="headerlink" href="#pages.LoginPage.LoginPage.password" title="Permalink to this definition">¶</a></dt>
+<dd><p>password text field</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pages.LoginPage.LoginPage.username">
+<tt class="descname">username</tt><a class="headerlink" href="#pages.LoginPage.LoginPage.username" title="Permalink to this definition">¶</a></dt>
+<dd><p>username text field</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Page Objects</a><ul>
+<li><a class="reference internal" href="#homepage">HomePage</a></li>
+<li><a class="reference internal" href="#loginpage">LoginPage</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="base.html"
+                        title="previous chapter">Base Objects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="generators.html"
+                        title="next chapter">Generators</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/pages.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generators.html" title="Generators"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="base.html" title="Base Objects"
+             >previous</a> |</li>
+        <li><a href="index.html">Python and Selenium v.7 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Adam Goucher.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+    </div>
+  </body>
+</html>

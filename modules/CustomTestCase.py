@@ -1,3 +1,8 @@
+"""
+==============
+CustomTestCase
+==============
+"""
 import unittest2 as unittest
 
 import logging
@@ -10,7 +15,15 @@ if ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
     import json
 
 class CustomTestCase(unittest.TestCase):
+    """
+    Parent class of all script classes used for custom asserts (usually 'soft' asserts) and shared fixture setup
+    and teardown
+    """
     def setUp(self):
+        """
+        Default setup method for all scripts. Connects either to the RC server configured in conf/selenium.ini
+        or to Sauce Labs OnDemand
+        """
         self.verificationErrors = []
         self.cf = ConfigWrapper.ConfigWrapper().config
         if self.cf.getboolean("SauceLabs", "ondemand"):
@@ -39,7 +52,8 @@ class CustomTestCase(unittest.TestCase):
 
     def tearDown(self):
         """
-        This method runs after every 'test' method
+        Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags
+        are updated. Also the video and server log are downloaded if so configured.
         """
         if self.cf.getboolean("SauceLabs", "ondemand"):
             j = {}
@@ -101,6 +115,9 @@ class CustomTestCase(unittest.TestCase):
         self.assertEqual([], self.verificationErrors)
 
     def verifyEqual(self, want, got):
+        """
+        'Soft' assert for checking whether two things are equal
+        """
         try:
             self.assertEqual(want, got)
         except AssertionError, e:

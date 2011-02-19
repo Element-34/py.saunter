@@ -1,5 +1,11 @@
-from SeleniumWrapper import SeleniumWrapper
+"""
+========
+BasePage
+========
+"""
 
 class BasePage(object):
-    def __init__(self):
-        self.se = SeleniumWrapper().connection
+    """
+    Top of the PO page tree
+    """
+    pass

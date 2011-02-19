@@ -1,9 +1,14 @@
+"""
+================
+SQLite3 Provider
+================
+"""
 import os.path
 import sqlite3
 
 class DBProvider(object):
     """
-    Database powered provider
+    SQLite3 powered provider
     """
     def __init__(self):
         self.db = sqlite3.connect(os.path.join(os.path.dirname(__file__), 'example.db'))

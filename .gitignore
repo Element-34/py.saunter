@@ -1,3 +1,5 @@
 conf/*.ini
 *.pyc
 logs/*.xml
+logs/*.vlc
+logs/*.log

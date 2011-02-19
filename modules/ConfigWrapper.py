@@ -1,7 +1,15 @@
+"""
+=============
+ConfigWrapper
+=============
+"""
 import ConfigParser
 import os.path
 
 class ConfigWrapper(object):
+    """
+    Singleton reference to the config information
+    """
     # singleton
     _instance = None
     def __new__(cls, *args, **kwargs):

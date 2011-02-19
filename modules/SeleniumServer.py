@@ -1,3 +1,14 @@
+"""
+==============
+SeleniumServer
+==============
+
+Script for controlling the Selenium Server. Can be used from in a script or standalone. If used standalone, it can be called with either
+ * check
+ * start
+ * stop
+"""
+
 import getopt
 import os.path
 import signal
@@ -7,6 +18,11 @@ import sys
 import time
 
 def have_server():
+    """
+    Checks whether the server is running on localhost:4444 (the defaults)
+    
+    :returns: Boolean
+    """
     # check that the server is running
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
@@ -17,6 +33,9 @@ def have_server():
         return False
         
 def start_server():
+    """
+    Starts the included server and writes out the pid
+    """
     s = subprocess.Popen(['java', '-jar', 'third_party/selenium/selenium-server-standalone-2.0b2.jar'], 
                         stdout=subprocess.PIPE, 
                         stderr=subprocess.STDOUT).pid
@@ -40,6 +59,9 @@ def start_server():
     return server_up
     
 def stop_server():
+    """
+    Stops the process in the selenium server's pid file.
+    """
     dead = False
     if os.path.exists("third_party/selenium/server.pid"):
         pidfile = open("third_party/selenium/server.pid", "r")

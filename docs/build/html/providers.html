@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Providers &mdash; Python and Selenium v.7 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Python and Selenium v.7 documentation" href="index.html" />
+    <link rel="next" title="Exceptions" href="exceptions.html" />
+    <link rel="prev" title="Generators" href="generators.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="exceptions.html" title="Exceptions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="generators.html" title="Generators"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Python and Selenium v.7 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-providers.csv_provider">
+<span id="providers"></span><h1>Providers<a class="headerlink" href="#module-providers.csv_provider" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="csv-provider">
+<h2>CSV Provider<a class="headerlink" href="#csv-provider" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="providers.csv_provider.CSVProvider">
+<em class="property">class </em><tt class="descclassname">providers.csv_provider.</tt><tt class="descname">CSVProvider</tt><big>(</big><em>c</em><big>)</big><a class="headerlink" href="#providers.csv_provider.CSVProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides data for either data driven scripting or as oracles from a csv file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Params c:</th><td class="field-body">name of csv file locates in support/csv directory</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="providers.csv_provider.CSVProvider.randomRow">
+<tt class="descname">randomRow</tt><big>(</big><big>)</big><a class="headerlink" href="#providers.csv_provider.CSVProvider.randomRow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a random row from the provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">List</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-providers.django_providers"></span><div class="section" id="django-provider">
+<h2>Django Provider<a class="headerlink" href="#django-provider" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="providers.django_providers.DjangoProvider">
+<em class="property">class </em><tt class="descclassname">providers.django_providers.</tt><tt class="descname">DjangoProvider</tt><a class="headerlink" href="#providers.django_providers.DjangoProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses Django&#8217;s Models to access the database</p>
+<dl class="method">
+<dt id="providers.django_providers.DjangoProvider.get_random_user">
+<tt class="descname">get_random_user</tt><big>(</big><big>)</big><a class="headerlink" href="#providers.django_providers.DjangoProvider.get_random_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a random user from the provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Dictionary</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-providers.sqlite3_provider"></span><div class="section" id="sqlite3-provider">
+<h2>SQLite3 Provider<a class="headerlink" href="#sqlite3-provider" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="providers.sqlite3_provider.DBProvider">
+<em class="property">class </em><tt class="descclassname">providers.sqlite3_provider.</tt><tt class="descname">DBProvider</tt><a class="headerlink" href="#providers.sqlite3_provider.DBProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>SQLite3 powered provider</p>
+<dl class="method">
+<dt id="providers.sqlite3_provider.DBProvider.get_random_user">
+<tt class="descname">get_random_user</tt><big>(</big><big>)</big><a class="headerlink" href="#providers.sqlite3_provider.DBProvider.get_random_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a random user from the provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Dictionary</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Providers</a><ul>
+<li><a class="reference internal" href="#csv-provider">CSV Provider</a></li>
+<li><a class="reference internal" href="#django-provider">Django Provider</a></li>
+<li><a class="reference internal" href="#sqlite3-provider">SQLite3 Provider</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="generators.html"
+                        title="previous chapter">Generators</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="exceptions.html"
+                        title="next chapter">Exceptions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/providers.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="exceptions.html" title="Exceptions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="generators.html" title="Generators"
+             >previous</a> |</li>
+        <li><a href="index.html">Python and Selenium v.7 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Adam Goucher.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+    </div>
+  </body>
+</html>
