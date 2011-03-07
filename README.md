@@ -23,7 +23,7 @@ With Page Objects
     {
       landing_Page = LandingPage()
       landing.open_default_base_url()
-      form = landing->open_sign_in_form()
+      form = landing.open_sign_in_form()
       form.username = "monkey"
       form.password = "buttress"
       form.login()
