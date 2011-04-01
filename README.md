@@ -7,14 +7,15 @@ Page Objects 101
 
 Without Page Objects
     class LoginExample(unittest.TestCase):
-        self.selenium.open('/')
-        self.selenium.click('css=div.account_mast a:first')
-        self.selenium.waitForPageToLoad("30000")
-        self.selenium.type('username', 'monkey')
-        self.selenium.type('password', 'buttress')
-        self.selenium.click('submit')
-        self.selenium.wait_for_page_to_Load("30000")
-        self.assertEqual(self.selenium.get_ext("css=div.error > p"), "Incorrect username or password.")
+        def incorrect_login(self):
+            self.selenium.open('/')
+            self.selenium.click('css=div.account_mast a:first')
+            self.selenium.waitForPageToLoad("30000")
+            self.selenium.type('username', 'monkey')
+            self.selenium.type('password', 'buttress')
+            self.selenium.click('submit')
+            self.selenium.wait_for_page_to_Load("30000")
+            self.assertEqual(self.selenium.get_ext("css=div.error > p"), "Incorrect username or password.")
 
 With Page Objects
     class LoginExample(CustomTestCase.CustomTestCase):
