@@ -6,29 +6,27 @@ Page Objects 101
 'Page Objects' is a pattern for creating Selenium scripts that makes heavy use of OO principles to enable code reuse and improve maintenance. Rather than having test methods that are a series of Se commands that are sent to the server, your scripts become a series of interactions with objects that represent a page (or part of one) -- thus the name.  
 
 Without Page Objects
-    public function example()
-    {
-      self.selenium.open('/')
-      self.selenium.click('css=div.account_mast a:first')
-      self.selenium.waitForPageToLoad("30000")
-      self.selenium.type('username', 'monkey')
-      self.selenium.type('password', 'buttress')
-      self.selenium.click('submit')
-      self.selenium.wait_for_page_to_Load("30000")
-      self.assertEqual(self.selenium.get_ext("css=div.error > p"), "Incorrect username or password.")
-    }
+    class LoginExample(unittest.TestCase):
+        self.selenium.open('/')
+        self.selenium.click('css=div.account_mast a:first')
+        self.selenium.waitForPageToLoad("30000")
+        self.selenium.type('username', 'monkey')
+        self.selenium.type('password', 'buttress')
+        self.selenium.click('submit')
+        self.selenium.wait_for_page_to_Load("30000")
+        self.assertEqual(self.selenium.get_ext("css=div.error > p"), "Incorrect username or password.")
 
 With Page Objects
-    public function example()
-    {
-      landing_Page = LandingPage()
-      landing.open_default_base_url()
-      form = landing.open_sign_in_form()
-      form.username = "monkey"
-      form.password = "buttress"
-      form.login()
-      self.assertEqual(form.error_message, "Incorrect username or password.")
-    }
+    class LoginExample(CustomTestCase.CustomTestCase):
+        @attr(tags=['deep', 'website', 'login'])
+        def incorrect_login(self):
+            h = HomePage()
+            h.open_default_url()
+            l = h.go_to_login_page()
+            l.username = "foo"
+            l.password = "bar"
+            l.do_login()
+            self.assertEqual(l.error_message, "Incorrect username or password.")
 
 As you can see, not only is the script that uses POs [slightly] more human readable, but it is much more maintainable since it really does separate the page interface from the implementation so that _when_ something on the page changes only the POs themselves need to change and not ten billion scripts.
 
