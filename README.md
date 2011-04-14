@@ -49,15 +49,23 @@ Script Execution
 
 In order to run the scripts, you first need to run the Selenium server.
 
-From there it is a matter of using the 'run' script. Because we are using 'tags' for discovery you need to specify which tag you want. For instance, this is for all the scripts tagged with 'goals'
+From there it is a matter of using the 'run.py' script. Because we are using 'tags' for discovery you need to specify which tag you want. For instance, this is for all the scripts tagged with 'goals'
 
-./run.sh tags=goals
+python run.py -a tags=goals
 
-To specify more than one tag, you need to provide additional -a flags to the script (the first is implicit and baked into run.sh).
+To specify more than one tag, you need to provide additional -a flags to the script.
 
-./run.sh tags=goals -a tags=issues
+python run.py -a tags=goals -a tags=issues
 
-This will run all the scripts for 'goals' and 'issues'
+This will run all the scripts for 'goals' and 'issues' in an 'or' manner. To have them run 'and'...
+
+python run.py -a tags=goals,tags=issues
+
+To filter out an attribute you do !attribute.
+
+python run.py -a tags=goals,!firefox
+
+would run all the scripts that have 'goals' in the list 'tags', but not the ones with a separate tag of firefox. This is kinda important. You cannot filter on things in the 'tags' list; just individual tags.
 
 Tags
 ----
