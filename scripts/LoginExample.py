@@ -32,7 +32,7 @@ class LoginExample(CustomTestCase.CustomTestCase):
         h.open_default_url()
         l = h.go_to_login_page()
         
-        from generators.StringData import random_string
+        from saunter.generators.StringData import random_string
         l.username = random_string(5)
         l.password = random_string()
         
