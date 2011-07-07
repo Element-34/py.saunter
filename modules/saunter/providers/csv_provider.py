@@ -30,7 +30,7 @@ class CSVProvider(object):
         """
         :params c: name of csv file locates in support/csv directory
         """
-        f = os.path.join(os.path.dirname(__file__), '..', '..', 'support', 'csv', c)
+        f = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'support', 'csv', c)
         self.data = csv.DictReader(open(f, 'r'))
         
     def randomRow(self):

@@ -45,7 +45,7 @@ class LoginExample(CustomTestCase.CustomTestCase):
         h.open_default_url()
         l = h.go_to_login_page()
         
-        from providers.csv_provider import CSVProvider
+        from saunter.providers.csv_provider import CSVProvider
         p = CSVProvider('invalid_usernames.csv')
         data = p.randomRow()
         l.username = data['username']
@@ -60,7 +60,7 @@ class LoginExample(CustomTestCase.CustomTestCase):
         h.open_default_url()
         l = h.go_to_login_page()
 
-        from providers.sqlite3_provider import DBProvider
+        from saunter.providers.sqlite3_provider import DBProvider
         p = DBProvider()
         data = p.get_random_user()
         l.username = data['username']
