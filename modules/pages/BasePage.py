@@ -17,7 +17,7 @@ BasePage
 ========
 """
 from pages import timeout_seconds
-from CustomException import ElementVisiblityTimeout, ElementTextTimeout
+from saunter.exceptions import ElementVisiblityTimeout, ElementTextTimeout
 import time
 
 class BasePage(object):
