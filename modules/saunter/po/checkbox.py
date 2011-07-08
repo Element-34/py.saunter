@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-===================
-BaseCheckboxElement
-===================
+========
+Checkbox
+========
 """
-from pages.BaseElement import BaseElement
+from saunter.po.element import Element
 from SeleniumWrapper import SeleniumWrapper as wrapper
 
-class BaseCheckboxElement(BaseElement):
+class Checkbox(Element):
     """
     Base element class for Checkboxes
     """

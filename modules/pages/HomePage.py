@@ -16,8 +16,8 @@
 HomePage
 ========
 """
-from pages import string_timeout
-from pages.BasePage import BasePage
+from saunter.po import string_timeout
+from saunter.po.page import Page
 from pages.LoginPage import LoginPage
 from SeleniumWrapper import SeleniumWrapper as wrapper
 
@@ -26,7 +26,7 @@ locators = {
     "signup": "css=div.account_mast a:last"
 }
 
-class HomePage(BasePage):
+class HomePage(Page):
     """
     PO for the Home/Landing page
     """

@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-========
-BasePage
-========
+====
+Page
+====
 """
-from pages import timeout_seconds
+from saunter.po import timeout_seconds
 from saunter.exceptions import ElementVisiblityTimeout, ElementTextTimeout
 import time
 
-class BasePage(object):
+class Page(object):
     """
     Top of the PO page tree
     """

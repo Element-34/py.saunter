@@ -16,9 +16,9 @@
 LoginPage
 =========
 """
-from pages.BasePage import BasePage
-from pages.BaseTextElement import BaseTextElement
-from pages import string_timeout
+from saunter.po.page import Page
+from saunter.po.text import Text
+from saunter.po import string_timeout
 from SeleniumWrapper import SeleniumWrapper as wrapper
 
 locators = {
@@ -28,19 +28,19 @@ locators = {
     "error_message": "css=div.error p:nth(0)"
 }
 
-class UsernameTextElement(BaseTextElement):
+class UsernameTextElement(Text):
     def __init__(self):
         self.locator = locators["username"]
 
-class PasswordTextElement(BaseTextElement):
+class PasswordTextElement(Text):
     def __init__(self):
         self.locator = locators["password"]
 
-class ErrorMessageTextElement(BaseTextElement):
+class ErrorMessageTextElement(Text):
     def __init__(self):
         self.locator = locators["error_message"]
 
-class LoginPage(BasePage):
+class LoginPage(Page):
     """
     PO for the Login page
     """

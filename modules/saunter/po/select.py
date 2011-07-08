@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-=================
-BaseSelectElement
-=================
+======
+Select
+======
 """
-from pages.BaseElement import BaseElement
+from saunter.po.element import Element
 from SeleniumWrapper import SeleniumWrapper as wrapper
 
-class BaseSelectElement(BaseElement):
+class Select(Element):
     """
     Base element class for Select fields
     """

@@ -17,7 +17,7 @@ BaseElement
 ===========
 """
 
-class BaseElement(object):
+class Element(object):
     """
     Top of the PO element tree
     """
