@@ -1,3 +1,5 @@
+NOTE: Py.Saunter currently is based on Nose. It is going to be switching to Py.Test *really* soon. I'll have migration notes, but you are forewarned.
+
 (Selenium) Page Objects in Python
 =================================
 
