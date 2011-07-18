@@ -1,10 +1,10 @@
-import CustomTestCase
+import SaunterTestCase
 
 from pages.HomePage import HomePage
 
 import pytest
 
-class CheckLoginExample(CustomTestCase.CustomTestCase):
+class CheckLoginExample(SaunterTestCase.SaunterTestCase):
     @pytest.marks('deep', 'website', 'login')
     def test_incorrect_login(self):
         h = HomePage()

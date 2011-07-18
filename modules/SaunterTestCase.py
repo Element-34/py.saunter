@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 ==============
-CustomTestCase
+SaunterTestCase
 ==============
 """
 import unittest2 as unittest
@@ -27,7 +27,7 @@ import ConfigWrapper
 if ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
     import json
 
-class CustomTestCase(unittest.TestCase):
+class SaunterTestCase(unittest.TestCase):
     """
     Parent class of all script classes used for custom asserts (usually 'soft' asserts) and shared fixture setup
     and teardown
