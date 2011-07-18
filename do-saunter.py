@@ -13,8 +13,9 @@
 # limitations under the License.
 
 import datetime
-import nose
-from nose.config import Config
+import pytest
+import marks
+import markfiltration
 import argparse
 import os.path
 import re
@@ -22,9 +23,8 @@ import shutil
 import sys
 import time
 
-# other arguments necessary as needed; they all get passed down to nose
 p = argparse.ArgumentParser()
-p.add_argument('-a', action='store', default='shallow')
+p.add_argument('-f', action='store', default='shallow', nargs='*')
 p.add_argument('-v', action='store_true', default=None)
 p.add_argument('-s', action='store_true', default=None)
 
@@ -39,26 +39,23 @@ import SeleniumServer
 
 # check if server is up
 if not SeleniumServer.have_server():
-  SeleniumServer.start_server()
+    if 'HUDSON_HOME' in os.environ or 'JENKINS_HOME' in os.environ:
+      sys.exit("The Selenium Server must be started outside of the Hudson/Jenkins Agent")
+    SeleniumServer.start_server()
 
-c = Config()
-# essentially we are going to remove the default discovery method and only use -a as the filter
-c.workingDir = os.path.join(base_dir, "scripts")
-# apparently you can't overwrite the compiled re, but can control what is used
-c.testMatchPat = r'^.*$'
-
-# load the built-in plugins; need the attr and xunit ones specifically
-pm = nose.plugins.manager.BuiltinPluginManager()
-pm.loadPlugins()
-c.plugins = pm
+arguments = sys.argv[1:]
 
 # logging
-log_name = os.path.join(base_dir, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%M-%S"))
-sys.argv.extend(['--with-xunit', '--xunit-file', log_name])
-print(log_name)
-nose.core.run(config = c)
+#log_name = os.path.join(base_dir, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%M-%S"))
+log_name = os.path.join(base_dir, 'logs', "testresults.xml")
+arguments.append('--junitxml=%s' %log_name)
+arguments.append('--tb=line')
+
+# run
+arguments.append("scripts")
+pytest.main(args=arguments, plugins=[marks.MarksDecorator(), markfiltration.MarkFiltration()])
 
 shutil.copy(log_name, os.path.join(base_dir, 'logs', 'latest.xml'))
 
-if os.path.exists(os.path.join(base_dir, "third_party", "selenium", "server.pid")):
+if os.path.exists(os.path.join(base_dir, "third_party", "selenium", "server", "server.pid")):
   SeleniumServer.stop_server()

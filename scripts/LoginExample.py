@@ -2,12 +2,11 @@ import CustomTestCase
 
 from pages.HomePage import HomePage
 
-from nose.plugins.attrib import attr
-from nose.plugins.skip import SkipTest
+import pytest
 
-class LoginExample(CustomTestCase.CustomTestCase):
-    @attr(tags=['deep', 'website', 'login', 'adam'])
-    def incorrect_login(self):
+class CheckLoginExample(CustomTestCase.CustomTestCase):
+    @pytest.marks('deep', 'website', 'login')
+    def test_incorrect_login(self):
         h = HomePage()
         h.open_default_url()
         l = h.go_to_login_page()
@@ -16,8 +15,8 @@ class LoginExample(CustomTestCase.CustomTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @attr(tags=['deep', 'website', 'login'])
-    def incorrect_login_with_soft_assert(self):
+    @pytest.marks('deep', 'website', 'login')
+    def test_incorrect_login_with_soft_assert(self):
         h = HomePage()
         h.open_default_url()
         l = h.go_to_login_page()
@@ -26,8 +25,8 @@ class LoginExample(CustomTestCase.CustomTestCase):
         l.do_login()
         self.verifyEqual(l.error_message, "Incorrect username or password.")
 
-    @attr(tags=['deep', 'website', 'login'])
-    def incorrect_login_with_random_username_and_password(self):
+    @pytest.marks('deep', 'website', 'login')
+    def test_incorrect_login_with_random_username_and_password(self):
         h = HomePage()
         h.open_default_url()
         l = h.go_to_login_page()
@@ -39,8 +38,8 @@ class LoginExample(CustomTestCase.CustomTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @attr(tags=['deep', 'website', 'login'])
-    def incorrect_login_from_csv(self):
+    @pytest.marks('deep', 'website', 'login')
+    def test_incorrect_login_from_csv(self):
         h = HomePage()
         h.open_default_url()
         l = h.go_to_login_page()
@@ -54,8 +53,8 @@ class LoginExample(CustomTestCase.CustomTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @attr(tags=['deep', 'website', 'login'])
-    def incorrect_login_from_sqlite3(self):
+    @pytest.marks('deep', 'website', 'login')
+    def test_incorrect_login_from_sqlite3(self):
         h = HomePage()
         h.open_default_url()
         l = h.go_to_login_page()
@@ -69,8 +68,8 @@ class LoginExample(CustomTestCase.CustomTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
         
-    @attr(tags=['deep', 'website', 'login'])
-    def incorrect_login_fails(self):
+    @pytest.marks('deep', 'website', 'login')
+    def test_incorrect_login_fails(self):
         h = HomePage()
         h.open_default_url()
         l = h.go_to_login_page()
