@@ -5,7 +5,7 @@ from pages.HomePage import HomePage
 import pytest
 
 class CheckLoginExample(SaunterTestCase.SaunterTestCase):
-    @pytest.marks('deep', 'website', 'login')
+    @pytest.marks('deep', 'sauce', 'login')
     def test_incorrect_login(self):
         h = HomePage()
         h.open_default_url()
@@ -15,7 +15,7 @@ class CheckLoginExample(SaunterTestCase.SaunterTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @pytest.marks('deep', 'website', 'login')
+    @pytest.marks('deep', 'sauce', 'login')
     def test_incorrect_login_with_soft_assert(self):
         h = HomePage()
         h.open_default_url()
@@ -25,7 +25,7 @@ class CheckLoginExample(SaunterTestCase.SaunterTestCase):
         l.do_login()
         self.verifyEqual(l.error_message, "Incorrect username or password.")
 
-    @pytest.marks('deep', 'website', 'login')
+    @pytest.marks('deep', 'sauce', 'login')
     def test_incorrect_login_with_random_username_and_password(self):
         h = HomePage()
         h.open_default_url()
@@ -38,7 +38,7 @@ class CheckLoginExample(SaunterTestCase.SaunterTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @pytest.marks('deep', 'website', 'login')
+    @pytest.marks('deep', 'sauce', 'login')
     def test_incorrect_login_from_csv(self):
         h = HomePage()
         h.open_default_url()
@@ -53,7 +53,7 @@ class CheckLoginExample(SaunterTestCase.SaunterTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @pytest.marks('deep', 'website', 'login')
+    @pytest.marks('deep', 'sauce', 'login')
     def test_incorrect_login_from_sqlite3(self):
         h = HomePage()
         h.open_default_url()
@@ -68,7 +68,7 @@ class CheckLoginExample(SaunterTestCase.SaunterTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
         
-    @pytest.marks('deep', 'website', 'login')
+    @pytest.marks('deep', 'sauce', 'login')
     def test_incorrect_login_fails(self):
         h = HomePage()
         h.open_default_url()
