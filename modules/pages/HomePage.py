@@ -16,7 +16,6 @@
 HomePage
 ========
 """
-import sys
 from saunter.po import string_timeout
 from saunter.po.page import Page
 from pages.LoginPage import LoginPage
