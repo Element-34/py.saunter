@@ -3,3 +3,6 @@ conf/*.ini
 logs/*.xml
 logs/*.vlc
 logs/*.log
+build/*
+dist/*
+py.saunter.egg-info/*
