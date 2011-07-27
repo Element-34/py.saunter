@@ -107,7 +107,19 @@ class Page(object):
         else:
             raise ElementTextTimeout("%s value timed out" % locator)
         return True
-            
+
+    def wait_for_value_changed(self, locator, text):
+        for i in range(timeout_seconds):
+            try:
+                if len(self.se.get_text(locator).strip()) != 0 and self.se.get_text(locator) != text:
+                    break
+            except:
+                pass
+            time.sleep(1)
+        else:
+            raise ElementVisiblityTimeout("%s visibility timed out" % locator)
+        return True
+
     def wait_for_element_not_present(self, locator):
         """
         Synchronization helper to wait until some element is removed from the page 
