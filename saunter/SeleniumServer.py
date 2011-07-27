@@ -29,6 +29,9 @@ import socket
 import subprocess
 import sys
 import time
+import tempfile
+
+pid_file_path = os.path.join(tempfile.gettempdir(), "selenium-server.pid")
 
 def have_server():
     """
@@ -52,7 +55,7 @@ def start_server():
     s = subprocess.Popen(['java', '-jar', 'third_party/selenium/selenium-server-standalone-2.0b2.jar'], 
                         stdout=subprocess.PIPE, 
                         stderr=subprocess.STDOUT).pid
-    pidfile = open("third_party/selenium/server.pid", "w")
+    pidfile = open(pid_file, "w")
     pidfile.write(str(s))
     pidfile.close()
 
@@ -76,12 +79,12 @@ def stop_server():
     Stops the process in the selenium server's pid file.
     """
     dead = False
-    if os.path.exists("third_party/selenium/server.pid"):
-        pidfile = open("third_party/selenium/server.pid", "r")
+    if os.path.exists(pid_file_path):
+        pidfile = open(pid_file_path, "r")
         pid = int(pidfile.read())
         pidfile.close()
         os.kill(pid, signal.SIGTERM)
-        os.remove("third_party/selenium/server.pid")
+        os.remove(pid_file_path)
         dead = True
         
     return dead

@@ -12,23 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-======
-Select
-======
+========
+Checkbox
+========
 """
 from saunter.po.element import Element
-from SeleniumWrapper import SeleniumWrapper as wrapper
+from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
-class Select(Element):
+class Checkbox(Element):
     """
-    Base element class for Select fields
+    Base element class for Checkboxes
     """
     def __set__(self, obj, val):
-        wrapper().connection.select(self.locator, val)
+        if (val == True and str(wrapper().connection.get_value(self.locator)) == 'off') or (val == False and str(wrapper().connection.get_value(self.locator)) == 'on'):
+            wrapper().connection.click(self.locator)
 
     def __get__(self, obj, cls=None):
         try:
-            return str(wrapper().connection.get_selected_label(self.locator))
+            return str(wrapper().connection.get_value(self.locator))
         except AttributeError as e:
             if str(e) == "'SeleniumWrapper' object has no attribute 'connection'":
                 pass

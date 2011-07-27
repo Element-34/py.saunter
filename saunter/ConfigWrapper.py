@@ -30,7 +30,7 @@ class ConfigWrapper(object):
             cls._instance = super(ConfigWrapper, cls).__new__(cls, *args, **kwargs)
         return cls._instance
 
-    def configure(self, config = "selenium.ini"):
+    def configure(self, config = "saunter.ini"):
         self.config = ConfigParser.RawConfigParser()
         self.config.readfp(open(os.path.join("conf", config)))
 

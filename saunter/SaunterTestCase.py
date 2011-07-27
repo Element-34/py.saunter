@@ -20,11 +20,11 @@ import unittest2 as unittest
 
 import logging
 
-from SeleniumWrapper import SeleniumWrapper as wrapper
+from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
-import ConfigWrapper
+import saunter.ConfigWrapper
 
-if ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
+if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
     import json
 
 class SaunterTestCase(unittest.TestCase):
@@ -38,7 +38,7 @@ class SaunterTestCase(unittest.TestCase):
         or to Sauce Labs OnDemand
         """
         self.verificationErrors = []
-        self.cf = ConfigWrapper.ConfigWrapper().config
+        self.cf = saunter.ConfigWrapper.ConfigWrapper().config
         if self.cf.getboolean("SauceLabs", "ondemand"):
             host = self.cf.get("SauceLabs", "server_host")
             port = self.cf.get("SauceLabs", "server_port")

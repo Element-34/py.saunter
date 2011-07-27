@@ -12,24 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-====
-Text
-====
+======
+Select
+======
 """
 from saunter.po.element import Element
-from SeleniumWrapper import SeleniumWrapper as wrapper
+from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
-class Text(Element):
+class Select(Element):
     """
-    Base element class for Text fields
+    Base element class for Select fields
     """
-
     def __set__(self, obj, val):
-        wrapper().connection.type(self.locator, val)
+        wrapper().connection.select(self.locator, val)
 
     def __get__(self, obj, cls=None):
         try:
-            return str(wrapper().connection.get_text(self.locator))
+            return str(wrapper().connection.get_selected_label(self.locator))
         except AttributeError as e:
             if str(e) == "'SeleniumWrapper' object has no attribute 'connection'":
                 pass

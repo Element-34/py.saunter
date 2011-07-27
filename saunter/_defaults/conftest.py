@@ -1,9 +1,9 @@
-import ConfigWrapper
+import saunter.ConfigWrapper
 
-if ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
+if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
     import json
 
-cf = ConfigWrapper.ConfigWrapper().config
+cf = saunter.ConfigWrapper.ConfigWrapper().config
 
 import os.path
 import time
@@ -12,7 +12,7 @@ import urllib2
 import py
 import _pytest
 
-from SeleniumWrapper import SeleniumWrapper as wrapper
+from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
 class AdvancedReport(_pytest.runner.TestReport):
     def __init__(self, nodeid, location, marks, outcome, longrepr, when):
