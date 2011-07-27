@@ -10,19 +10,18 @@ setup(
     author = "adam goucher",
     author_email = "adam@element34.ca",
     install_requires = ['pytest>2.0.2', 'pytest-marks', 'pytest-markfiltration'],
-    long_description=open('README.md').read(),
+    long_description="An opionated test framework",
     url='https://github.com/adamgoucher/py.saunter',
     scripts=['bin/pysaunter.py'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'License :: OSI Approved :: Apache Software License',
         'Operating System :: POSIX',
         'Operating System :: Microsoft :: Windows',
         'Operating System :: MacOS :: MacOS X',
         'Topic :: Software Development :: Testing',
         'Topic :: Software Development :: Quality Assurance',
-        'Topic :: Utilities',
-        'Programming Language :: Python',
+        'Programming Language :: Python'
     ]
 )
