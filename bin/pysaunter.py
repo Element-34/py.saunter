@@ -97,8 +97,7 @@ if '--new' in arguments:
     new()
 
 # logging
-#log_name = os.path.join(base_dir, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%M-%S"))
-log_name = os.path.join(cwd, 'logs', "testresults.xml")
+log_name = os.path.join(cws, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%M-%S"))
 arguments.append('--junitxml=%s' %log_name)
 arguments.append('--tb=line')
 
