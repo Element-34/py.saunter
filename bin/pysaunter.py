@@ -103,6 +103,9 @@ sys.path.append(os.path.join(cwd, "modules"))
 
 import saunter.SeleniumServer
 
+import saunter.ConfigWrapper
+saunter.ConfigWrapper.ConfigWrapper().config.set("Saunter", "base", cwd)
+
 # check if server is up
 if not saunter.SeleniumServer.have_server():
     if 'HUDSON_HOME' in os.environ or 'JENKINS_HOME' in os.environ:

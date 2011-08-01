@@ -19,7 +19,7 @@ LoginPage
 from saunter.po.page import Page
 from saunter.po.text import Text
 from saunter.po import string_timeout
-from SeleniumWrapper import SeleniumWrapper as wrapper
+from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
 locators = {
     "username": "username",

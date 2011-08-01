@@ -19,7 +19,7 @@ HomePage
 from saunter.po import string_timeout
 from saunter.po.page import Page
 from pages.LoginPage import LoginPage
-from SeleniumWrapper import SeleniumWrapper as wrapper
+from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
 locators = {
     "login": "css=div.account_mast a:first",

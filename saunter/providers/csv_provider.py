@@ -20,6 +20,8 @@ import csv
 import os.path
 import random
 
+import saunter.ConfigWrapper
+
 class CSVProvider(object):
     """
     Provides data for either data driven scripting or as oracles from a csv file
@@ -30,7 +32,8 @@ class CSVProvider(object):
         """
         :params c: name of csv file locates in support/csv directory
         """
-        f = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'support', 'csv', c)
+        cf = saunter.ConfigWrapper.ConfigWrapper().config
+        f = os.path.join(cf.get("Saunter", "base"), 'support', 'csv', c)
         self.data = csv.DictReader(open(f, 'r'))
         
     def randomRow(self):

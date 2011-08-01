@@ -1,10 +1,10 @@
-import SaunterTestCase
+import saunter.SaunterTestCase
 
 from pages.HomePage import HomePage
 
 import pytest
 
-class CheckLoginExample(SaunterTestCase.SaunterTestCase):
+class CheckLoginExample(saunter.SaunterTestCase.SaunterTestCase):
     @pytest.marks('deep', 'sauce', 'login')
     def test_incorrect_login(self):
         h = HomePage()
@@ -38,7 +38,7 @@ class CheckLoginExample(SaunterTestCase.SaunterTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @pytest.marks('deep', 'sauce', 'login')
+    @pytest.marks('deep', 'sauce', 'login', 'csv')
     def test_incorrect_login_from_csv(self):
         h = HomePage()
         h.open_default_url()
@@ -53,14 +53,14 @@ class CheckLoginExample(SaunterTestCase.SaunterTestCase):
         l.do_login()
         self.assertEqual(l.error_message, "Incorrect username or password.")
 
-    @pytest.marks('deep', 'sauce', 'login')
+    @pytest.marks('deep', 'sauce', 'login', "db")
     def test_incorrect_login_from_sqlite3(self):
         h = HomePage()
         h.open_default_url()
         l = h.go_to_login_page()
 
-        from saunter.providers.sqlite3_provider import DBProvider
-        p = DBProvider()
+        from providers.invalid_usernames import InvalidUsernames
+        p = InvalidUsernames()
         data = p.get_random_user()
         l.username = data['username']
         l.password = data['password']

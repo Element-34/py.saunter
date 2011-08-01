@@ -18,19 +18,14 @@ SQLite3 Provider
 """
 import os.path
 import sqlite3
+import saunter.providers.sqlite3_provider
 
-import saunter.ConfigWrapper
-
-class DBProvider(object):
+class InvalidUsernames(saunter.providers.sqlite3_provider.DBProvider):
     """
     SQLite3 powered provider
     """
-    def __init__(self, db):
-        cf = saunter.ConfigWrapper.ConfigWrapper().config
-        self.db = sqlite3.connect(os.path.join(cf.get("Saunter", "base"), 'support', 'db', db))
-        
-    def __del__(self):
-        self.db.close()
+    def __init__(self):
+        super(InvalidUsernames, self).__init__("example.db")
     
     def get_random_user(self):
         """
