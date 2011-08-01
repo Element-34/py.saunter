@@ -1,3 +1,5 @@
+[Saunter]
+
 [Selenium]
 server: /path/to/selenium-server.jar
 server_host: localhost
