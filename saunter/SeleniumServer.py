@@ -55,7 +55,7 @@ def start_server():
     s = subprocess.Popen(['java', '-jar', 'third_party/selenium/selenium-server-standalone-2.0b2.jar'], 
                         stdout=subprocess.PIPE, 
                         stderr=subprocess.STDOUT).pid
-    pidfile = open(pid_file, "w")
+    pidfile = open(pid_file_path, "w")
     pidfile.write(str(s))
     pidfile.close()
 
