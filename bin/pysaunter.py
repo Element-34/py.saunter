@@ -110,7 +110,7 @@ if not saunter.SeleniumServer.have_server():
     saunter.SeleniumServer.start_server()
 
 # logging
-log_name = os.path.join(cws, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%M-%S"))
+log_name = os.path.join(cwd, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%M-%S"))
 arguments.append('--junitxml=%s' %log_name)
 arguments.append('--tb=line')
 
