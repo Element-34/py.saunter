@@ -1,10 +1,10 @@
-import SaunterTestCase
+import saunter.SaunterTestCase
 
 from pages.shirts import ShirtPage
 
 import pytest
 
-class CheckLoginExample(SaunterTestCase.SaunterTestCase):
+class CheckLoginExample(saunter.SaunterTestCase.SaunterTestCase):
     @pytest.marks('deep', 'ebay', 'shirts')
     def test_collar_style(self):
         s = ShirtPage()
