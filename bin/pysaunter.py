@@ -52,7 +52,16 @@ def new():
     if not os.path.isfile(os.path.join(cwd, "modules", "pages", "__init__.py")):
         f = open(os.path.join(cwd, "modules", "pages", "__init__.py"), "w")
         f.close()
-    
+
+    # modules/providers
+    if not os.path.isdir(os.path.join(cwd, "modules", "providers")):
+        os.mkdir(os.path.join(cwd, "modules", "providers"))
+
+    # providers is a package
+    if not os.path.isfile(os.path.join(cwd, "modules", "providers", "__init__.py")):
+        f = open(os.path.join(cwd, "modules", "providers", "__init__.py"), "w")
+        f.close()
+            
     # scripts
     if not os.path.isdir(os.path.join(cwd, "scripts")):
         os.mkdir(os.path.join(cwd, "scripts"))
@@ -64,6 +73,10 @@ def new():
     # support/csv
     if not os.path.isdir(os.path.join(cwd, "support", "csv")):
         os.mkdir(os.path.join(cwd, "support", "csv"))
+
+    # support/db
+    if not os.path.isdir(os.path.join(cwd, "support", "db")):
+        os.mkdir(os.path.join(cwd, "support", "db"))
         
     # misc.
     if not os.path.isfile(os.path.join(cwd, "conftest.py")):
@@ -81,6 +94,10 @@ p.add_argument('-s', action='store_true', default=None)
 
 results = p.parse_args()
 
+arguments = sys.argv[1:]
+if '--new' in arguments:
+    new()
+
 # pythonpath
 sys.path.append(os.path.join(cwd, "modules"))
 
@@ -91,10 +108,6 @@ if not saunter.SeleniumServer.have_server():
     if 'HUDSON_HOME' in os.environ or 'JENKINS_HOME' in os.environ:
       sys.exit("The Selenium Server must be started outside of the Hudson/Jenkins Agent")
     saunter.SeleniumServer.start_server()
-
-arguments = sys.argv[1:]
-if '--new' in arguments:
-    new()
 
 # logging
 log_name = os.path.join(cws, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%M-%S"))
