@@ -41,7 +41,6 @@ class SaunterSelenium(selenium):
         except Exception, e:
             if (re.match("ERROR: Element .* not found", str(e))
                 and implicit_wait > 0):
-                print('implicit')
                 time.sleep(1)
                 return self.do_command(verb, args, implicit_wait - 1)
             raise Exception(e)
