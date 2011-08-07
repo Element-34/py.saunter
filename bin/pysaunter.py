@@ -24,6 +24,7 @@ import shutil
 import sys
 import time
 import tempfile
+import types
 import saunter
 saunter_installed_at = os.path.dirname(saunter.__file__)
 cwd = os.getcwd()
@@ -88,15 +89,31 @@ def new():
 
 p = argparse.ArgumentParser()
 p.add_argument('--new', action='store_true', default=False)
-p.add_argument('-f', action='store', default='shallow', nargs='*')
+p.add_argument('-f', action='append', default=['shallow'], nargs='*')
 p.add_argument('-v', action='store_true', default=None)
 p.add_argument('-s', action='store_true', default=None)
 
 results = p.parse_args()
 
-arguments = sys.argv[1:]
-if '--new' in arguments:
+# argument handling; what a mess
+if results.new:
     new()
+
+arguments = []
+
+# argparse will take all the -f arguments and compile them into a list
+if len(results.f) == 1:
+    arguments.append("-f %s" % results.f[0])
+else:
+    for filters in results.f:
+        if isinstance(filters, types.ListType):
+            for script_filter in filters:
+                arguments.append("-f %s" % script_filter)
+
+# this are either true or false
+for noneable in ['v', 's']:
+    if results.__dict__[noneable]:
+        arguments.append("-%s" % noneable)
 
 # pythonpath
 sys.path.append(os.path.join(cwd, "modules"))
