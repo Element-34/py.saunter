@@ -15,6 +15,7 @@ import re
 import time
 from selenium import selenium
 import saunter.ConfigWrapper
+from saunter.exceptions import ElementNotFound
 
 class SaunterSelenium(selenium):
     """
@@ -43,4 +44,5 @@ class SaunterSelenium(selenium):
                 and implicit_wait > 0):
                 time.sleep(1)
                 return self.do_command(verb, args, implicit_wait - 1)
-            raise Exception(e)
+                        
+            raise ElementNotFound(e)

@@ -18,6 +18,7 @@ Text
 """
 from saunter.po.element import Element
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
+from saunter.exceptions import ElementNotFound
 
 class Text(Element):
     """
@@ -35,3 +36,6 @@ class Text(Element):
                 pass
             else:
                 raise e
+        except ElementNotFound as e:
+            msg = "Element %s was not found. It is used in the %s page object in the %s module." % (self.locator, obj.__class__.__name__, self.__module__)
+            raise ElementNotFound(msg)

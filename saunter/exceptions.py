@@ -20,6 +20,13 @@ class SyncExceptions(Exception):
     """Base class for exceptions in this module."""
     pass
 
+class ElementNotFound(SyncExceptions):
+    def _get_message(self): 
+        return self._message
+    def _set_message(self, message): 
+        self._message = message
+    message = property(_get_message, _set_message)
+
 class ElementVisiblityTimeout(SyncExceptions):
     def _get_message(self): 
         return self._message
