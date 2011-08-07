@@ -9,7 +9,7 @@ setup(
     version = "0.5",
     author = "adam goucher",
     author_email = "adam@element34.ca",
-    install_requires = ['pytest>2.0.2', 'pytest-marks', 'pytest-markfiltration', 'selenium>=2.2.0'],
+    install_requires = ['pytest>2.0.2', 'pytest-marks', 'pytest-markfiltration', 'selenium>=2.2.0', 'unittest2'],
     long_description="An opionated test framework",
     url='https://github.com/adamgoucher/py.saunter',
     scripts=['bin/pysaunter.py'],
