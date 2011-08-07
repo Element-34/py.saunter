@@ -6,3 +6,4 @@ logs/*.log
 build/*
 dist/*
 py.saunter.egg-info/*
+examples/**/logs/*.xml
