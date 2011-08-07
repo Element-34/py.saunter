@@ -6,7 +6,7 @@ setup(
     package_data={"saunter": ["_defaults/conftest.py",
                               "_defaults/pytest.ini",
                               "_defaults/conf/saunter.ini.default"]},
-    version = "0.4",
+    version = "0.5",
     author = "adam goucher",
     author_email = "adam@element34.ca",
     install_requires = ['pytest>2.0.2', 'pytest-marks', 'pytest-markfiltration', 'selenium>=2.2.0'],
