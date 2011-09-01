@@ -19,6 +19,7 @@ SeleniumWrapper
 import re
 from SaunterSelenium import SaunterSelenium
 import time
+from selenium import webdriver
 
 class SeleniumWrapper(object):
     """
@@ -31,6 +32,10 @@ class SeleniumWrapper(object):
             cls._instance = super(SeleniumWrapper, cls).__new__(cls, *args, **kwargs)
         return cls._instance
 
-    def connect(self, host, port, browser, server):
+    def remote_control(self, host, port, browser, server):
         self.connection = SaunterSelenium(host, port, browser, server)
+        return self.connection
+        
+    def remote_webdriver(self, *args, **kwargs):
+        self.connection = webdriver.Remote(*args, **kwargs)
         return self.connection

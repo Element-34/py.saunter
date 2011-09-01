@@ -16,8 +16,8 @@
 LoginPage
 =========
 """
-from saunter.po.page import Page
-from saunter.po.text import Text
+from saunter.po.remotecontrol.page import Page
+from saunter.po.remotecontrol.text import Text
 from saunter.po import string_timeout
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 

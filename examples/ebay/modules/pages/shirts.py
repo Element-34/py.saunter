@@ -11,12 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from saunter.po.page import Page
-from saunter.po.text import Text
+from saunter.po.webdriver.page import Page
+from saunter.po.webdriver.text import Text
 from saunter.po import string_timeout, timeout_seconds
-from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
+from saunter.SeleniumWrapper import SeleniumWrapper as se_wrapper
 from saunter.exceptions import ElementVisiblityTimeout
 import time
+from saunter.ConfigWrapper import ConfigWrapper as cfg_wrapper
+from saunter.SaunterWebDriver import SaunterWebDriver
 
 locators = {
     "collar style": 'css=a[title="REPLACE"]',
@@ -32,19 +34,19 @@ class ShirtPage(Page):
     results = ResultsTextElement()
     
     def __init__(self):
-        self.se = wrapper().connection
+        self.driver = se_wrapper().connection
+        self.config = cfg_wrapper().config
         
     def go_to_mens_dress_shirts(self):
-        self.se.open("/mens-clothing/Dress-Shirts/57991")
-        self.se.wait_for_page_to_load(string_timeout)
+        self.driver.get("%s/mens-clothing/Dress-Shirts/57991" % self.config.get("Selenium", "base_url"))
         
     def change_collar_style(self, style):
         before = self.results;
-        self.se.click(locators["collar style"].replace("REPLACE", style))
-        self.wait_for_value_changed(locators["results"], self.results)
+        SaunterWebDriver.find_element_by_locator(locators["collar style"].replace("REPLACE", style)).click()
+        self.wait_for_value_changed(locators["results"], before)
         
     def is_collar_selected(self, style):
-        if self.se.is_element_present("%s .sl-deSel" % locators["collar style"].replace("REPLACE", style)):
+        if SaunterWebDriver.is_element_present("%s .sl-deSel" % locators["collar style"].replace("REPLACE", style)):
             return False
         return True
         

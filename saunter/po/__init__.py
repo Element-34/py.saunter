@@ -3,8 +3,6 @@
 Common
 ======
 """
-__version__ = '0.1'
-
 #: timeout value in s as an integer
 timeout_seconds = 30
 #: timout value in ms as an integer

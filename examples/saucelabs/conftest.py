@@ -59,7 +59,6 @@ def fetch_artifact(which):
     urllib2.install_opener(opener)
 
     which_url = "https://saucelabs.com/rest/%s/jobs/%s/results/%s" % (cf.get("SauceLabs", "username"), sauce_session, which)
-    print(which_url)
     code = 404
     while code == 404:
         req = urllib2.Request(which_url)

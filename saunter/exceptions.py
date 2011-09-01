@@ -16,25 +16,32 @@
 SyncExceptions
 ==============
 """
-class SyncExceptions(Exception):
+class SaunterExceptions(Exception):
     """Base class for exceptions in this module."""
     pass
 
-class ElementNotFound(SyncExceptions):
+class ElementNotFound(SaunterExceptions):
     def _get_message(self): 
         return self._message
     def _set_message(self, message): 
         self._message = message
     message = property(_get_message, _set_message)
 
-class ElementVisiblityTimeout(SyncExceptions):
+class ElementVisiblityTimeout(SaunterExceptions):
     def _get_message(self): 
         return self._message
     def _set_message(self, message): 
         self._message = message
     message = property(_get_message, _set_message)
 
-class ElementTextTimeout(SyncExceptions):
+class ElementTextTimeout(SaunterExceptions):
+    def _get_message(self): 
+        return self._message
+    def _set_message(self, message): 
+        self._message = message
+    message = property(_get_message, _set_message)
+    
+class InvalidLocatorString(SaunterExceptions):
     def _get_message(self): 
         return self._message
     def _set_message(self, message): 

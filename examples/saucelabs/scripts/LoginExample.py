@@ -1,10 +1,10 @@
-import saunter.SaunterTestCase
+from saunter.testcase.remotecontrol import SaunterTestCase
 
 from pages.HomePage import HomePage
 
 import pytest
 
-class CheckLoginExample(saunter.SaunterTestCase.SaunterTestCase):
+class CheckLoginExample(SaunterTestCase):
     @pytest.marks('deep', 'sauce', 'login')
     def test_incorrect_login(self):
         h = HomePage()
@@ -23,7 +23,7 @@ class CheckLoginExample(saunter.SaunterTestCase.SaunterTestCase):
         l.username = "foo"
         l.password = "bar"
         l.do_login()
-        self.verifyEqual(l.error_message, "Incorrect username or password.")
+        self.verify_equal(l.error_message, "Incorrect username or password.")
 
     @pytest.marks('deep', 'sauce', 'login')
     def test_incorrect_login_with_random_username_and_password(self):

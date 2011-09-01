@@ -17,7 +17,7 @@ HomePage
 ========
 """
 from saunter.po import string_timeout
-from saunter.po.page import Page
+from saunter.po.remotecontrol.page import Page
 from pages.LoginPage import LoginPage
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 

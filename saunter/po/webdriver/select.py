@@ -12,25 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-====
-Text
-====
+======
+Select
+======
 """
 from saunter.po.element import Element
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 from saunter.exceptions import ElementNotFound
+from saunter.SaunterWebDriver import SaunterWebDriver
 
-class Text(Element):
+class Select(Element):
     """
-    Base element class for Text fields
+    Base element class for Select fields
     """
-
     def __set__(self, obj, val):
-        wrapper().connection.type(self.locator, val)
+        e = SaunterWebDriver.find_element_by_locator(self.locator)
+        e.click()
 
     def __get__(self, obj, cls=None):
         try:
-            return str(wrapper().connection.get_text(self.locator))
+            e = SaunterWebDriver.find_element_by_locator(self.locator)
+            return str(e.text)
         except AttributeError as e:
             if str(e) == "'SeleniumWrapper' object has no attribute 'connection'":
                 pass
