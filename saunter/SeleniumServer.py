@@ -99,8 +99,7 @@ def stop_server():
         pidfile = open(pid_file_path, "r")
         pid = int(pidfile.read())
         pidfile.close()
-        # os.kill(pid, signal.SIGTERM)
-        os.kill(7500, signal.SIGTERM)
+        os.kill(pid, signal.SIGTERM)
         os.remove(pid_file_path)
         dead = True
         
