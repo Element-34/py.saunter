@@ -30,8 +30,12 @@ import subprocess
 import sys
 import time
 import tempfile
+import urllib2
 
 pid_file_path = os.path.join(tempfile.gettempdir(), "selenium-server.pid")
+
+import saunter.ConfigWrapper
+cf = saunter.ConfigWrapper.ConfigWrapper().config
 
 def have_server():
     """
@@ -52,7 +56,18 @@ def start_server():
     """
     Starts the included server and writes out the pid
     """
-    s = subprocess.Popen(['java', '-jar', 'third_party/selenium/selenium-server-standalone-2.0b2.jar'], 
+    if not os.path.exists(cf.get("Selenium", "server_path")):
+        server_jar = os.path.join(tempfile.gettempdir(), "selenium-server.jar")
+        if not os.path.exists(server_jar):
+            request = urllib2.Request("http://selenium.googlecode.com/files/selenium-server-standalone-2.5.0.jar")
+            response = urllib2.urlopen(request)
+            jar_on_disk = open(server_jar, "wb")
+            jar_on_disk.write(response.read())
+            jar_on_disk.close()
+    else:
+        server_jar = cf.get("Selenium", "server_path")
+    
+    s = subprocess.Popen(['java', '-jar', server_jar], 
                         stdout=subprocess.PIPE, 
                         stderr=subprocess.STDOUT).pid
     pidfile = open(pid_file_path, "w")
@@ -70,6 +85,7 @@ def start_server():
             server_up = True
         except socket.error:
             time.sleep(1)
+            waiting = waiting + 1
             server_up = False
 
     return server_up
@@ -83,35 +99,9 @@ def stop_server():
         pidfile = open(pid_file_path, "r")
         pid = int(pidfile.read())
         pidfile.close()
-        os.kill(pid, signal.SIGTERM)
+        # os.kill(pid, signal.SIGTERM)
+        os.kill(7500, signal.SIGTERM)
         os.remove(pid_file_path)
         dead = True
         
     return dead
-
-def help():
-    print("monkey")
-
-if __name__ == '__main__':
-    opts, args = getopt.getopt(sys.argv[1:], "csk", ["check", "start", "stop"])
-    for o, a in opts:
-        if o == "--check":
-            up = have_server()
-            if up == True:
-                sys.exit(0)
-            else:
-                sys.exit(1)
-        elif o == "--start":
-            up = start_server()
-            if up == True:
-                sys.exit(0)
-            else:
-                sys.exit(1)
-        elif o == "--stop":
-            up = stop_server()
-            if up == True:
-                sys.exit(0)
-            else:
-                sys.exit(1)
-
-    help()

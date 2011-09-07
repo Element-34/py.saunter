@@ -125,9 +125,14 @@ saunter.ConfigWrapper.ConfigWrapper().config.set("Saunter", "base", cwd)
 
 # check if server is up
 if not saunter.SeleniumServer.have_server():
-    if 'HUDSON_HOME' in os.environ or 'JENKINS_HOME' in os.environ:
-      sys.exit("The Selenium Server must be started outside of the Hudson/Jenkins Agent")
-    saunter.SeleniumServer.start_server()
+    if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("Selenium", "manage_server"):
+        if 'HUDSON_HOME' in os.environ or 'JENKINS_HOME' in os.environ:
+          sys.exit("The Selenium Server must be started outside of the Hudson/Jenkins Agent")
+        started = saunter.SeleniumServer.start_server()
+        if not started:
+            sys.exit("Could not start the Selenium Server")
+    else:
+        sys.exit("Selenium Server not running and py.saunter configured not to control it")
 
 # logging
 log_name = os.path.join(cwd, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%M-%S"))
@@ -140,5 +145,10 @@ pytest.main(args=arguments, plugins=[marks.MarksDecorator(), markfiltration.Mark
 
 shutil.copy(log_name, os.path.join(cwd, 'logs', 'latest.xml'))
 
-if os.path.exists(os.path.join(tempfile.gettempdir(), "selenium-server.pid")):
-  saunter.SeleniumServer.stop_server()
+if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("Selenium", "manage_server"):
+    if os.path.exists(os.path.join(tempfile.gettempdir(), "selenium-server.pid")):
+        try:
+            saunter.SeleniumServer.stop_server()
+        except OSError as (errno, strerror):
+            if strerror == "No such process":
+                sys.exit("Tried to kill Selenium Server but process in was already killed.")

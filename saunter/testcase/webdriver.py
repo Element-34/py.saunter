@@ -46,8 +46,7 @@ class SaunterTestCase(BaseTestCase):
             browser = self.cf.get("Selenium", "browser")
             if browser[0] == "*":
                 browser = browser[1:]
-            if browser in desired_capabilities:
-                desired_capabilities = desired_capabilities[browser]
+            desired_capabilities = capabilities_map[browser]
             command_executor = "http://%s:%s/wd/hub" % (self.cf.get("Selenium", "server_host"), self.cf.get("Selenium", "server_port"))
         self.driver = wrapper().remote_webdriver(desired_capabilities = desired_capabilities, command_executor = command_executor)
         

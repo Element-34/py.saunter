@@ -3,7 +3,8 @@ use_implicit_wait: true
 implicit_wait: 30
 
 [Selenium]
-server: /path/to/selenium-server.jar
+manage_server: true
+server_path: /path/to/selenium-server.jar
 server_host: localhost
 server_port: 4444
 browser: *firefox

@@ -1,1 +1,2 @@
-<?xml version="1.0" encoding="utf-8"?><testsuite name="" errors="0" failures="0" skips="0" tests="0" time="0.041" ></testsuite>
+<?xml version="1.0" encoding="utf-8"?><testsuite name="" errors="0" failures="0" skips="0" tests="1" time="14.698" >
+<testcase classname="scripts.DressShirts.CheckLoginExample" name="test_collar_style" time="0"></testcase></testsuite>
