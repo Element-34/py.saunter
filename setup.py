@@ -18,6 +18,7 @@ setup(
     install_requires = ['pytest>2.0.2',
                         'pytest-marks',
                         'pytest-markfiltration>=0.5',
+                        'requests',
                         'selenium>=2.5.0',
                         'unittest2'],
     license="LICENSE.txt",

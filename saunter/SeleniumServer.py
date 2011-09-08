@@ -24,13 +24,13 @@ Script for controlling the Selenium Server. Can be used from in a script or stan
 
 import getopt
 import os.path
+import requests
 import signal
 import socket
 import subprocess
 import sys
 import time
 import tempfile
-import urllib2
 
 pid_file_path = os.path.join(tempfile.gettempdir(), "selenium-server.pid")
 
@@ -46,7 +46,7 @@ def have_server():
     # check that the server is running
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        s.connect((cf.get("Selenium", "server_host"), cf.get("Selenium", "server_port")))
+        s.connect((cf.get("Selenium", "server_host"), cf.getint("Selenium", "server_port")))
         s.close()
         return True
     except socket.error, e: # Connection Refused
@@ -59,10 +59,9 @@ def start_server():
     if not os.path.exists(cf.get("Selenium", "server_path")):
         server_jar = os.path.join(tempfile.gettempdir(), "selenium-server.jar")
         if not os.path.exists(server_jar):
-            request = urllib2.Request("http://selenium.googlecode.com/files/selenium-server-standalone-2.5.0.jar")
-            response = urllib2.urlopen(request)
+            r = requests.get("http://selenium.googlecode.com/files/selenium-server-standalone-2.5.0.jar")
             jar_on_disk = open(server_jar, "wb")
-            jar_on_disk.write(response.read())
+            jar_on_disk.write(r.content)
             jar_on_disk.close()
     else:
         server_jar = cf.get("Selenium", "server_path")
