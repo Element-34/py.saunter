@@ -12,7 +12,7 @@ setup(
     package_data={"saunter": ["_defaults/conftest.py",
                               "_defaults/pytest.ini",
                               "_defaults/conf/saunter.ini.default"]},
-    version = "0.67",
+    version = "0.7",
     author = "adam goucher",
     author_email = "adam@element34.ca",
     install_requires = ['pytest>2.0.2',
