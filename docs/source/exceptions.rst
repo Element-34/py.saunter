@@ -1,5 +1,0 @@
-Exceptions
-==========
-   
-.. automodule:: CustomException
-  :members:
