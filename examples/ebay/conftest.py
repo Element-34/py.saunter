@@ -21,6 +21,7 @@ cf = saunter.ConfigWrapper.ConfigWrapper().config
 
 import os.path
 import time
+import requests
 import urllib2
 
 import py
@@ -67,29 +68,19 @@ def pytest_runtest_makereport(item, call):
 
 def fetch_artifact(which):
     sauce_session = wrapper().sauce_session
-    auth_handler = urllib2.HTTPBasicAuthHandler()
-    auth_handler.add_password("Sauce", "https://saucelabs.com/", cf.get("SauceLabs", "username"), cf.get("SauceLabs", "key"))
-    opener = urllib2.build_opener(auth_handler)
-    urllib2.install_opener(opener)
-
     which_url = "https://saucelabs.com/rest/%s/jobs/%s/results/%s" % (cf.get("SauceLabs", "username"), sauce_session, which)
     code = 404
-    while code == 404:
-        req = urllib2.Request(which_url)
+    timeout = 0
+    while code in [401, 404]:
+        r = requests.get(which_url, auth = (cf.get("SauceLabs", "username"), cf.get("SauceLabs", "key")))
         try:
-            response = urllib2.urlopen(req)
-            # implicit
-            code = 200
-        except urllib2.URLError, e:
-            if e.code == 404:
-                code = e.code
-                time.sleep(8)
-            if e.code == 401:
-                print("401'ing -- this shouldn't be happening... But if it does, up the sleep amount by a couple seconds. Ugh.")
-                break
+            code = r.status_code
+            r.raise_for_status()
+        except urllib2.HTTPError, e:
+            time.sleep(4)
 
     artifact = open(os.path.join(os.path.dirname(__file__), "logs", which), "wb")
-    artifact.write(response.read())
+    artifact.write(r.content)
 
 def pytest_runtest_logreport(report):
     if cf.getboolean("SauceLabs", "ondemand"):
@@ -122,17 +113,13 @@ def pytest_runtest_logreport(report):
         j["tags"] = report.keywords
         
         # update
-        auth_handler = urllib2.HTTPBasicAuthHandler()
-        auth_handler.add_password("Sauce", "https://saucelabs.com/", cf.get("SauceLabs", "username"), cf.get("SauceLabs", "key"))
-        opener = urllib2.build_opener(auth_handler)
-        urllib2.install_opener(opener)
-
         which_url = "https://saucelabs.com/rest/v1/%s/jobs/%s" % (cf.get("SauceLabs", "username"), sauce_session)
-        request = urllib2.Request(which_url, data=json.dumps(j))
-        request.add_header('Content-Type', 'your/contenttype')
-        request.get_method = lambda: 'PUT'
-        url = opener.open(request)
-                    
+        r = requests.put(which_url,
+                         data=json.dumps(j),
+                         headers={"Content-Type": "application/json"},
+                         auth=(cf.get("SauceLabs", "username"), cf.get("SauceLabs", "key")))
+        r.raise_for_status()
+
         if cf.getboolean("SauceLabs", "get_video"):
             fetch_artifact("video.flv")
         
