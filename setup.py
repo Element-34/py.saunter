@@ -12,7 +12,7 @@ setup(
     package_data={"saunter": ["_defaults/conftest.py",
                               "_defaults/pytest.ini",
                               "_defaults/conf/saunter.ini.default"]},
-    version = "0.6",
+    version = "0.67",
     author = "adam goucher",
     author_email = "adam@element34.ca",
     install_requires = ['pytest>2.0.2',
@@ -20,7 +20,9 @@ setup(
                         'pytest-markfiltration>=0.5',
                         'selenium>=2.5.0',
                         'unittest2'],
-    long_description="An opionated test framework",
+    license="LICENSE.txt",
+    description="An opinionated Selenium framework"
+    long_description="An opinionated test framework",
     url='https://github.com/adamgoucher/py.saunter',
     scripts=['bin/pysaunter.py'],
     classifiers=[
