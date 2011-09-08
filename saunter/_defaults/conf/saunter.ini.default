@@ -1,27 +1,60 @@
+# This config file is divided into sections based largely on the logical grouping of the
+# options contained.
+
 [Saunter]
+# Whether or not Saunter should wait for elements on the page. And for how many seconds.
 use_implicit_wait: true
 implicit_wait: 30
 
 [Selenium]
+# Should Saunter try to start/stop the server if it is not running?
 manage_server: true
+
+# The path on disk to the Selenium server jar. If Saunter is managing the server and the
+# jar is not there it will download one
 server_path: /path/to/selenium-server.jar
+
+# Where is the server that Saunter will connect to
 server_host: localhost
 server_port: 4444
+
+# The browser for this run. If running a mix of both RC and WebDriver, use the RC format
+# of *browser. If just using WebDriver the * can be skipped
 browser: *firefox
+
+# The first URL that is going to be opened in the browser
 base_url: https://fashion.ebay.com/
  
 [SauceLabs]
+# Should the job be run in the Sauce Labs OnDemand service
 ondemand: false
+
+# There are a number of artifacts available after the run. If set to true they are put
+# in the logs directory
 get_video: true
 get_log: true
+
+# Your Sauce Labs username and API key
 username: your_username
 key: your-key
+
+# These can likely just be left alone, but in case the Sauce entry point changes they are
+# here
 server_host: ondemand.saucelabs.com 
 server_port: 4444
+
+# Which OS/Browser/Version do you want to run in OnDemand. Much like with the browser key
+# in the [Selenium] section, you can use the RC format if you want. Saunter will convert
+# it to a WebDriver capability
 os: Windows 2003
 browser: *firefox
 browser_version: 3.6.
 
 [Django]
+# Saunter can interact with Django models if it knows where they are
 installation: /path/to/django/install
 app: app_name
+
+# Site-specific options should go in their own section.
+#[YourCompany]
+#some_option: some_value
