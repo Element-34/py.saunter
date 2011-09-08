@@ -17,6 +17,7 @@ ConfigWrapper
 =============
 """
 import ConfigParser
+import os
 import os.path
 
 class ConfigWrapper(object):
@@ -35,4 +36,8 @@ class ConfigWrapper(object):
         self.config.readfp(open(os.path.join("conf", config)))
 
 # initialize the singleton
-cf = ConfigWrapper().configure()
+try:
+    cf = ConfigWrapper().configure()
+except IOError as e:
+    if "DOCGENERATION" not in os.environ:
+        raise

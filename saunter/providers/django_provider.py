@@ -13,22 +13,22 @@
 # limitations under the License.
 """
 ===============
-Django Provider
+django_provider
 ===============
 """
-import ConfigWrapper
+import saunter.ConfigWrapper
 
 class DjangoProvider(object):
     """
     Uses Django's Models to access the database
     """
     def __init__(self):
-        c = ConfigWrapper.ConfigWrapper()
-        django_where = c.config.get("Django", "installation")
+        cf = saunter.ConfigWrapper.ConfigWrapper().config
+        django_where = cf.get("Django", "installation")
         if django_where not in sys.path:
             sys.path.append(django_where)
 
-        django_name = c.config.get("Django", "app")
+        django_name = cf.get("Django", "app")
         if not 'DJANGO_SETTINGS_MODULE' in os.environ:
             os.environ['DJANGO_SETTINGS_MODULE'] = "%s.settings" % django_name
 

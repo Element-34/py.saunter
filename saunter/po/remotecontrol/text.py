@@ -24,7 +24,6 @@ class Text(Element):
     """
     Base element class for Text fields
     """
-
     def __set__(self, obj, val):
         wrapper().connection.type(self.locator, val)
 

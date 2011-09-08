@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 ============
-CSV Provider
+csv_provider
 ============
 """
 import csv
@@ -26,12 +26,9 @@ class CSVProvider(object):
     """
     Provides data for either data driven scripting or as oracles from a csv file
 
-    :params c: name of csv file locates in support/csv directory
+    :params c: name of csv file located in support/csv directory
     """
     def __init__(self, c):
-        """
-        :params c: name of csv file locates in support/csv directory
-        """
         cf = saunter.ConfigWrapper.ConfigWrapper().config
         f = os.path.join(cf.get("Saunter", "base"), 'support', 'csv', c)
         self.data = csv.DictReader(open(f, 'r'))

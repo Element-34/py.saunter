@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 ================
-SQLite3 Provider
+sqlite3_provider
 ================
 """
 import os.path
@@ -24,9 +24,14 @@ import saunter.ConfigWrapper
 class DBProvider(object):
     """
     SQLite3 powered provider
+
+    :params db: name of db file located in support/db directory
     """
     def __init__(self, db):
-        cf = saunter.ConfigWrapper.ConfigWrapper().config
+        try:
+            cf = saunter.ConfigWrapper.ConfigWrapper().config
+        except:
+            print('ooooo')
         self.db = sqlite3.connect(os.path.join(cf.get("Saunter", "base"), 'support', 'db', db))
         
     def __del__(self):

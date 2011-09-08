@@ -12,18 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-==============
+===============
 SaunterTestCase
-==============
+===============
 """
+import ConfigParser
 import logging
+import os
 
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
 import saunter.ConfigWrapper
-
-if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
-    import json
+try:
+    if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
+        import json
+except ConfigParser.NoSectionError as e:
+    if "DOCGENERATION" not in os.environ:
+        raise
 
 from saunter.testcase.base import BaseTestCase
 

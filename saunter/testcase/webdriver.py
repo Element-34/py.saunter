@@ -11,15 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+"""
+===============
+SaunterTestCase
+===============
+"""
+import ConfigParser
 import logging
+import os
 
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
 import saunter.ConfigWrapper
-
-if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
-    import json
+try:
+    if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
+        import json
+except ConfigParser.NoSectionError as e:
+    if "DOCGENERATION" not in os.environ:
+        raise
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -41,7 +50,15 @@ os_map = {
 }
 
 class SaunterTestCase(BaseTestCase):
+    """
+    Parent class of all script classes used for custom asserts (usually 'soft' asserts) and shared fixture setup
+    and teardown
+    """
     def setUp(self):
+        """
+        Parent class of all script classes used for custom asserts (usually 'soft' asserts) and shared fixture setup
+        and teardown
+        """
         self.verificationErrors = []
         self.cf = saunter.ConfigWrapper.ConfigWrapper().config
         if self.cf.getboolean("SauceLabs", "ondemand"):
@@ -68,5 +85,9 @@ class SaunterTestCase(BaseTestCase):
             wrapper().sauce_session = self.driver.session_id
             
     def tearDown(self):
+        """
+        Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags
+        are updated. Also the video and server log are downloaded if so configured.
+        """
         self.driver.quit()
         self.assertEqual([], self.verificationErrors)

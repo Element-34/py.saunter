@@ -22,6 +22,9 @@ from saunter.exceptions import ElementNotFound
 from saunter.SaunterWebDriver import SaunterWebDriver
 
 class Text(Element):
+    """
+    Base element class for Text fields
+    """
     def __set__(self, obj, val):
         e = SaunterWebDriver.find_element_by_locator(self.locator)
         e.type(val)
