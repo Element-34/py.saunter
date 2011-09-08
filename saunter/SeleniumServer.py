@@ -46,7 +46,7 @@ def have_server():
     # check that the server is running
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        s.connect(("localhost", 4444))
+        s.connect((cf.get("Selenium", "server_host"), cf.get("Selenium", "server_port")))
         s.close()
         return True
     except socket.error, e: # Connection Refused
