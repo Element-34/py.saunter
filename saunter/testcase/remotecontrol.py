@@ -47,6 +47,8 @@ class SaunterTestCase(BaseTestCase):
             j['access-key'] = self.cf.get("SauceLabs", "key")
             j['os'] = self.cf.get("SauceLabs", "os")
             j['browser'] = self.cf.get("SauceLabs", "browser")
+            if j['browser'][0] == "*":
+                j['browser'] = j['browser'][1:]
             j['browser-version'] = self.cf.get("SauceLabs", "browser_version")
             browser = json.dumps(j)
         else:
@@ -58,7 +60,7 @@ class SaunterTestCase(BaseTestCase):
         self.selenium.start()
         
         if self.cf.getboolean("SauceLabs", "ondemand"):
-            self.sauce_session = self.selenium.get_eval("selenium.sessionId")
+            wrapper().sauce_session = self.selenium.get_eval("selenium.sessionId")
         
         self.selenium.window_maximize()
         self.selenium.open('/');
@@ -68,23 +70,5 @@ class SaunterTestCase(BaseTestCase):
         Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags
         are updated. Also the video and server log are downloaded if so configured.
         """
-        if self.cf.getboolean("SauceLabs", "ondemand"):
-            j = {}
-
-            # name
-            j["name"] = self._testMethodName
-
-            # result
-            if (len(self._resultForDoCleanups.result.failures) != 0) or \
-               (len(self._resultForDoCleanups.result.errors) != 0) or \
-               (len(self.verificationErrors) != 0):
-                j["passed"] = False
-            else:
-                j["passed"] = True
-
-            # tags
-            j["tags"] = getattr(getattr(self, self._testMethodName), 'tags')
-            self.selenium.set_context('sauce: job-info=%s' % json.dumps(j))
-
         self.selenium.stop()
         self.assertEqual([], self.verificationErrors)
