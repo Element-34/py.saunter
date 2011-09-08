@@ -21,7 +21,7 @@ setup(
                         'selenium>=2.5.0',
                         'unittest2'],
     license="LICENSE.txt",
-    description="An opinionated Selenium framework"
+    description="An opinionated Selenium framework",
     long_description="An opinionated test framework",
     url='https://github.com/adamgoucher/py.saunter',
     scripts=['bin/pysaunter.py'],
