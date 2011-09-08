@@ -1,0 +1,148 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>saunter.testcase.webdriver &mdash; Py.Saunter v0.8 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Py.Saunter v0.8 documentation" href="../index.html" />
+    <link rel="next" title="Pages" href="../po/webdriver.html" />
+    <link rel="prev" title="Pages" href="../po/remotecontrol.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../po/webdriver.html" title="Pages"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../po/remotecontrol.html" title="Pages"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Py.Saunter v0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="saunter-testcase-webdriver">
+<h1>saunter.testcase.webdriver<a class="headerlink" href="#saunter-testcase-webdriver" title="Permalink to this headline">¶</a></h1>
+<p>You likely do not want your scripts to inherit from this class directly. Instead, subclass it in your project and use that instead.</p>
+<span class="target" id="module-saunter.testcase.webdriver"></span><div class="section" id="sauntertestcase">
+<h2>SaunterTestCase<a class="headerlink" href="#sauntertestcase" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="saunter.testcase.webdriver.SaunterTestCase">
+<em class="property">class </em><tt class="descclassname">saunter.testcase.webdriver.</tt><tt class="descname">SaunterTestCase</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="headerlink" href="#saunter.testcase.webdriver.SaunterTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent class of all script classes used for custom asserts (usually &#8216;soft&#8217; asserts) and shared fixture setup
+and teardown</p>
+<dl class="method">
+<dt id="saunter.testcase.webdriver.SaunterTestCase.setUp">
+<tt class="descname">setUp</tt><big>(</big><big>)</big><a class="headerlink" href="#saunter.testcase.webdriver.SaunterTestCase.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent class of all script classes used for custom asserts (usually &#8216;soft&#8217; asserts) and shared fixture setup
+and teardown</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="saunter.testcase.webdriver.SaunterTestCase.tearDown">
+<tt class="descname">tearDown</tt><big>(</big><big>)</big><a class="headerlink" href="#saunter.testcase.webdriver.SaunterTestCase.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags
+are updated. Also the video and server log are downloaded if so configured.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">saunter.testcase.webdriver</a><ul>
+<li><a class="reference internal" href="#sauntertestcase">SaunterTestCase</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../po/remotecontrol.html"
+                        title="previous chapter">Pages</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../po/webdriver.html"
+                        title="next chapter">Pages</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/testcase/webdriver.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../po/webdriver.html" title="Pages"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../po/remotecontrol.html" title="Pages"
+             >previous</a> |</li>
+        <li><a href="../index.html">Py.Saunter v0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Element 34.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

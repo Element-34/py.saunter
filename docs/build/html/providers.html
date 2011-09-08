@@ -1,0 +1,201 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>saunter.providers &mdash; Py.Saunter v0.8 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Py.Saunter v0.8 documentation" href="index.html" />
+    <link rel="prev" title="saunter.generators" href="generators.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generators.html" title="saunter.generators"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Py.Saunter v0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="saunter-providers">
+<h1>saunter.providers<a class="headerlink" href="#saunter-providers" title="Permalink to this headline">¶</a></h1>
+<p>Providers can insert data into scripts from canned resources, or act as conduits into the backend for verification purposes.</p>
+<span class="target" id="module-saunter.providers.csv_provider"></span><div class="section" id="csv-provider">
+<h2>csv_provider<a class="headerlink" href="#csv-provider" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="saunter.providers.csv_provider.CSVProvider">
+<em class="property">class </em><tt class="descclassname">saunter.providers.csv_provider.</tt><tt class="descname">CSVProvider</tt><big>(</big><em>c</em><big>)</big><a class="headerlink" href="#saunter.providers.csv_provider.CSVProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides data for either data driven scripting or as oracles from a csv file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Params c:</th><td class="field-body">name of csv file located in support/csv directory</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="saunter.providers.csv_provider.CSVProvider.randomRow">
+<tt class="descname">randomRow</tt><big>(</big><big>)</big><a class="headerlink" href="#saunter.providers.csv_provider.CSVProvider.randomRow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a random row from the provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">List</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-saunter.providers.django_provider"></span><div class="section" id="django-provider">
+<h2>django_provider<a class="headerlink" href="#django-provider" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="saunter.providers.django_provider.DjangoProvider">
+<em class="property">class </em><tt class="descclassname">saunter.providers.django_provider.</tt><tt class="descname">DjangoProvider</tt><a class="headerlink" href="#saunter.providers.django_provider.DjangoProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses Django&#8217;s Models to access the database</p>
+<dl class="method">
+<dt id="saunter.providers.django_provider.DjangoProvider.get_random_user">
+<tt class="descname">get_random_user</tt><big>(</big><big>)</big><a class="headerlink" href="#saunter.providers.django_provider.DjangoProvider.get_random_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a random user from the provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Dictionary</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-saunter.providers.sqlite3_provider"></span><div class="section" id="sqlite3-provider">
+<h2>sqlite3_provider<a class="headerlink" href="#sqlite3-provider" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="saunter.providers.sqlite3_provider.DBProvider">
+<em class="property">class </em><tt class="descclassname">saunter.providers.sqlite3_provider.</tt><tt class="descname">DBProvider</tt><big>(</big><em>db</em><big>)</big><a class="headerlink" href="#saunter.providers.sqlite3_provider.DBProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>SQLite3 powered provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Params db:</th><td class="field-body">name of db file located in support/db directory</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="saunter.providers.sqlite3_provider.DBProvider.get_random_user">
+<tt class="descname">get_random_user</tt><big>(</big><big>)</big><a class="headerlink" href="#saunter.providers.sqlite3_provider.DBProvider.get_random_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a random user from the provider</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Dictionary</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">saunter.providers</a><ul>
+<li><a class="reference internal" href="#csv-provider">csv_provider</a></li>
+<li><a class="reference internal" href="#django-provider">django_provider</a></li>
+<li><a class="reference internal" href="#sqlite3-provider">sqlite3_provider</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="generators.html"
+                        title="previous chapter">saunter.generators</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/providers.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generators.html" title="saunter.generators"
+             >previous</a> |</li>
+        <li><a href="index.html">Py.Saunter v0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Element 34.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

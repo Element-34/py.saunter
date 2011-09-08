@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pages &mdash; Py.Saunter v0.8 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Py.Saunter v0.8 documentation" href="../index.html" />
+    <link rel="next" title="saunter.generators" href="../generators.html" />
+    <link rel="prev" title="saunter.testcase.webdriver" href="../testcase/webdriver.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../generators.html" title="saunter.generators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../testcase/webdriver.html" title="saunter.testcase.webdriver"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Py.Saunter v0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-saunter.po.webdriver.page">
+<span id="pages"></span><h1>Pages<a class="headerlink" href="#module-saunter.po.webdriver.page" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="page">
+<h2>Page<a class="headerlink" href="#page" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="saunter.po.webdriver.page.Page">
+<em class="property">class </em><tt class="descclassname">saunter.po.webdriver.page.</tt><tt class="descname">Page</tt><a class="headerlink" href="#saunter.po.webdriver.page.Page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Top of the PO page tree</p>
+<dl class="method">
+<dt id="saunter.po.webdriver.page.Page.is_element_available">
+<tt class="descname">is_element_available</tt><big>(</big><em>locator</em><big>)</big><a class="headerlink" href="#saunter.po.webdriver.page.Page.is_element_available" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synchronization method for making sure the element we&#8217;re looking for is not only on the page,
+but also visible &#8211; since Se will happily deal with things that aren&#8217;t visible.</p>
+<p>Use this instead of is_element_present most of the time.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="saunter.po.webdriver.page.Page.wait_for_element_not_present">
+<tt class="descname">wait_for_element_not_present</tt><big>(</big><em>locator</em><big>)</big><a class="headerlink" href="#saunter.po.webdriver.page.Page.wait_for_element_not_present" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synchronization helper to wait until some element is removed from the page</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="saunter.po.webdriver.page.Page.wait_for_hidden">
+<tt class="descname">wait_for_hidden</tt><big>(</big><em>locator</em><big>)</big><a class="headerlink" href="#saunter.po.webdriver.page.Page.wait_for_hidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synchronization to deal with elements that are present, but are visibility until some action
+triggers their hidden-ness.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout=</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="saunter.po.webdriver.page.Page.wait_for_text">
+<tt class="descname">wait_for_text</tt><big>(</big><em>locator</em>, <em>text</em><big>)</big><a class="headerlink" href="#saunter.po.webdriver.page.Page.wait_for_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synchronization on some text being displayed in a particular element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="saunter.po.webdriver.page.Page.wait_for_value">
+<tt class="descname">wait_for_value</tt><big>(</big><em>locator</em>, <em>text</em><big>)</big><a class="headerlink" href="#saunter.po.webdriver.page.Page.wait_for_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synchronization on some value being set in a particular element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="saunter.po.webdriver.page.Page.wait_for_visible">
+<tt class="descname">wait_for_visible</tt><big>(</big><em>locator</em><big>)</big><a class="headerlink" href="#saunter.po.webdriver.page.Page.wait_for_visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synchronization to deal with elements that are present, but are disabled until some action
+triggers their visibility.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-saunter.po.webdriver.element">
+<span id="elements"></span><h1>Elements<a class="headerlink" href="#module-saunter.po.webdriver.element" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="element">
+<h2>Element<a class="headerlink" href="#element" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="saunter.po.webdriver.element.Element">
+<em class="property">class </em><tt class="descclassname">saunter.po.webdriver.element.</tt><tt class="descname">Element</tt><a class="headerlink" href="#saunter.po.webdriver.element.Element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Top of the PO element tree</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-saunter.po.webdriver.select"></span><div class="section" id="select">
+<h2>Select<a class="headerlink" href="#select" title="Permalink to this headline">¶</a></h2>
+<dl class="attribute">
+<dt id="saunter.po.webdriver.select.Select">
+<tt class="descclassname">saunter.po.webdriver.select.</tt><tt class="descname">Select</tt><a class="headerlink" href="#saunter.po.webdriver.select.Select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base element class for Select fields</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-saunter.po.webdriver.text"></span><div class="section" id="text">
+<h2>Text<a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h2>
+<dl class="attribute">
+<dt id="saunter.po.webdriver.text.Text">
+<tt class="descclassname">saunter.po.webdriver.text.</tt><tt class="descname">Text</tt><a class="headerlink" href="#saunter.po.webdriver.text.Text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base element class for Text fields</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Pages</a><ul>
+<li><a class="reference internal" href="#page">Page</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-saunter.po.webdriver.element">Elements</a><ul>
+<li><a class="reference internal" href="#element">Element</a></li>
+<li><a class="reference internal" href="#select">Select</a></li>
+<li><a class="reference internal" href="#text">Text</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../testcase/webdriver.html"
+                        title="previous chapter">saunter.testcase.webdriver</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../generators.html"
+                        title="next chapter">saunter.generators</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/po/webdriver.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../generators.html" title="saunter.generators"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../testcase/webdriver.html" title="saunter.testcase.webdriver"
+             >previous</a> |</li>
+        <li><a href="../index.html">Py.Saunter v0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Element 34.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
