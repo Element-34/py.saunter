@@ -33,9 +33,11 @@ class SeleniumWrapper(object):
         return cls._instance
 
     def remote_control(self, host, port, browser, server):
-        self.connection = SaunterSelenium(host, port, browser, server)
+        import tailored.remotecontrol
+        self.connection = tailored.remotecontrol.RemoteControl(host, port, browser, server)
         return self.connection
         
     def remote_webdriver(self, *args, **kwargs):
         self.connection = webdriver.Remote(*args, **kwargs)
+        self.driver = self.connection
         return self.connection

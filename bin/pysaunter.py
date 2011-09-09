@@ -62,7 +62,19 @@ def new():
     if not os.path.isfile(os.path.join(cwd, "modules", "providers", "__init__.py")):
         f = open(os.path.join(cwd, "modules", "providers", "__init__.py"), "w")
         f.close()
-            
+
+    # modules/pages
+    if not os.path.isdir(os.path.join(cwd, "modules", "tailored")):
+        os.mkdir(os.path.join(cwd, "modules", "tailored"))
+
+    # pages is a package
+    if not os.path.isfile(os.path.join(cwd, "modules", "tailored", "__init__.py")):
+        f = open(os.path.join(cwd, "modules", "tailored", "__init__.py"), "w")
+        f.close()
+        
+    if not os.path.isfile(os.path.join(cwd, "modules", "tailored", "remotecontrol.py")):
+        shutil.copy(os.path.join(saunter_installed_at, "_defaults", "tailored", "remotecontrol.py"), os.path.join(cwd, "modules", "tailored"))
+
     # scripts
     if not os.path.isdir(os.path.join(cwd, "scripts")):
         os.mkdir(os.path.join(cwd, "scripts"))
