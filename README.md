@@ -1,11 +1,11 @@
-NOTE: Py.Saunter currently is based on Nose. It is going to be switching to Py.Test *really* soon. I'll have migration notes, but you are forewarned.
+NOTE: Py.Saunter currently is based on [Nose](http://readthedocs.org/docs/nose/en/latest/). It is going to be switching to [Py.Test](http://pytest.org/latest/) *really* soon. I'll have migration notes, but you are forewarned.
 
 (Selenium) Page Objects in Python
 =================================
 
 Page Objects 101
 ----------------
-'Page Objects' is a pattern for creating Selenium scripts that makes heavy use of OO principles to enable code reuse and improve maintenance. Rather than having test methods that are a series of Se commands that are sent to the server, your scripts become a series of interactions with objects that represent a page (or part of one) -- thus the name.  
+'Page Objects' is a pattern for creating [Selenium](http://seleniumhq.org/) scripts that makes heavy use of OO principles to enable code reuse and improve maintenance. Rather than having test methods that are a series of Se commands that are sent to the server, your scripts become a series of interactions with objects that represent a page (or part of one) -- thus the name.  
 
 Without Page Objects:
 
