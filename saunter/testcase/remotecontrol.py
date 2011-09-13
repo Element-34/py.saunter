@@ -44,6 +44,7 @@ class SaunterTestCase(BaseTestCase):
         """
         self.verificationErrors = []
         self.cf = saunter.ConfigWrapper.ConfigWrapper().config
+        self.cf.set("Saunter", "name", self._testMethodName)
         if self.cf.getboolean("SauceLabs", "ondemand"):
             host = self.cf.get("SauceLabs", "server_host")
             port = self.cf.get("SauceLabs", "server_port")

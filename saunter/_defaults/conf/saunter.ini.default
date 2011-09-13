@@ -6,6 +6,10 @@
 use_implicit_wait: true
 implicit_wait: 30
 
+# With this true, Saunter will take a screenshot after most interactions with the
+# application such as click, submit, type, etc.
+take_screenshots: false
+
 [Selenium]
 # Should Saunter try to start/stop the server if it is not running?
 manage_server: true
