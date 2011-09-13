@@ -9,29 +9,33 @@ Page Objects 101
 
 Without Page Objects:
 
-    class LoginExample(unittest.TestCase):
-        def incorrect_login(self):
-            self.selenium.open('/')
-            self.selenium.click('css=div.account_mast a:first')
-            self.selenium.wait_for_page_to_load("30000")
-            self.selenium.type('username', 'monkey')
-            self.selenium.type('password', 'buttress')
-            self.selenium.click('submit')
-            self.selenium.wait_for_page_to_load("30000")
-            self.assertEqual(self.selenium.get_text("css=div.error > p"), "Incorrect username or password.")
+```python
+class LoginExample(unittest.TestCase):
+    def incorrect_login(self):
+        self.selenium.open('/')
+        self.selenium.click('css=div.account_mast a:first')
+        self.selenium.wait_for_page_to_load("30000")
+        self.selenium.type('username', 'monkey')
+        self.selenium.type('password', 'buttress')
+        self.selenium.click('submit')
+        self.selenium.wait_for_page_to_load("30000")
+        self.assertEqual(self.selenium.get_text("css=div.error > p"), "Incorrect username or password.")
+```
 
 With Page Objects:
 
-    class LoginExample(CustomTestCase.CustomTestCase):
-        @attr(tags=['deep', 'website', 'login'])
-        def incorrect_login(self):
-            h = HomePage()
-            h.open_default_url()
-            l = h.go_to_login_page()
-            l.username = "foo"
-            l.password = "bar"
-            l.do_login()
-            self.assertEqual(l.error_message, "Incorrect username or password.")
+```python
+class LoginExample(CustomTestCase.CustomTestCase):
+    @attr(tags=['deep', 'website', 'login'])
+    def incorrect_login(self):
+        h = HomePage()
+        h.open_default_url()
+        l = h.go_to_login_page()
+        l.username = "foo"
+        l.password = "bar"
+        l.do_login()
+        self.assertEqual(l.error_message, "Incorrect username or password.")
+```
 
 As you can see, not only is the script that uses POs [slightly] more human readable, but it is much more maintainable since it really does separate the page interface from the implementation so that _when_ something on the page changes only the POs themselves need to change and not ten billion scripts.
 
