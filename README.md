@@ -7,7 +7,8 @@ Page Objects 101
 ----------------
 'Page Objects' is a pattern for creating Selenium scripts that makes heavy use of OO principles to enable code reuse and improve maintenance. Rather than having test methods that are a series of Se commands that are sent to the server, your scripts become a series of interactions with objects that represent a page (or part of one) -- thus the name.  
 
-Without Page Objects
+Without Page Objects:
+
     class LoginExample(unittest.TestCase):
         def incorrect_login(self):
             self.selenium.open('/')
@@ -19,7 +20,8 @@ Without Page Objects
             self.selenium.wait_for_page_to_load("30000")
             self.assertEqual(self.selenium.get_text("css=div.error > p"), "Incorrect username or password.")
 
-With Page Objects
+With Page Objects:
+
     class LoginExample(CustomTestCase.CustomTestCase):
         @attr(tags=['deep', 'website', 'login'])
         def incorrect_login(self):
