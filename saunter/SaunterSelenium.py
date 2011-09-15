@@ -106,7 +106,7 @@ class SaunterSelenium(selenium):
         self.take_numbered_screenshot()
 
     def drag_and_drop_to_object(self, locatorOfObjectToBeDragged, locatorOfDragDestinationObject):
-        super(SaunterSelenium, self).focus(locator)        
+        super(SaunterSelenium, self).focus(locatorOfObjectToBeDragged)        
         super(SaunterSelenium, self).drag_and_drop_to_object(locatorOfObjectToBeDragged, locatorOfDragDestinationObject)
         self.take_numbered_screenshot()
             
@@ -159,7 +159,7 @@ class SaunterSelenium(selenium):
         self.take_numbered_screenshot()
 
     def select(self, selectLocator, optionLocator):
-        super(SaunterSelenium, self).focus(locator)
+        super(SaunterSelenium, self).focus(selectLocator)
         super(SaunterSelenium, self).select(selectLocator, optionLocator)
         self.take_numbered_screenshot()
         
