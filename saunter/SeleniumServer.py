@@ -59,7 +59,7 @@ def start_server():
     if not os.path.exists(cf.get("Selenium", "server_path")):
         server_jar = os.path.join(tempfile.gettempdir(), "selenium-server.jar")
         if not os.path.exists(server_jar):
-            r = requests.get("http://selenium.googlecode.com/files/selenium-server-standalone-2.5.0.jar")
+            r = requests.get("http://selenium.googlecode.com/files/selenium-server-standalone-2.7.0.jar")
             jar_on_disk = open(server_jar, "wb")
             jar_on_disk.write(r.content)
             jar_on_disk.close()

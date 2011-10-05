@@ -20,7 +20,7 @@ setup(
                         'pytest-marks',
                         'pytest-markfiltration>=0.5',
                         'requests',
-                        'selenium>=2.6.0',
+                        'selenium>=2.7.0',
                         'unittest2'],
     license="LICENSE.txt",
     description="An opinionated Selenium framework",
