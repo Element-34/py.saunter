@@ -147,7 +147,7 @@ if not saunter.SeleniumServer.have_server():
         sys.exit("Selenium Server not running and py.saunter configured not to control it")
 
 # logging
-log_name = os.path.join(cwd, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%M-%S"))
+log_name = os.path.join(cwd, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%H-%M-%S"))
 arguments.append('--junitxml=%s' %log_name)
 arguments.append('--tb=line')
 
