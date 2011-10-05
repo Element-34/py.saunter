@@ -66,87 +66,93 @@ class SaunterSelenium(selenium):
                 self.screenshot_number = self.screenshot_number + 1
             
     def click(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).click(locator)
         self.take_numbered_screenshot()
         
     def double_click(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).double_click(locator)
         self.take_numbered_screenshot()
 
     def check(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).check(locator)
         self.take_numbered_screenshot()
 
     def click_at(self, locator, coordString):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).click_at(locator, coordString)
         self.take_numbered_screenshot()
 
     def context_menu(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).context_menu(locator)
         self.take_numbered_screenshot()
 
     def context_menu_at(self, locator, coordString):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).context_menu_at(locator, coordString)
         self.take_numbered_screenshot()
         
     def double_click_at(self, locator, coordString):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).double_click_at(locator, coordString)
         self.take_numbered_screenshot()
 
     def drag_and_drop(self, locator, movementsString):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).drag_and_drop(locator, movementsString)
         self.take_numbered_screenshot()
 
     def drag_and_drop_to_object(self, locatorOfObjectToBeDragged, locatorOfDragDestinationObject):
-        super(SaunterSelenium, self).focus(locatorOfObjectToBeDragged)        
+        self.focus(locatorOfObjectToBeDragged)        
         super(SaunterSelenium, self).drag_and_drop_to_object(locatorOfObjectToBeDragged, locatorOfDragDestinationObject)
         self.take_numbered_screenshot()
+    
+    def focus(self, locator):
+        try:
+            super(SaunterSelenium, self).focus(locator)
+        except:
+            pass
             
     def fire_event(self, locator, eventName):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).fire_event(locator, eventName)
         self.take_numbered_screenshot()
         
     def mouse_over(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).mouse_over(locator)
         self.take_numbered_screenshot()
         
     def mouse_down(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).mouse_down(locator)
         self.take_numbered_screenshot()
         
     def mouse_down_right(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).mouse_down_right(locator)
         self.take_numbered_screenshot()
         
     def mouse_down_at(self, locator, coordString):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).mouse_down_at(locator, coordString)
         self.take_numbered_screenshot()
         
     def mouse_down_right_at(self, locator, coordString):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).mouse_down_right_at(locator, coordString)
         self.take_numbered_screenshot()
         
     def mouse_move(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).mouse_move(locator)
         self.take_numbered_screenshot()
         
     def mouse_move_at(self, locator, coordString):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).mouse_move_at(locator, coordString)
         self.take_numbered_screenshot()
 
@@ -159,22 +165,22 @@ class SaunterSelenium(selenium):
         self.take_numbered_screenshot()
 
     def select(self, selectLocator, optionLocator):
-        super(SaunterSelenium, self).focus(selectLocator)
+        self.focus(selectLocator)
         super(SaunterSelenium, self).select(selectLocator, optionLocator)
         self.take_numbered_screenshot()
         
     def add_selection(self, locator, optionLocator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).add_selection(selectLocator, optionLocator)
         self.take_numbered_screenshot()
         
     def remove_selection(self, locator, optionLocator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).remove_selection(selectLocator, optionLocator)
         self.take_numbered_screenshot()
         
     def remove_all_selections(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).remove_all_selections(locator)
         self.take_numbered_screenshot()
 
@@ -183,17 +189,17 @@ class SaunterSelenium(selenium):
         self.take_numbered_screenshot()
 
     def type(self, locator, value):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).type(locator, value)
         self.take_numbered_screenshot()
 
     def type_keys(self, locator, value):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).type_keys(locator, value)
         self.take_numbered_screenshot()
 
     def uncheck(self, locator):
-        super(SaunterSelenium, self).focus(locator)
+        self.focus(locator)
         super(SaunterSelenium, self).uncheck(locator)
         self.take_numbered_screenshot()
 
