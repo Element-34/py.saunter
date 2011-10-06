@@ -68,8 +68,8 @@ def start_server():
         server_jar = cf.get("Selenium", "server_path")
     
     s = subprocess.Popen(['java', '-jar', server_jar], 
-                        stdout=subprocess.PIPE, 
-                        stderr=subprocess.STDOUT).pid
+                        stdout=tempfile.TemporaryFile(), 
+                        stderr=tempfile.TemporaryFile()).pid
     pidfile = open(pid_file_path, "w")
     pidfile.write(str(s))
     pidfile.close()
