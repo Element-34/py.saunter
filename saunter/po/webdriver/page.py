@@ -40,6 +40,23 @@ class Page(object):
                 return False
         else:
             return False
+
+    def wait_for_available(self, locator):
+        """
+        Synchronization to deal with elements that are present, and are visible
+
+        :raises: ElementVisiblityTimeout        
+        """
+        for i in range(timeout_seconds):
+            try:
+                if self.is_element_available(locator):
+                    break
+            except:
+                pass
+            time.sleep(1)
+        else:
+            raise ElementVisiblityTimeout("%s availability timed out" % locator)
+        return True
             
     def wait_for_visible(self, locator):
         """
