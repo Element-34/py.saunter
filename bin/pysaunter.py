@@ -104,6 +104,7 @@ p.add_argument('--new', action='store_true', default=False)
 p.add_argument('-f', action='append', default=['shallow'], nargs='*')
 p.add_argument('-v', action='store_true', default=None)
 p.add_argument('-s', action='store_true', default=None)
+p.add_argument('--tb', action='store', default="line", help='traceback print mode (long/short/line/native/no)')
 
 results = p.parse_args()
 
@@ -149,7 +150,8 @@ if not saunter.SeleniumServer.have_server():
 # logging
 log_name = os.path.join(cwd, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%H-%M-%S"))
 arguments.append('--junitxml=%s' %log_name)
-arguments.append('--tb=line')
+
+arguments.append('--tb=%s' % results.__dict__["tb"])
 
 # run
 arguments.append("scripts")
