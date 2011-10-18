@@ -81,7 +81,7 @@ class SaunterTestCase(BaseTestCase):
             command_executor = "http://%s:%s/wd/hub" % (self.cf.get("Selenium", "server_host"), self.cf.get("Selenium", "server_port"))
         self.driver = wrapper().remote_webdriver(desired_capabilities = desired_capabilities, command_executor = command_executor)
 
-        if cf.getboolean("Saunter", "use_implicit_wait"):
+        if self.cf.getboolean("Saunter", "use_implicit_wait"):
             driver.implicitly_wait = cf.getint("Saunter", "implicit_wait")
         
         if self.cf.getboolean("SauceLabs", "ondemand"):
