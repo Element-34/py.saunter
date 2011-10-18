@@ -82,7 +82,7 @@ class SaunterTestCase(BaseTestCase):
         self.driver = wrapper().remote_webdriver(desired_capabilities = desired_capabilities, command_executor = command_executor)
 
         if self.cf.getboolean("Saunter", "use_implicit_wait"):
-            driver.implicitly_wait = self.cf.getint("Saunter", "implicit_wait")
+            self.driver.implicitly_wait = self.cf.getint("Saunter", "implicit_wait")
         
         if self.cf.getboolean("SauceLabs", "ondemand"):
             wrapper().sauce_session = self.driver.session_id
