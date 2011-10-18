@@ -16,6 +16,8 @@
 django_provider
 ===============
 """
+import os
+import sys
 import saunter.ConfigWrapper
 
 class DjangoProvider(object):
