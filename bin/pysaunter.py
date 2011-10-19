@@ -155,7 +155,7 @@ arguments.append('--tb=%s' % results.__dict__["tb"])
 
 # run
 arguments.append("scripts")
-pytest.main(args=arguments, plugins=[marks.MarksDecorator(), markfiltration.MarkFiltration()])
+run_status = pytest.main(args=arguments, plugins=[marks.MarksDecorator(), markfiltration.MarkFiltration()])
 
 shutil.copy(log_name, os.path.join(cwd, 'logs', 'latest.xml'))
 
@@ -165,4 +165,7 @@ if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("Selenium", "manage_s
             saunter.SeleniumServer.stop_server()
         except OSError as (errno, strerror):
             if strerror == "No such process":
-                sys.exit("Tried to kill Selenium Server but process in was already killed.")
+                print("Tried to kill Selenium Server but process in was already killed.")
+                run_status = 1
+
+sys.exit(run_status)
