@@ -69,6 +69,9 @@ class SaunterSelenium(selenium):
                 super(SaunterSelenium, self).capture_screenshot(os.path.join(self.screenshots_where, str(self.screenshot_number).zfill(3) + ".png"))
                 self.screenshot_number = self.screenshot_number + 1
 
+    def take_named_screenshot(self, name):
+        super(SaunterSelenium, self).capture_screenshot(os.path.join(self.screenshots_where, str(name) + ".png"))
+
     def click(self, locator):
         self.focus(locator)
         super(SaunterSelenium, self).click(locator)

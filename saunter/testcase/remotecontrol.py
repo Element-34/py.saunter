@@ -76,5 +76,7 @@ class SaunterTestCase(BaseTestCase):
         Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags
         are updated. Also the video and server log are downloaded if so configured.
         """
+        if not self.cf.getboolean("SauceLabs", "ondemand"):
+            self.selenium.take_named_screenshot("final")
         self.selenium.stop()
         self.assertEqual([], self.verificationErrors)
