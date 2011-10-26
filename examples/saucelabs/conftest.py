@@ -83,11 +83,18 @@ def fetch_artifact(which):
     artifact.write(r.content)
 
 def pytest_runtest_logreport(report):
+    try:
+        c = wrapper().connection
+        if c.running:
+            c.stop()
+    except AttributeError:
+        pass
+    
     if cf.getboolean("SauceLabs", "ondemand"):
         # session couldn't be established for some reason
-        if not hasattr(wrapper(), "sauce_session"):
+        if not hasattr(c, "sauce_session"):
            return
-        sauce_session = wrapper().sauce_session
+        sauce_session = c.sauce_session
         
         j = {}
     

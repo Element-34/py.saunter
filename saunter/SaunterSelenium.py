@@ -41,6 +41,10 @@ class SaunterSelenium(selenium):
                 self.implicit_wait = 0
         except:
             self.implicit_wait = 0
+        
+    def stop(self):
+        super(SaunterSelenium, self).stop()
+        self.running = False
 
     def do_command(self, verb, args, implicit_wait = None):
         if implicit_wait == None:
@@ -64,7 +68,7 @@ class SaunterSelenium(selenium):
             if self.cf.getboolean("Saunter", "take_screenshots"):
                 super(SaunterSelenium, self).capture_screenshot(os.path.join(self.screenshots_where, str(self.screenshot_number).zfill(3) + ".png"))
                 self.screenshot_number = self.screenshot_number + 1
-            
+
     def click(self, locator):
         self.focus(locator)
         super(SaunterSelenium, self).click(locator)

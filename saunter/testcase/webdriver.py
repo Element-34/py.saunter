@@ -92,5 +92,5 @@ class SaunterTestCase(BaseTestCase):
         Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags
         are updated. Also the video and server log are downloaded if so configured.
         """
-        self.driver.quit()
+        SaunterWebDriver.quit()
         self.assertEqual([], self.verificationErrors)

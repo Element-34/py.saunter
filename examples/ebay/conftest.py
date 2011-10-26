@@ -83,6 +83,17 @@ def fetch_artifact(which):
     artifact.write(r.content)
 
 def pytest_runtest_logreport(report):
+    # this will make sure the browser is dead even if there was an exception in setUp
+    try:
+        c = wrapper().connection
+        if c.running:
+            if hasattr(c, "capabilities"):
+                c.quit()
+            else:
+                c.stop()
+    except AttributeError:
+        pass
+
     if cf.getboolean("SauceLabs", "ondemand"):
         # session couldn't be established for some reason
         if not hasattr(wrapper(), "sauce_session"):

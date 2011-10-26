@@ -19,6 +19,12 @@ from selenium.common.exceptions import NoSuchElementException
 
 class SaunterWebDriver(object):
     @classmethod
+    def quit(cls):
+        driver = se_wrapper().connection
+        driver.quit()
+        driver.running = False
+    
+    @classmethod
     def find_element_by_locator(cls, locator):
         driver = se_wrapper().connection
         
