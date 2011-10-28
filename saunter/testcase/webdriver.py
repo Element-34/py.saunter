@@ -37,6 +37,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from saunter.testcase.base import BaseTestCase
+from saunter.SaunterWebDriver import SaunterWebDriver
 
 capabilities_map = {
     "firefox": DesiredCapabilities.FIREFOX,
