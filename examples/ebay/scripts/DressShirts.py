@@ -18,10 +18,23 @@ from pages.shirts import ShirtPage
 
 import pytest
 
-class CheckLoginExample(SaunterTestCase):
+class EbayExample(SaunterTestCase):
     @pytest.marks('deep', 'ebay', 'shirts')
     def test_collar_style(self):
         s = ShirtPage()
         s.go_to_mens_dress_shirts()
         s.change_collar_style("Banded (Collarless)")
         assert(s.is_collar_selected("Banded (Collarless)"))
+
+    @pytest.marks('deep', 'ebay', 'meta')
+    def test_meta(self):
+        s = ShirtPage()
+        s.go_to_mens_dress_shirts()
+        metas = s.get_meta_elements()
+        assert(len(metas) == 2)
+        
+        keywords = s.get_meta_element("keywords")
+        assert(keywords.get_attribute("Content") == "Dress Shirts")
+
+        description = s.get_meta_element("description")
+        assert(description.get_attribute("Content") == "Shop eBay Fashion for the most dynamic selection of affordable, new  Dress Shirts Items. Find the best deals on new and used fashion.  Learn more about eBay Buyer Protection.")

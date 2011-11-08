@@ -51,3 +51,8 @@ class ShirtPage(Page):
             return False
         return True
         
+    def get_meta_elements(self):
+        return SaunterWebDriver.find_elements_by_locator("tag=meta")
+        
+    def get_meta_element(self, name):
+        return SaunterWebDriver.find_element_by_locator('css=meta[name="%s"]' % name)
