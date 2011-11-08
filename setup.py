@@ -18,7 +18,7 @@ setup(
     author_email = "adam@element34.ca",
     install_requires = ['pytest>2.0.2',
                         'pytest-marks',
-                        'pytest-markfiltration>=0.7',
+                        'pytest-markfiltration>=0.8',
                         'requests',
                         'selenium>=2.7.0',
                         'unittest2'],
