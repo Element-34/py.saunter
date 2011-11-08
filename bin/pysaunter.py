@@ -105,6 +105,8 @@ p.add_argument('-f', action='append', default=['shallow'], nargs='*')
 p.add_argument('-v', action='store_true', default=None)
 p.add_argument('-s', action='store_true', default=None)
 p.add_argument('--tb', action='store', default="line", help='traceback print mode (long/short/line/native/no)')
+p.add_argument('-p', action='append', default=[])
+p.add_argument('--traceconfig', action='store_true', default=None)
 
 results = p.parse_args()
 
@@ -116,17 +118,34 @@ arguments = []
 
 # argparse will take all the -f arguments and compile them into a list
 if len(results.f) == 1:
-    arguments.append("-f %s" % results.f[0])
+    arguments.append("-f")
+    arguments.append(results.f[0])
 else:
     for filters in results.f:
         if isinstance(filters, types.ListType):
             for script_filter in filters:
-                arguments.append("-f %s" % script_filter)
+                arguments.append("-f")
+                arguments.append(script_filter)
 
 # this are either true or false
 for noneable in ['v', 's']:
     if results.__dict__[noneable]:
         arguments.append("-%s" % noneable)
+
+for noneable in ['traceconfig']:
+    if results.__dict__[noneable]:
+        arguments.append("--%s" % noneable)
+
+# plugin control
+arguments.append("-p")
+arguments.append("no:mark")
+if len(results.p) == 1:
+    arguments.append("-p")
+    arguments.append(results.p[0])
+else:
+    for p in results.p:
+        arguments.append("-p")
+        arguments.append(p)
 
 # pythonpath
 sys.path.append(os.path.join(cwd, "modules"))
@@ -155,6 +174,7 @@ arguments.append('--tb=%s' % results.__dict__["tb"])
 
 # run
 arguments.append("scripts")
+
 run_status = pytest.main(args=arguments, plugins=[marks.MarksDecorator(), markfiltration.MarkFiltration()])
 
 shutil.copy(log_name, os.path.join(cwd, 'logs', 'latest.xml'))
