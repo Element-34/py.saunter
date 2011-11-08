@@ -32,7 +32,7 @@ class ConfigWrapper(object):
         return cls._instance
 
     def configure(self, config = "saunter.ini"):
-        self.config = ConfigParser.RawConfigParser()
+        self.config = ConfigParser.SafeConfigParser()
         self.config.readfp(open(os.path.join("conf", config)))
 
 # initialize the singleton
