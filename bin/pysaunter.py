@@ -107,6 +107,7 @@ p.add_argument('-s', action='store_true', default=None)
 p.add_argument('--tb', action='store', default="line", help='traceback print mode (long/short/line/native/no)')
 p.add_argument('-p', action='append', default=[])
 p.add_argument('--traceconfig', action='store_true', default=None)
+p.add_argument('--pdb', action='store_true', default=None, help="start the interactive Python debugger on errors")
 
 results = p.parse_args()
 
@@ -132,7 +133,7 @@ for noneable in ['v', 's']:
     if results.__dict__[noneable]:
         arguments.append("-%s" % noneable)
 
-for noneable in ['traceconfig']:
+for noneable in ['traceconfig', 'pdb']:
     if results.__dict__[noneable]:
         arguments.append("--%s" % noneable)
 
