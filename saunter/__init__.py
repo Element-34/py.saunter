@@ -12,5 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__version__ = 0.25
+__version__ = 0.26
 __all__ = ['generators', 'po', 'providers', 'testcase']
