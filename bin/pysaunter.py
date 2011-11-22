@@ -100,13 +100,13 @@ def new():
     sys.exit()
 
 p = argparse.ArgumentParser()
-p.add_argument('--new', action='store_true', default=False)
+p.add_argument('--new', action='store_true', default=False, help="creates a new Py.Saunter environment")
 p.add_argument('-f', action='append', default=['shallow'], nargs='*')
-p.add_argument('-v', action='store_true', default=None)
-p.add_argument('-s', action='store_true', default=None)
+p.add_argument('-v', action='store_true', default=None, help="increase verbosity")
+p.add_argument('-s', action='store_true', default=None, help="don't capture output")
 p.add_argument('--tb', action='store', default="line", help='traceback print mode (long/short/line/native/no)')
-p.add_argument('-p', action='append', default=[])
-p.add_argument('--traceconfig', action='store_true', default=None)
+p.add_argument('-p', action='append', default=[], help="early-load given plugin (multi-allowed)")
+p.add_argument('--traceconfig', action='store_true', default=None, help="trace considerations of conftest.py files")
 p.add_argument('--pdb', action='store_true', default=None, help="start the interactive Python debugger on errors")
 
 results = p.parse_args()
