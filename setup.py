@@ -19,7 +19,7 @@ setup(
     install_requires = ['pytest=2.2.0',
                         'pytest-marks',
                         'requests',
-                        'selenium>=2.7.0',
+                        'selenium>=2.13.0',
                         'unittest2'],
     license="LICENSE.txt",
     description="An opinionated Selenium framework",
