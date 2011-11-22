@@ -15,7 +15,6 @@
 import datetime
 import pytest
 import marks
-import markfiltration
 import argparse
 import os
 import os.path
@@ -101,13 +100,17 @@ def new():
 
 p = argparse.ArgumentParser()
 p.add_argument('--new', action='store_true', default=False, help="creates a new Py.Saunter environment")
-p.add_argument('-f', action='append', default=['shallow'], nargs='*')
 p.add_argument('-v', action='store_true', default=None, help="increase verbosity")
 p.add_argument('-s', action='store_true', default=None, help="don't capture output")
 p.add_argument('--tb', action='store', default="line", help='traceback print mode (long/short/line/native/no)')
 p.add_argument('-p', action='append', default=[], help="early-load given plugin (multi-allowed)")
+p.add_argument('-m', action='append', default=[], help="filter based on marks")
 p.add_argument('--traceconfig', action='store_true', default=None, help="trace considerations of conftest.py files")
 p.add_argument('--pdb', action='store_true', default=None, help="start the interactive Python debugger on errors")
+
+# enable when figure out how to invoke the xdist plugin
+# p.add_argument('-f', action='store_true', default=None, help="run tests in subprocess, wait for modified files and re-run failing test set until all pass.")
+# p.add_argument('--maxfail', action='store', default=None, help="exit after first num failures or errors.")
 
 results = p.parse_args()
 
@@ -117,29 +120,33 @@ if results.new:
 
 arguments = []
 
-# argparse will take all the -f arguments and compile them into a list
-if len(results.f) == 1:
-    arguments.append("-f")
-    arguments.append(results.f[0])
+# argparse will take all the -m arguments and compile them into a list
+if len(results.m) == 1:
+    arguments.append("-m")
+    arguments.append(results.m[0])
+elif len(results.m) > 1:
+    for markers in results.m:
+        arguments.append("-m")
+        arguments.append(markers)
 else:
-    for filters in results.f:
-        if isinstance(filters, types.ListType):
-            for script_filter in filters:
-                arguments.append("-f")
-                arguments.append(script_filter)
+    arguments.append("-m")
+    arguments.append("shallow")
 
 # this are either true or false
-for noneable in ['v', 's']:
-    if results.__dict__[noneable]:
+for noneable in ['v', 's', 'f']:
+    if noneable in results.__dict__ and results.__dict__[noneable] != None:
         arguments.append("-%s" % noneable)
 
 for noneable in ['traceconfig', 'pdb']:
-    if results.__dict__[noneable]:
+    if noneable in results.__dict__ and results.__dict__[noneable] != None:
         arguments.append("--%s" % noneable)
 
+for has_value in ['maxfail']:
+    if has_value in results.__dict__:
+        arguments.append("--%s" % has_value)
+        arguments.append(results.__dict__[has_value][0])        
+
 # plugin control
-arguments.append("-p")
-arguments.append("no:mark")
 if len(results.p) == 1:
     arguments.append("-p")
     arguments.append(results.p[0])
