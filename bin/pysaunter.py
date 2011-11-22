@@ -176,7 +176,7 @@ arguments.append('--tb=%s' % results.__dict__["tb"])
 # run
 arguments.append("scripts")
 
-run_status = pytest.main(args=arguments, plugins=[marks.MarksDecorator(), markfiltration.MarkFiltration()])
+run_status = pytest.main(args=arguments, plugins=[marks.MarksDecorator()])
 
 shutil.copy(log_name, os.path.join(cwd, 'logs', 'latest.xml'))
 
