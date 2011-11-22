@@ -140,8 +140,8 @@ for noneable in ['traceconfig', 'pdb']:
 
 for has_value in ['maxfail']:
     if has_value in results.__dict__:
-        arguments.append("--%s" % has_value)
-        arguments.append(results.__dict__[has_value][0])        
+        arguments.append("--%s=%s" % (has_value, results.__dict__[has_value][0]))
+        # arguments.append(results.__dict__[has_value][0])        
 
 # plugin control
 if len(results.p) == 1:
@@ -180,6 +180,7 @@ arguments.append('--tb=%s' % results.__dict__["tb"])
 # run
 arguments.append("scripts")
 
+print(arguments)
 run_status = pytest.main(args=arguments, plugins=[marks.MarksDecorator()])
 
 shutil.copy(log_name, os.path.join(cwd, 'logs', 'latest.xml'))
