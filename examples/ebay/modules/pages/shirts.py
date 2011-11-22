@@ -23,7 +23,7 @@ from saunter.SaunterWebDriver import SaunterWebDriver
 
 locators = {
     "collar style": 'css=a[title="REPLACE"]',
-    "results": 'css=.count',
+    "results": 'css=.rsltCnt',
     "throbber": 'id=PreferenceThrob'
 }
 

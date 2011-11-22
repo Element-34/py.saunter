@@ -19,7 +19,7 @@ from pages.shirts import ShirtPage
 import pytest
 
 class EbayExample(SaunterTestCase):
-    @pytest.marks('deep', 'ebay', 'shirts')
+    @pytest.marks('shallow', 'ebay', 'shirts')
     def test_collar_style(self):
         s = ShirtPage()
         s.go_to_mens_dress_shirts()
