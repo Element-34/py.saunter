@@ -107,10 +107,7 @@ p.add_argument('-p', action='append', default=[], help="early-load given plugin 
 p.add_argument('-m', action='append', default=[], help="filter based on marks")
 p.add_argument('--traceconfig', action='store_true', default=None, help="trace considerations of conftest.py files")
 p.add_argument('--pdb', action='store_true', default=None, help="start the interactive Python debugger on errors")
-
-# enable when figure out how to invoke the xdist plugin
-# p.add_argument('-f', action='store_true', default=None, help="run tests in subprocess, wait for modified files and re-run failing test set until all pass.")
-# p.add_argument('--maxfail', action='store', default=None, help="exit after first num failures or errors.")
+p.add_argument('--maxfail', action='store', default=None, help="exit after first num failures or errors.")
 
 results = p.parse_args()
 
@@ -133,7 +130,7 @@ else:
     arguments.append("shallow")
 
 # this are either true or false
-for noneable in ['v', 's', 'f']:
+for noneable in ['v', 's']:
     if noneable in results.__dict__ and results.__dict__[noneable] != None:
         arguments.append("-%s" % noneable)
 
