@@ -16,7 +16,7 @@ setup(
     version = "0.25",
     author = "adam goucher",
     author_email = "adam@element34.ca",
-    install_requires = ['pytest>2.0.2',
+    install_requires = ['pytest=2.2.0',
                         'pytest-marks',
                         'pytest-markfiltration>=0.8',
                         'requests',
