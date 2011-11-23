@@ -41,7 +41,8 @@ from saunter.SaunterWebDriver import SaunterWebDriver
 
 capabilities_map = {
     "firefox": DesiredCapabilities.FIREFOX,
-    "iexplore": DesiredCapabilities.INTERNETEXPLORER
+    "iexplore": DesiredCapabilities.INTERNETEXPLORER,
+    "chrome": DesiredCapabilities.CHROME
 }
 
 os_map = {
@@ -78,6 +79,8 @@ class SaunterTestCase(BaseTestCase):
             browser = self.cf.get("Selenium", "browser")
             if browser[0] == "*":
                 browser = browser[1:]
+            if browser == "chrome":
+                os.environ["webdriver.chrome.driver"] = self.cf.get("Selenium", "chromedriver_path")
             desired_capabilities = capabilities_map[browser]
             command_executor = "http://%s:%s/wd/hub" % (self.cf.get("Selenium", "server_host"), self.cf.get("Selenium", "server_port"))
         self.driver = wrapper().remote_webdriver(desired_capabilities = desired_capabilities, command_executor = command_executor)
