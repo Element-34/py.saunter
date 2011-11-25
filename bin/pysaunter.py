@@ -108,6 +108,7 @@ p.add_argument('-m', action='append', default=[], help="filter based on marks")
 p.add_argument('--traceconfig', action='store_true', default=None, help="trace considerations of conftest.py files")
 p.add_argument('--pdb', action='store_true', default=None, help="start the interactive Python debugger on errors")
 p.add_argument('--maxfail', action='store', default=None, help="exit after first num failures or errors.")
+p.add_argument('--collectonly', action='store_true', default=None, help="only collect tests, don't execute them")
 
 results = p.parse_args()
 
@@ -134,7 +135,7 @@ for noneable in ['v', 's']:
     if noneable in results.__dict__ and results.__dict__[noneable] != None:
         arguments.append("-%s" % noneable)
 
-for noneable in ['traceconfig', 'pdb']:
+for noneable in ['traceconfig', 'pdb', 'collectonly']:
     if noneable in results.__dict__ and results.__dict__[noneable] != None:
         arguments.append("--%s" % noneable)
 
