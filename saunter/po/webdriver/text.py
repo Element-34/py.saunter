@@ -27,7 +27,7 @@ class Text(Element):
     """
     def __set__(self, obj, val):
         e = SaunterWebDriver.find_element_by_locator(self.locator)
-        e.type(val)
+        e.send_keys(val)
 
     def __get__(self, obj, cls=None):
         try:
