@@ -57,7 +57,7 @@ def start_server():
     Starts the included server and writes out the pid
     """
     if not os.path.exists(cf.get("Selenium", "server_path")):
-        jar_name = "selenium-server-standalone-2.13.0.jar"
+        jar_name = "selenium-server-standalone-2.14.0.jar"
         server_jar = os.path.join(tempfile.gettempdir(), jar_name)
         if not os.path.exists(server_jar):
             r = requests.get("http://selenium.googlecode.com/files/%s" % jar_name)
