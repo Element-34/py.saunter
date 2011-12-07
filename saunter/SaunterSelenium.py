@@ -18,7 +18,7 @@ import shutil
 import time
 from selenium import selenium
 import saunter.ConfigWrapper
-from saunter.exceptions import ElementNotFound
+from saunter.exceptions import ElementNotFound, WindowNotFound
 
 class SaunterSelenium(selenium):
     """
@@ -61,7 +61,16 @@ class SaunterSelenium(selenium):
                 and implicit_wait == 0):
                 self.take_numbered_screenshot()
                 raise ElementNotFound(e)
-            self.take_numbered_screenshot()
+                
+            if (re.match("ERROR: Could not find window with .*", str(e))
+                and implicit_wait > 0):
+                time.sleep(1)
+                return self.do_command(verb, args, implicit_wait - 1)
+            elif (re.match("ERROR: Could not find window with .*", str(e))
+                and implicit_wait == 0):
+                self.take_numbered_screenshot()
+                raise WindowNotFound(e)
+            raise Exception(str(e))
     
     def take_numbered_screenshot(self):
         if self.cf.has_option("Saunter", "take_screenshots"):
