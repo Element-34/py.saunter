@@ -120,6 +120,21 @@ class Page(object):
             raise ElementVisiblityTimeout("%s visibility timed out" % locator)
         return True
 
+    def wait_for_element_present(self, locator):
+        """
+        Synchronization helper to wait until some element is removed from the page 
+
+        :raises: ElementVisiblityTimeout
+        """
+        for i in range(timeout_seconds):
+            if self.se.is_element_present(locator):
+                break
+            else:
+                time.sleep(1)
+        else:
+            raise ElementVisiblityTimeout("%s presence timed out" % locator)
+        return True
+
     def wait_for_element_not_present(self, locator):
         """
         Synchronization helper to wait until some element is removed from the page 
