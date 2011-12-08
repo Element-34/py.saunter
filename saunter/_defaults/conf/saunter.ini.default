@@ -31,7 +31,7 @@ base_url: https://fashion.ebay.com/
 
 # To drive the chrome browser with WebDriver you need the external chromedriver. And Saunter needs
 # to know where to find it.
-chromedriver_path: /Users/adam/Downloads/chromedriver
+chromedriver_path: /path/to/chromedriver
 
 [SauceLabs]
 # Should the job be run in the Sauce Labs OnDemand service
