@@ -15,31 +15,31 @@
 import unittest2 as unittest
 
 class BaseTestCase(unittest.TestCase):
-    def verify_equal(self, want, got):
+    def verify_equal(self, want, got, message = ""):
         try:
             self.assertEqual(want, got)
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
-    def verify_text_present(self, text):
+    def verify_text_present(self, text, message = ""):
         try:
             self.assertTrue(self.selenium.is_text_present(text))
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
-    def verify_element_present(self, locator):
+    def verify_element_present(self, locator, message = ""):
         try:
             self.assertTrue(self.selenium.is_element_present(locator))
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
-    def verify_visible(self, locator):
+    def verify_visible(self, locator, message = ""):
         try:
             self.assertTrue(self.selenium.is_visible(locator))
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
-    def verify_true(self, condition):
+    def verify_true(self, condition, message = ""):
         try:
             self.assertTrue(condition)
         except AssertionError, e:
