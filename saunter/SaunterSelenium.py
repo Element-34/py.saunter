@@ -53,24 +53,24 @@ class SaunterSelenium(selenium):
         try:
             return super(SaunterSelenium, self).do_command(verb, args)
         except Exception, e:
-            if (re.match("ERROR: Element .* not found", str(e))
+            if (re.match("ERROR: Element .* not found", unicode(e))
                 and implicit_wait > 0):
                 time.sleep(1)
                 return self.do_command(verb, args, implicit_wait - 1)
-            elif (re.match("ERROR: Element .* not found", str(e))
+            elif (re.match("ERROR: Element .* not found", unicode(e))
                 and implicit_wait == 0):
                 self.take_numbered_screenshot()
                 raise ElementNotFound(e)
                 
-            if (re.match("ERROR: Could not find window with .*", str(e))
+            if (re.match("ERROR: Could not find window with .*", unicode(e))
                 and implicit_wait > 0):
                 time.sleep(1)
                 return self.do_command(verb, args, implicit_wait - 1)
-            elif (re.match("ERROR: Could not find window with .*", str(e))
+            elif (re.match("ERROR: Could not find window with .*", unicode(e))
                 and implicit_wait == 0):
                 self.take_numbered_screenshot()
                 raise WindowNotFound(e)
-            raise Exception(str(e))
+            raise Exception(unicode(e))
     
     def take_numbered_screenshot(self):
         if self.cf.has_option("Saunter", "take_screenshots"):
