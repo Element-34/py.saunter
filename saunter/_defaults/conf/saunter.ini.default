@@ -33,6 +33,9 @@ base_url: https://fashion.ebay.com/
 # to know where to find it.
 chromedriver_path: /path/to/chromedriver
 
+# The timeout that the server will use when trying to do things like page loads. In seconds.
+timeout: 30
+
 [SauceLabs]
 # Should the job be run in the Sauce Labs OnDemand service
 ondemand: false
