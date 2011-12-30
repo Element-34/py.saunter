@@ -132,8 +132,9 @@ class SaunterSelenium(selenium):
         except:
             pass
             
-    def fire_event(self, locator, eventName):
-        self.focus(locator)
+    def fire_event(self, locator, eventName, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).fire_event(locator, eventName)
         self.take_numbered_screenshot()
         
