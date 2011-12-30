@@ -13,7 +13,7 @@ setup(
                               "_defaults/pytest.ini",
                               "_defaults/conf/saunter.ini.default",
                               "_defaults/tailored/remotecontrol.py"]},
-    version = "0.31",
+    version = "0.32",
     author = "adam goucher",
     author_email = "adam@element34.ca",
     install_requires = ['pytest==2.2.0',
