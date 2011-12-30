@@ -109,7 +109,7 @@ p.add_argument('--traceconfig', action='store_true', default=None, help="trace c
 p.add_argument('--pdb', action='store_true', default=None, help="start the interactive Python debugger on errors")
 p.add_argument('--maxfail', action='store', default=None, help="exit after first num failures or errors.")
 p.add_argument('--collectonly', action='store_true', default=None, help="only collect tests, don't execute them")
-p.add_argument('--durations', action='store', default="0", help='show N slowest setup/test durations (N=0 for all)')
+p.add_argument('--durations', action='store', default="None", help='show N slowest setup/test durations (N=0 for all)')
 
 results = p.parse_args()
 
@@ -140,7 +140,7 @@ for noneable in ['traceconfig', 'pdb', 'collectonly']:
     if noneable in results.__dict__ and results.__dict__[noneable] != None:
         arguments.append("--%s" % noneable)
 
-for has_value in ['maxfail']:
+for has_value in ['maxfail', 'durations']:
     if has_value in results.__dict__ and results.__dict__[has_value] != None:
         arguments.append("--%s=%s" % (has_value, results.__dict__[has_value][0]))
         # arguments.append(results.__dict__[has_value][0])        
@@ -178,7 +178,6 @@ log_name = os.path.join(cwd, 'logs', "%s.xml" % time.strftime("%Y-%m-%d-%H-%M-%S
 arguments.append('--junitxml=%s' %log_name)
 
 arguments.append('--tb=%s' % results.__dict__["tb"])
-arguments.append('--durations=%s' % results.__dict__["durations"])
 
 # run
 arguments.append("scripts")
