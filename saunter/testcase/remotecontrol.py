@@ -69,6 +69,8 @@ class SaunterTestCase(BaseTestCase):
             wrapper().sauce_session = self.selenium.get_eval("selenium.sessionId")
         
         self.selenium.window_maximize()
+        if self.cf.has_option("Selenium", "timeout"):
+            self.set_timeout(self.cf.get("Selenium", "timeout"))
         self.selenium.open('/');
 
     def tearDown(self):
