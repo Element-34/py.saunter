@@ -81,48 +81,57 @@ class SaunterSelenium(selenium):
     def take_named_screenshot(self, name):
         super(SaunterSelenium, self).capture_screenshot(os.path.join(self.screenshots_where, str(name) + ".png"))
 
-    def click(self, locator):
-        self.focus(locator)
+    def click(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).click(locator)
         self.take_numbered_screenshot()
         
-    def double_click(self, locator):
-        self.focus(locator)
+    def double_click(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).double_click(locator)
         self.take_numbered_screenshot()
 
-    def check(self, locator):
-        self.focus(locator)
+    def check(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).check(locator)
         self.take_numbered_screenshot()
 
-    def click_at(self, locator, coordString):
-        self.focus(locator)
+    def click_at(self, locator, coordString, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).click_at(locator, coordString)
         self.take_numbered_screenshot()
 
-    def context_menu(self, locator):
-        self.focus(locator)
+    def context_menu(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).context_menu(locator)
         self.take_numbered_screenshot()
 
-    def context_menu_at(self, locator, coordString):
-        self.focus(locator)
+    def context_menu_at(self, locator, coordString, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).context_menu_at(locator, coordString)
         self.take_numbered_screenshot()
         
-    def double_click_at(self, locator, coordString):
-        self.focus(locator)
+    def double_click_at(self, locator, coordString, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).double_click_at(locator, coordString)
         self.take_numbered_screenshot()
 
-    def drag_and_drop(self, locator, movementsString):
-        self.focus(locator)
+    def drag_and_drop(self, locator, movementsString, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).drag_and_drop(locator, movementsString)
         self.take_numbered_screenshot()
 
-    def drag_and_drop_to_object(self, locatorOfObjectToBeDragged, locatorOfDragDestinationObject):
-        self.focus(locatorOfObjectToBeDragged)        
+    def drag_and_drop_to_object(self, locatorOfObjectToBeDragged, locatorOfDragDestinationObject, focus_before = True):
+        if focus_before:
+            self.focus(locatorOfObjectToBeDragged)
         super(SaunterSelenium, self).drag_and_drop_to_object(locatorOfObjectToBeDragged, locatorOfDragDestinationObject)
         self.take_numbered_screenshot()
     
@@ -138,38 +147,45 @@ class SaunterSelenium(selenium):
         super(SaunterSelenium, self).fire_event(locator, eventName)
         self.take_numbered_screenshot()
         
-    def mouse_over(self, locator):
-        self.focus(locator)
+    def mouse_over(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).mouse_over(locator)
         self.take_numbered_screenshot()
         
-    def mouse_down(self, locator):
-        self.focus(locator)
+    def mouse_down(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).mouse_down(locator)
         self.take_numbered_screenshot()
         
-    def mouse_down_right(self, locator):
-        self.focus(locator)
+    def mouse_down_right(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).mouse_down_right(locator)
         self.take_numbered_screenshot()
         
-    def mouse_down_at(self, locator, coordString):
-        self.focus(locator)
+    def mouse_down_at(self, locator, coordString, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).mouse_down_at(locator, coordString)
         self.take_numbered_screenshot()
         
-    def mouse_down_right_at(self, locator, coordString):
-        self.focus(locator)
+    def mouse_down_right_at(self, locator, coordString, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).mouse_down_right_at(locator, coordString)
         self.take_numbered_screenshot()
         
-    def mouse_move(self, locator):
-        self.focus(locator)
+    def mouse_move(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).mouse_move(locator)
         self.take_numbered_screenshot()
         
-    def mouse_move_at(self, locator, coordString):
-        self.focus(locator)
+    def mouse_move_at(self, locator, coordString, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).mouse_move_at(locator, coordString)
         self.take_numbered_screenshot()
 
@@ -181,23 +197,27 @@ class SaunterSelenium(selenium):
         super(SaunterSelenium, self).open_window(url, windowID)
         self.take_numbered_screenshot()
 
-    def select(self, selectLocator, optionLocator):
-        self.focus(selectLocator)
+    def select(self, selectLocator, optionLocator, focus_before = True):
+        if focus_before:
+            self.focus(selectLocator)
         super(SaunterSelenium, self).select(selectLocator, optionLocator)
         self.take_numbered_screenshot()
         
-    def add_selection(self, locator, optionLocator):
-        self.focus(locator)
+    def add_selection(self, locator, optionLocator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).add_selection(selectLocator, optionLocator)
         self.take_numbered_screenshot()
         
-    def remove_selection(self, locator, optionLocator):
-        self.focus(locator)
+    def remove_selection(self, locator, optionLocator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).remove_selection(selectLocator, optionLocator)
         self.take_numbered_screenshot()
         
-    def remove_all_selections(self, locator):
-        self.focus(locator)
+    def remove_all_selections(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).remove_all_selections(locator)
         self.take_numbered_screenshot()
 
@@ -205,18 +225,21 @@ class SaunterSelenium(selenium):
         super(SaunterSelenium, self).submit(formLocator)
         self.take_numbered_screenshot()
 
-    def type(self, locator, value):
-        self.focus(locator)
+    def type(self, locator, value, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).type(locator, value)
         self.take_numbered_screenshot()
 
-    def type_keys(self, locator, value):
-        self.focus(locator)
+    def type_keys(self, locator, value, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).type_keys(locator, value)
         self.take_numbered_screenshot()
 
-    def uncheck(self, locator):
-        self.focus(locator)
+    def uncheck(self, locator, focus_before = True):
+        if focus_before:
+            self.focus(locator)
         super(SaunterSelenium, self).uncheck(locator)
         self.take_numbered_screenshot()
 
