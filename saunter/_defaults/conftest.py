@@ -29,43 +29,6 @@ import _pytest
 
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
-class AdvancedReport(_pytest.runner.TestReport):
-    def __init__(self, nodeid, location, marks, outcome, longrepr, when):
-        super(AdvancedReport, self).__init__(nodeid, location, marks, outcome, longrepr, when)
-                
-    def __repr__(self):
-        return "<AdvancedReport %r when=%r outcome=%r>" % (
-            self.nodeid, self.when, self.outcome)
-
-def pytest_runtest_makereport(item, call):
-    when = call.when
-    # get the MarkInfo objects since 'keyword' is essentially useless.
-    marks = []
-    for keyword in item.keywords:
-        if isinstance(item.keywords[keyword], _pytest.mark.MarkInfo):
-            marks.append(keyword)
-
-    excinfo = call.excinfo
-    if not call.excinfo:
-        outcome = "passed"
-        longrepr = None
-    else:
-        excinfo = call.excinfo
-        if not isinstance(excinfo, py.code.ExceptionInfo):
-            outcome = "failed"
-            longrepr = excinfo
-        elif excinfo.errisinstance(py.test.skip.Exception):
-            outcome = "skipped"
-            r = excinfo._getreprcrash()
-            longrepr = (str(r.path), r.lineno, r.message)
-        else:
-            outcome = "failed"
-            if call.when == "call":
-                longrepr = item.repr_failure(excinfo)
-            else: # exception in setup or teardown
-                longrepr = item._repr_failure_py(excinfo)
-    return AdvancedReport(item.nodeid, item.location, marks, outcome, longrepr, when)
-
 def fetch_artifact(which):
     sauce_session = wrapper().sauce_session
     which_url = "https://saucelabs.com/rest/%s/jobs/%s/results/%s" % (cf.get("SauceLabs", "username"), sauce_session, which)
