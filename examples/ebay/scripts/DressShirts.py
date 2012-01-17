@@ -31,7 +31,7 @@ class EbayExample(SaunterTestCase):
         s = ShirtPage()
         s.go_to_mens_dress_shirts()
         metas = s.get_meta_elements()
-        assert(len(metas) == 2)
+        assert(len(metas) == 7)
         
         keywords = s.get_meta_element("keywords")
         assert(keywords.get_attribute("Content") == "Dress Shirts")
