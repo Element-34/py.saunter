@@ -71,7 +71,7 @@ class SaunterTestCase(BaseTestCase):
         self.selenium.window_maximize()
         if self.cf.has_option("Selenium", "timeout"):
             self.selenium.set_timeout(self.cf.getint("Selenium", "timeout") * 1000)
-        self.selenium.open('/');
+        self.selenium.open(self.cf.get("Selenium", "base_url"));
 
     def tearDown(self):
         """
