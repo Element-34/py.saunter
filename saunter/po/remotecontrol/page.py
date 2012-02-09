@@ -38,6 +38,15 @@ class Page(object):
                 return False
         else:
             return False
+
+    def wait_for_element_available(self, locator):
+        for i in range(timeout_seconds):
+            if self.is_element_available(locator):
+                return True
+            else:
+                time.sleep(1)
+        else:
+            raise ElementVisiblityTimeout("%s value timed out" %locator)
             
     def wait_for_visible(self, locator):
         """
@@ -148,4 +157,14 @@ class Page(object):
                 break
         else:
             raise ElementVisiblityTimeout("%s presence timed out" % locator)
+        return True
+        
+    def wait_for_element_visibility_change(self, locator, intial_visibility):
+        for i in range(timeout_seconds):
+            if self.se.is_visible(locator) == intial_visibility:
+                time.sleep(1)                
+            else:                
+                break
+        else:
+            raise ElementVisiblityTimeout("%s value timed out" %locator)
         return True
