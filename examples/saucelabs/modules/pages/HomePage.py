@@ -22,8 +22,8 @@ from pages.LoginPage import LoginPage
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
 locators = {
-    "login": "css=div.account_mast a:first",
-    "signup": "css=div.account_mast a:last"
+    "login": 'xpath=(//a[text()="Login"])[1]',
+    "signup": 'xpath=(//a[text()="Signup"])[1]'
 }
 
 class HomePage(Page):
