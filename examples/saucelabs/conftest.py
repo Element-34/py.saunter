@@ -67,7 +67,7 @@ def pytest_runtest_makereport(item, call):
     return AdvancedReport(item.nodeid, item.location, marks, outcome, longrepr, when)
 
 def fetch_artifact(which):
-    sauce_session = wrapper().sauce_session
+    sauce_session = wrapper().connection.sauce_session
     which_url = "https://saucelabs.com/rest/%s/jobs/%s/results/%s" % (cf.get("SauceLabs", "username"), sauce_session, which)
     code = 404
     timeout = 0
@@ -83,17 +83,22 @@ def fetch_artifact(which):
     artifact.write(r.content)
 
 def pytest_runtest_logreport(report):
+    if report.when != "teardown":
+        return
+    
+    w = wrapper()
     try:
-        c = wrapper().connection
+        c = w.connection
         if c.running:
             c.stop()
     except AttributeError:
         pass
-    
+
     if cf.getboolean("SauceLabs", "ondemand"):
         # session couldn't be established for some reason
         if not hasattr(c, "sauce_session"):
-           return
+            print("hmmm")
+            return
         sauce_session = c.sauce_session
         
         j = {}
