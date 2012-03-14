@@ -18,17 +18,17 @@ from pages.shirts import ShirtPage
 
 import pytest
 
-class EbayExample(SaunterTestCase):
+class EbayExample(SaunterTestCase):    
     @pytest.marks('shallow', 'ebay', 'shirts')
     def test_collar_style(self):
-        s = ShirtPage()
+        s = ShirtPage(self.driver)
         s.go_to_mens_dress_shirts()
         s.change_collar_style("Banded (Collarless)")
         assert(s.is_collar_selected("Banded (Collarless)"))
 
     @pytest.marks('deep', 'ebay', 'meta')
     def test_meta(self):
-        s = ShirtPage()
+        s = ShirtPage(self.driver)
         s.go_to_mens_dress_shirts()
         metas = s.get_meta_elements()
         assert(len(metas) == 7)

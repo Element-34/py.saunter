@@ -11,14 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+=============
+WebDriver
+=============
+"""
+from saunter.SaunterWebDriver import SaunterWebDriver
 
-import py
-
-def pytest_runtest_makereport(__multicall__, item, call):
-    if call.when == "call":
-        try:
-            assert([] == item._testcase.verificationErrors)
-        except AssertionError:
-            call.excinfo = py.code.ExceptionInfo()
-    rep = __multicall__.execute()
-    return rep
+class WebDriver(SaunterWebDriver):
+    """
+    Modifications to the core WebDriver API are done in this class
+    """
+    def __init__(self, **kwargs):
+        super(WebDriver, self).__init__(**kwargs)
