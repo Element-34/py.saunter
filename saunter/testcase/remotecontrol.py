@@ -66,7 +66,7 @@ class SaunterTestCase(BaseTestCase):
         self.selenium.start()
         
         if self.cf.getboolean("SauceLabs", "ondemand"):
-            wrapper().sauce_session = self.selenium.get_eval("selenium.sessionId")
+            self.selenium.sauce_session = self.selenium.get_eval("selenium.sessionId")
         
         self.selenium.window_maximize()
         if self.cf.has_option("Selenium", "timeout"):

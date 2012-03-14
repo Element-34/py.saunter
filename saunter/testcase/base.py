@@ -13,8 +13,30 @@
 # limitations under the License.
 
 import unittest2 as unittest
+import requests
+import time
+import urllib2
+import os
+import os.path
 
 class BaseTestCase(unittest.TestCase):
+    def fetch_sauce_artifact(self, which):
+        sauce_session = self.sauce_session
+        which_url = "https://saucelabs.com/rest/%s/jobs/%s/results/%s" % (self.cf.get("SauceLabs", "username"), sauce_session, which)
+        code = 404
+        timeout = 0
+        while code in [401, 404]:
+            r = requests.get(which_url, auth = (self.cf.get("SauceLabs", "username"), self.cf.get("SauceLabs", "key")))
+            try:
+                code = r.status_code
+                r.raise_for_status()
+            except urllib2.HTTPError, e:
+                time.sleep(4)
+
+        artifact = open(os.path.join(self.cf.get("Saunter", "base"), "logs", which), "wb")
+        artifact.write(r.content)
+        artifact.close()
+    
     def verify_equal(self, want, got, message = ""):
         try:
             self.assertEqual(want, got)

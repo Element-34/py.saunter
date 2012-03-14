@@ -37,9 +37,3 @@ class SeleniumWrapper(object):
         self.connection = tailored.remotecontrol.RemoteControl(host, port, browser, server)
         self.connection.running = True
         return self.connection
-        
-    def remote_webdriver(self, *args, **kwargs):
-        self.connection = webdriver.Remote(*args, **kwargs)
-        self.connection.running = True
-        self.driver = self.connection
-        return self.connection

@@ -19,7 +19,6 @@ Page
 from saunter.po import timeout_seconds
 import saunter.exceptions
 import time
-from saunter.SaunterWebDriver import SaunterWebDriver
 from selenium.common.exceptions import StaleElementReferenceException
 
 class Page(object):
@@ -33,8 +32,8 @@ class Page(object):
         
         Use this instead of is_element_present most of the time.
         """
-        if SaunterWebDriver.is_element_present(locator):
-            if SaunterWebDriver.is_visible(locator):
+        if self.driver.is_element_present(locator):
+            if self.driver.is_visible(locator):
                 return True
             else:
                 return False
@@ -67,7 +66,7 @@ class Page(object):
         """
         for i in range(timeout_seconds):
             try:
-                if SaunterWebDriver.is_visible(locator):
+                if self.driver.is_visible(locator):
                     break
             except:
                 pass
@@ -84,7 +83,7 @@ class Page(object):
         :raises: ElementVisiblityTimeout=
         """
         for i in range(timeout_seconds):
-            if SaunterWebDriver.is_visible(locator):
+            if self.driver.is_visible(locator):
                 time.sleep(1)
             else:
                 break
@@ -100,7 +99,7 @@ class Page(object):
         """
         for i in range(timeout_seconds):
             try:
-                e = SaunterWebDriver.find_element_by_locator(locator)
+                e = self.driver.find_element_by_locator(locator)
                 if e.text == text:
                     break
             except:
@@ -119,7 +118,7 @@ class Page(object):
         """
         for i in range(timeout_seconds):
             try:
-                e = SaunterWebDriver.find_element_by_locator(locator)
+                e = self.driver.find_element_by_locator(locator)
                 if e.value ==text:
                     break
             except:
@@ -130,13 +129,13 @@ class Page(object):
         return True
 
     def wait_for_value_changed(self, locator, text):
-        e = SaunterWebDriver.find_element_by_locator(locator)
+        e = self.driver.find_element_by_locator(locator)
         for i in range(timeout_seconds):
             try:
                 if len(e.text.strip()) != 0 and e.text != text:
                     return True
             except StaleElementReferenceException, e:
-                e = SaunterWebDriver.find_element_by_locator(locator)
+                e = self.driver.find_element_by_locator(locator)
             finally:
                 time.sleep(1)
         else:
@@ -149,7 +148,7 @@ class Page(object):
         :raises: ElementVisiblityTimeout
         """
         for i in range(timeout_seconds):
-            if SaunterWebDriver.is_element_present(locator):
+            if self.driver.is_element_present(locator):
                 time.sleep(1)
             else:
                 break

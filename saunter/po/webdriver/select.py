@@ -26,12 +26,12 @@ class Select(Element):
     Base element class for Select fields
     """
     def __set__(self, obj, val):
-        e = SaunterWebDriver.find_element_by_locator(self.locator)
+        e = obj.driver.find_element_by_locator(self.locator)
         e.click()
 
     def __get__(self, obj, cls=None):
         try:
-            e = SaunterWebDriver.find_element_by_locator(self.locator)
+            e = obj.driver.find_element_by_locator(self.locator)
             return str(e.text)
         except AttributeError as e:
             if str(e) == "'SeleniumWrapper' object has no attribute 'connection'":
