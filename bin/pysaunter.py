@@ -164,7 +164,7 @@ import saunter.ConfigWrapper
 saunter.ConfigWrapper.ConfigWrapper().config.set("Saunter", "base", cwd)
 
 # check if server is up
-if not saunter.SeleniumServer.have_server():
+if not saunter.ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand") and not saunter.SeleniumServer.have_server():
     if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("Selenium", "manage_server"):
         if 'HUDSON_HOME' in os.environ or 'JENKINS_HOME' in os.environ:
           sys.exit("The Selenium Server must be started outside of the Hudson/Jenkins Agent")
