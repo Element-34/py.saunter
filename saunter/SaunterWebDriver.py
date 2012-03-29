@@ -81,5 +81,5 @@ class SaunterWebDriver(webdriver.Remote):
         except NoSuchElementException:
             return False
     
-    def is_visible(cls, locator):
+    def is_visible(self, locator):
         return self.find_element_by_locator(locator).is_displayed()
