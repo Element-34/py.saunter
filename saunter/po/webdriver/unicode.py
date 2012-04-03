@@ -21,9 +21,9 @@ from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 from saunter.exceptions import ElementNotFound
 from saunter.SaunterWebDriver import SaunterWebDriver
 
-class Text(Element):
+class Unicode(Element):
     """
-    Base element class for Text fields
+    Base element class for Unicode fields
     """
     def __set__(self, obj, val):
         e = obj.driver.find_element_by_locator(self.locator)
