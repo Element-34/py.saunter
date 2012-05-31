@@ -12,6 +12,8 @@ setup(
     package_data={"saunter": ["_defaults/conftest.py",
                               "_defaults/pytest.ini",
                               "_defaults/conf/saunter.ini.default",
+                              "_defaults/tailored/remotecontrol.py",
+                              "_defaults/tailored/page.py",
                               "_defaults/tailored/remotecontrol.py"]},
     version = "0.40",
     author = "adam goucher",
