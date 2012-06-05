@@ -15,7 +15,7 @@ setup(
                               "_defaults/tailored/remotecontrol.py",
                               "_defaults/tailored/page.py",
                               "_defaults/tailored/remotecontrol.py"]},
-    version = "0.41",
+    version = "0.42",
     author = "adam goucher",
     author_email = "adam@element34.ca",
     install_requires = ['pytest>=2.2.3',
