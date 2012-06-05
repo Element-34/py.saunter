@@ -17,7 +17,7 @@ Page
 ====
 """
 from saunter.po import timeout_seconds
-import saunter.exceptions
+from saunter.exceptions import ElementVisiblityTimeout, ElementTextTimeout
 import time
 from selenium.common.exceptions import StaleElementReferenceException
 
