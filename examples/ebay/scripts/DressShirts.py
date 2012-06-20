@@ -15,8 +15,9 @@
 from saunter.testcase.webdriver import SaunterTestCase
 
 from pages.shirts import ShirtPage
-
+from harpy.har import Har
 import pytest
+import StringIO
 
 class EbayExample(SaunterTestCase):    
     @pytest.marks('shallow', 'ebay', 'shirts')
@@ -38,3 +39,25 @@ class EbayExample(SaunterTestCase):
 
         description = s.get_meta_element("description")
         assert(description.get_attribute("Content") == "Shop eBay Fashion for the most dynamic selection of affordable, new  Dress Shirts Items. Find the best deals on new and used fashion.  Learn more about eBay Buyer Protection.")
+
+    @pytest.marks('shallow', 'ebay', 'blacklist')
+    def test_blacklist(self):
+        self.client.blacklist("http://www\\.facebook\\.com/.*", 200)
+        self.client.blacklist("http://static\\.ak\\.fbcdn\\.com/.*", 200)
+        s = ShirtPage(self.driver)
+        s.go_to_mens_dress_shirts()
+        s.change_collar_style("Banded (Collarless)")
+        assert(s.is_collar_selected("Banded (Collarless)"))
+        
+    @pytest.marks('shallow', 'ebay', 'har')
+    def test_har_retrieval(self):
+        self.client.blacklist("http://www\\.facebook\\.com/.*", 404)
+        self.client.blacklist("http://static\\.ak\\.fbcdn\\.com/.*", 404)
+        self.client.new_har("shirts")
+        s = ShirtPage(self.driver)
+        s.go_to_mens_dress_shirts()
+        h = self.client.har
+        har = Har(self.client.har)
+        har = Har(h)
+        four_oh_fours = [e for e in har.entries if e.response.status == 404]
+        assert(len(four_oh_fours) == 1)

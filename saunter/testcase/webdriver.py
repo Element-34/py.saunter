@@ -83,6 +83,12 @@ class SaunterTestCase(BaseTestCase):
             if browser == "chrome":
                 os.environ["webdriver.chrome.driver"] = self.cf.get("Selenium", "chromedriver_path")
             desired_capabilities = capabilities_map[browser]
+            if self.cf.has_section("Proxy") \
+                and self.cf.has_option("Proxy", "proxy_url") \
+                and (self.cf.has_option("Proxy", "browsermob") and self.cf.getboolean("Proxy", "browsermob")):
+                from browsermobproxy import Client
+                self.client = Client(self.cf.get("Proxy", "proxy_url"))
+                self.client.add_to_webdriver_capabilities(desired_capabilities)
             command_executor = "http://%s:%s/wd/hub" % (self.cf.get("Selenium", "server_host"), self.cf.get("Selenium", "server_port"))
         self.driver = WebDriver(desired_capabilities = desired_capabilities, command_executor = command_executor)
 
