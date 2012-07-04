@@ -74,6 +74,13 @@ def new():
     if not os.path.isfile(os.path.join(cwd, "modules", "tailored", "remotecontrol.py")):
         shutil.copy(os.path.join(saunter_installed_at, "_defaults", "tailored", "remotecontrol.py"), os.path.join(cwd, "modules", "tailored"))
 
+    if not os.path.isfile(os.path.join(cwd, "modules", "tailored", "webdriver.py")):
+        shutil.copy(os.path.join(saunter_installed_at, "_defaults", "tailored", "webdriver.py"), os.path.join(cwd, "modules", "tailored"))
+
+    if not os.path.isfile(os.path.join(cwd, "modules", "tailored", "page.py")):
+        shutil.copy(os.path.join(saunter_installed_at, "_defaults", "tailored", "page.py"), os.path.join(cwd, "modules", "tailored"))
+
+
     # scripts
     if not os.path.isdir(os.path.join(cwd, "scripts")):
         os.mkdir(os.path.join(cwd, "scripts"))
