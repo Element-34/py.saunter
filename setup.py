@@ -14,7 +14,7 @@ setup(
                               "_defaults/conf/saunter.ini.default",
                               "_defaults/tailored/remotecontrol.py",
                               "_defaults/tailored/page.py",
-                              "_defaults/tailored/remotecontrol.py"]},
+                              "_defaults/tailored/webdriver.py"]},
     version = "0.43",
     author = "adam goucher",
     author_email = "adam@element34.ca",
