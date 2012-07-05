@@ -18,6 +18,7 @@ from pages.shirts import ShirtPage
 from harpy.har import Har
 import pytest
 import StringIO
+import saunter.web_element
 
 class EbayExample(SaunterTestCase):    
     @pytest.marks('shallow', 'ebay', 'shirts')
@@ -57,7 +58,14 @@ class EbayExample(SaunterTestCase):
         s = ShirtPage(self.driver)
         s.go_to_mens_dress_shirts()
         h = self.client.har
-        har = Har(self.client.har)
         har = Har(h)
         four_oh_fours = [e for e in har.entries if e.response.status == 404]
         assert(len(four_oh_fours) == 1)
+
+    @pytest.marks('shallow', 'ebay', 'chain')
+    def test_har_retrieval(self):
+        s = ShirtPage(self.driver)
+        s.go_to_mens_dress_shirts()
+        table = self.driver.find_element_by_locator("id=v4-p225")
+        row = table.find_element_by_locator("css=tr")
+        assert(isinstance(row, saunter.web_element.WebElement))
