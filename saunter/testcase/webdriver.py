@@ -43,7 +43,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from saunter.testcase.base import BaseTestCase
 from saunter.SaunterWebDriver import SaunterWebDriver
-from _pytest.mark import MarkInfo
+import py.test
 
 capabilities_map = {
     "firefox": DesiredCapabilities.FIREFOX,
@@ -134,7 +134,7 @@ class SaunterTestCase(BaseTestCase):
             # tags
             j["tags"] = []
             for keyword in self._resultForDoCleanups.keywords:
-                if isinstance(self._resultForDoCleanups.keywords[keyword], MarkInfo):
+                if isinstance(self._resultForDoCleanups.keywords[keyword], py.test.mark.MarkInfo):
                     j["tags"].append(keyword)
 
             # update
