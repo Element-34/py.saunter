@@ -1,6 +1,6 @@
 # Makefile for Sphinx documentation
 #
-export DOCGENERATION := true
+# export DOCGENERATION := true
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
