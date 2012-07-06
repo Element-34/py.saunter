@@ -29,6 +29,7 @@ Common:
 .. toctree::
    :maxdepth: 2
 
+   testcase/base
    generators
    providers
 

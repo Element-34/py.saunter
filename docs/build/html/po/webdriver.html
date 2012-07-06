@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Pages &mdash; Py.Saunter v0.8 documentation</title>
+    <title>Pages &mdash; Py.Saunter 0.47 documentation</title>
+    
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.8',
+        VERSION:     '0.47',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,8 +25,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Py.Saunter v0.8 documentation" href="../index.html" />
-    <link rel="next" title="saunter.generators" href="../generators.html" />
+    <link rel="top" title="Py.Saunter 0.47 documentation" href="../index.html" />
+    <link rel="next" title="saunter.testcase.base" href="../testcase/base.html" />
     <link rel="prev" title="saunter.testcase.webdriver" href="../testcase/webdriver.html" /> 
   </head>
   <body>
@@ -37,12 +40,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../generators.html" title="saunter.generators"
+          <a href="../testcase/base.html" title="saunter.testcase.base"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../testcase/webdriver.html" title="saunter.testcase.webdriver"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Py.Saunter v0.8 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Py.Saunter 0.47 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -68,6 +71,20 @@ but also visible &#8211; since Se will happily deal with things that aren&#8217;
 </dd></dl>
 
 <dl class="method">
+<dt id="saunter.po.webdriver.page.Page.wait_for_available">
+<tt class="descname">wait_for_available</tt><big>(</big><em>locator</em><big>)</big><a class="headerlink" href="#saunter.po.webdriver.page.Page.wait_for_available" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synchronization to deal with elements that are present, and are visible</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="saunter.po.webdriver.page.Page.wait_for_element_not_present">
 <tt class="descname">wait_for_element_not_present</tt><big>(</big><em>locator</em><big>)</big><a class="headerlink" href="#saunter.po.webdriver.page.Page.wait_for_element_not_present" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synchronization helper to wait until some element is removed from the page</p>
@@ -75,7 +92,7 @@ but also visible &#8211; since Se will happily deal with things that aren&#8217;
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
 </tr>
 </tbody>
 </table>
@@ -90,7 +107,7 @@ triggers their hidden-ness.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout=</td>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout=</td>
 </tr>
 </tbody>
 </table>
@@ -104,7 +121,7 @@ triggers their hidden-ness.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
 </tr>
 </tbody>
 </table>
@@ -118,7 +135,7 @@ triggers their hidden-ness.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
 </tr>
 </tbody>
 </table>
@@ -133,7 +150,7 @@ triggers their visibility.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body">ElementVisiblityTimeout</td>
 </tr>
 </tbody>
 </table>
@@ -198,8 +215,8 @@ triggers their visibility.</p>
   <p class="topless"><a href="../testcase/webdriver.html"
                         title="previous chapter">saunter.testcase.webdriver</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../generators.html"
-                        title="next chapter">saunter.generators</a></p>
+  <p class="topless"><a href="../testcase/base.html"
+                        title="next chapter">saunter.testcase.base</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/po/webdriver.txt"
@@ -208,7 +225,7 @@ triggers their visibility.</p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -232,17 +249,17 @@ triggers their visibility.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../generators.html" title="saunter.generators"
+          <a href="../testcase/base.html" title="saunter.testcase.base"
              >next</a> |</li>
         <li class="right" >
           <a href="../testcase/webdriver.html" title="saunter.testcase.webdriver"
              >previous</a> |</li>
-        <li><a href="../index.html">Py.Saunter v0.8 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Py.Saunter 0.47 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Element 34.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>
