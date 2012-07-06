@@ -31,8 +31,8 @@ except ConfigParser.NoSectionError as e:
         raise
 
 try:
-    from tailored.webdriver import WebDriverexcept ConfigParser.NoSectionError as e:
-except ImportError as e:    
+    from tailored.webdriver import WebDriver
+except ImportError as e:
     if "DOCGENERATION" not in os.environ:
         raise
 
