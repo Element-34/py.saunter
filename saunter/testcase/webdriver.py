@@ -30,7 +30,12 @@ except ConfigParser.NoSectionError as e:
     if "DOCGENERATION" not in os.environ:
         raise
 
-from tailored.webdriver import WebDriver
+try:
+    from tailored.webdriver import WebDriverexcept ConfigParser.NoSectionError as e:
+except ImportError as e:    
+    if "DOCGENERATION" not in os.environ:
+        raise
+
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 from selenium.common.exceptions import TimeoutException
