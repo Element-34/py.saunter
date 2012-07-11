@@ -17,27 +17,37 @@ Select
 ======
 """
 from saunter.po.webdriver.element import Element
+from saunter.web_element import WebElement
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 from saunter.exceptions import ElementNotFound
 from saunter.SaunterWebDriver import SaunterWebDriver
+from selenium.webdriver.support.select import Select as WebDriverSelect
+import saunter.exceptions
 
-class Select(Element):
+class Select(Element, WebDriverSelect):
     """
     Base element class for Select fields
-    """
+    """    
     def __set__(self, obj, val):
-        e = obj.driver.find_element_by_locator(self.locator)
-        e.click()
-
+        s = WebDriverSelect(obj.driver.find_element_by_locator(self.locator))
+        method = val[:val.find("=")]
+        value = val[val.find("=") + 1:]
+        if method == "value":
+            s.select_by_value(value)
+        elif method == "index":
+            s.select_by_index(value)
+        elif method == "text":
+            s.select_by_visible_text(value)
+        else:
+            raise saunter.exceptions.InvalidLocatorString(val)
+    
     def __get__(self, obj, cls=None):
         try:
-            e = obj.driver.find_element_by_locator(self.locator)
+            s = WebDriverSelect(obj.driver.find_element_by_locator(self.locator))
+            e = s.first_selected_option
             return str(e.text)
         except AttributeError as e:
             if str(e) == "'SeleniumWrapper' object has no attribute 'connection'":
                 pass
             else:
                 raise e
-        except ElementNotFound as e:
-            msg = "Element %s was not found. It is used in the %s page object in the %s module." % (self.locator, obj.__class__.__name__, self.__module__)
-            raise ElementNotFound(msg)
