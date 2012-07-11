@@ -69,6 +69,7 @@ class SaunterTestCase(BaseTestCase):
         """
         self.verificationErrors = []
         self.cf = saunter.ConfigWrapper.ConfigWrapper().config
+        self.config = self.cf
         if self.cf.getboolean("SauceLabs", "ondemand"):
             desired_capabilities = {
                 "platform": self.cf.get("SauceLabs", "os"),
