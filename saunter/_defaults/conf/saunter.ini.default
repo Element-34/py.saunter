@@ -66,6 +66,12 @@ browser_version: 3.6.
 installation: /path/to/django/install
 app: app_name
 
+[Grid]
+use_grid: false
+type: selenium
+platform: linux
+browser_version: 13.0.1
+
 # Site-specific options should go in their own section.
 #[YourCompany]
 #some_option: some_value

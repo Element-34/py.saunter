@@ -95,6 +95,13 @@ class SaunterTestCase(BaseTestCase):
                 from browsermobproxy import Client
                 self.client = Client(self.cf.get("Proxy", "proxy_url"))
                 self.client.add_to_webdriver_capabilities(desired_capabilities)
+            if self.cf.has_section("Grid"):
+                if self.cf.getboolean("Grid", "use_grid") and self.cf.get("Grid", "type") == "selenium":
+                    if self.cf.has_option("Grid", "platform"):
+                        desired_capabilities["platform"] = self.cf.get("Grid", "platform").upper()
+                    if self.cf.has_option("Grid", "version"):
+                        desired_capabilities["version"] = str(self.cf.get("Grid", "browser_version"))
+
             command_executor = "http://%s:%s/wd/hub" % (self.cf.get("Selenium", "server_host"), self.cf.get("Selenium", "server_port"))
         self.driver = WebDriver(desired_capabilities = desired_capabilities, command_executor = command_executor)
 
