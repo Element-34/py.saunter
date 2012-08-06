@@ -12,6 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+import os.path
+import py
+import sys
+
+def pytest_configure(config):
+    sys.path.append(os.path.join(os.getcwd(), "modules"))
+
 # uncomment this block for RemoteControl style scripts
 
 # import saunter.ConfigWrapper
@@ -26,7 +34,6 @@
 # import requests
 # import urllib2
 # 
-# import py
 # import _pytest
 # 
 # from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
@@ -142,8 +149,6 @@
 
 # uncomment this block for WebDriver style scripts
 
-# import py
-# 
 # def pytest_runtest_makereport(__multicall__, item, call):
 #     if call.when == "call":
 #         try:

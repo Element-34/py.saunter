@@ -112,6 +112,7 @@ p.add_argument('-s', action='store_true', default=None, help="don't capture outp
 p.add_argument('--tb', action='store', default="native", help='traceback print mode (long/short/line/native/no)')
 p.add_argument('-p', action='append', default=[], help="early-load given plugin (multi-allowed)")
 p.add_argument('-m', action='append', default=[], help="filter based on marks")
+p.add_argument('-n', action='store', default=None, help="number of processes to fork")
 p.add_argument('--traceconfig', action='store_true', default=None, help="trace considerations of conftest.py files")
 p.add_argument('--pdb', action='store_true', default=None, help="start the interactive Python debugger on errors")
 p.add_argument('--maxfail', action='store', default=None, help="exit after first num failures or errors.")
@@ -153,6 +154,10 @@ for has_value in ['maxfail', 'durations']:
         arguments.append("--%s=%s" % (has_value, results.__dict__[has_value][0]))
         # arguments.append(results.__dict__[has_value][0])        
 
+if 'n' in results.__dict__ and results.__dict__['n'] != None:
+    arguments.append("--dist=load")
+    arguments.append("--tx=%s*popen" % results.__dict__['n'])
+
 # plugin control
 if len(results.p) == 1:
     arguments.append("-p")
@@ -161,9 +166,6 @@ else:
     for p in results.p:
         arguments.append("-p")
         arguments.append(p)
-
-# pythonpath
-sys.path.append(os.path.join(cwd, "modules"))
 
 import saunter.SeleniumServer
 
