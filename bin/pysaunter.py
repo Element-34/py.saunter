@@ -118,6 +118,7 @@ p.add_argument('--pdb', action='store_true', default=None, help="start the inter
 p.add_argument('--maxfail', action='store', default=None, help="exit after first num failures or errors.")
 p.add_argument('--collectonly', action='store_true', default=None, help="only collect tests, don't execute them")
 p.add_argument('--durations', action='store', default=None, help='show N slowest setup/test durations (N=0 for all)')
+p.add_argument('--debug', action='store', default=None, help="store internal tracing debug information in 'pytestdebug.log'.")
 p.add_argument('--version', action='version', version='Py.Saunter %s' % saunter.__version__)
 
 results = p.parse_args()
@@ -145,7 +146,7 @@ for noneable in ['v', 's']:
     if noneable in results.__dict__ and results.__dict__[noneable] != None:
         arguments.append("-%s" % noneable)
 
-for noneable in ['traceconfig', 'pdb', 'collectonly']:
+for noneable in ['traceconfig', 'pdb', 'collectonly', "debug"]:
     if noneable in results.__dict__ and results.__dict__[noneable] != None:
         arguments.append("--%s" % noneable)
 
