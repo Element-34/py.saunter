@@ -22,7 +22,7 @@ setup(
                         'pytest-marks>=0.3',
                         'pytest-xdist',
                         'requests',
-                        'selenium>=2.22.0',
+                        'selenium>=2.25.0',
                         'unittest2',
                         'browsermob-proxy>=0.2',
                         'harpy>=0.2.0'],
