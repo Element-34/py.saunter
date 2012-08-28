@@ -155,7 +155,7 @@ class SaunterTestCase(BaseTestCase):
             # tags
             j["tags"] = []
             for keyword in self._resultForDoCleanups.keywords:
-                if isinstance(self._resultForDoCleanups.keywords[keyword], py.test.mark.MarkInfo):
+                if isinstance(self._resultForDoCleanups.keywords[keyword], MarkInfo):
                     j["tags"].append(keyword)
 
             # update
