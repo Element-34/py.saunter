@@ -44,17 +44,30 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from saunter.testcase.base import BaseTestCase
 from saunter.SaunterWebDriver import SaunterWebDriver
 import py.test
+from _pytest.mark import MarkInfo
 
 capabilities_map = {
     "firefox": DesiredCapabilities.FIREFOX,
+    "internet explorer": DesiredCapabilities.INTERNETEXPLORER,    
     "iexplore": DesiredCapabilities.INTERNETEXPLORER,
-    "chrome": DesiredCapabilities.CHROME
+    "chrome": DesiredCapabilities.CHROME,
+    "opera": DesiredCapabilities.OPERA,
+    "chrome": DesiredCapabilities.CHROME,
+    "htmlunitjs": DesiredCapabilities.HTMLUNITWITHJS,
+    "htmlunit": DesiredCapabilities.HTMLUNIT,
+    "iphone": DesiredCapabilities.IPHONE,
+    "ipad": DesiredCapabilities.IPAD,
+    "android": DesiredCapabilities.ANDROID
 }
 
 os_map = {
+    "XP": "XP",
     "Windows 2003": "XP",
+    "VISTA": "VISTA",
     "Windows 2008": "VISTA",
-    "Linux": "LINUX"
+    "Linux": "LINUX",
+    "LINUX": "LINUX",
+    "MAC": "MAC"
 }
 
 class SaunterTestCase(BaseTestCase):
