@@ -30,7 +30,7 @@ class BaseTestCase(unittest.TestCase):
             try:
                 code = r.status_code
                 r.raise_for_status()
-            except urllib2.HTTPError, e:
+            except requests.exceptions.HTTPError, e:
                 time.sleep(4)
 
         artifact = open(os.path.join(self.cf.get("Saunter", "base"), "logs", which), "wb")
