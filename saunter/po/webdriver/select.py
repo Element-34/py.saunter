@@ -51,3 +51,35 @@ class Select(Element, WebDriverSelect):
                 pass
             else:
                 raise e
+
+class Select2(Element, WebDriverSelect):
+    def __init__(self, driver, locator):
+        self.driver = driver
+        self.locator = locator
+    
+    @property
+    def selected(self):
+        s = WebDriverSelect(self.driver.find_element_by_locator(self.locator))
+        e = s.first_selected_option
+        return str(e.text)
+
+    @selected.setter
+    def selected(self, val):
+        s = WebDriverSelect(self.driver.find_element_by_locator(self.locator))
+        method = val[:val.find("=")]
+        value = val[val.find("=") + 1:]
+        if method == "value":
+            s.select_by_value(value)
+        elif method == "index":
+            s.select_by_index(value)
+        elif method == "text":
+            s.select_by_visible_text(value)
+        else:
+            raise saunter.exceptions.InvalidLocatorString(val)
+
+    @property
+    def options(self):
+        s = WebDriverSelect(self.driver.find_element_by_locator(self.locator))
+        options = s.options
+        text = [option.text.strip() for option in options]
+        return text
