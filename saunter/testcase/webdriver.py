@@ -48,8 +48,10 @@ from _pytest.mark import MarkInfo
 
 capabilities_map = {
     "firefox": DesiredCapabilities.FIREFOX,
-    "internet explorer": DesiredCapabilities.INTERNETEXPLORER,    
+    "internet explorer": DesiredCapabilities.INTERNETEXPLORER,
+    "internetexplorer": DesiredCapabilities.INTERNETEXPLORER,
     "iexplore": DesiredCapabilities.INTERNETEXPLORER,
+    "ie": DesiredCapabilities.INTERNETEXPLORER,
     "chrome": DesiredCapabilities.CHROME,
     "opera": DesiredCapabilities.OPERA,
     "chrome": DesiredCapabilities.CHROME,
