@@ -28,3 +28,29 @@ class WebElement(WebElement):
             return WebElement(self.find_element_by_xpath(locator_value))
         else:
             raise saunter.exceptions.InvalidLocatorString(locator)
+            
+    def find_elements_by_locator(self, locator):
+        locator_type = locator[:locator.find("=")]
+        if locator_type == "":
+            raise saunter.exceptions.InvalidLocatorString(locator)
+        locator_value = locator[locator.find("=") + 1:]
+        if locator_type == 'class':
+            elements = self.find_elements_by_class_name(locator_value)
+        elif locator_type == 'css':
+            elements = self.find_elements_by_css_selector(locator_value)
+        elif locator_type == 'id':
+            elements = self.find_elements_by_id(locator_value)
+        elif locator_type == 'link':
+            elements = self.find_elements_by_link_text(locator_value)
+        elif locator_type == 'name':
+            elements = self.find_elements_by_name(locator_value)
+        elif locator_type == 'plink':
+            elements = self.find_elements_by_partial_link_text(locator_value)
+        elif locator_type == 'tag':
+            elements = self.find_elements_by_tag_name(locator_value)
+        elif locator_type == 'xpath':
+            elements = self.find_elements_by_xpath(locator_value)
+        else:
+            raise saunter.exceptions.InvalidLocatorString(locator)
+
+        return [WebElement(e) for e in elements]
