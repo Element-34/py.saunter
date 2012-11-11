@@ -80,7 +80,6 @@ def new():
     if not os.path.isfile(os.path.join(cwd, "modules", "tailored", "page.py")):
         shutil.copy(os.path.join(saunter_installed_at, "_defaults", "tailored", "page.py"), os.path.join(cwd, "modules", "tailored"))
 
-
     # scripts
     if not os.path.isdir(os.path.join(cwd, "scripts")):
         os.mkdir(os.path.join(cwd, "scripts"))
@@ -96,7 +95,11 @@ def new():
     # support/db
     if not os.path.isdir(os.path.join(cwd, "support", "db")):
         os.mkdir(os.path.join(cwd, "support", "db"))
-        
+
+    # support/db
+    if not os.path.isdir(os.path.join(cwd, "support", "files")):
+        os.mkdir(os.path.join(cwd, "support", "files"))
+
     # misc.
     if not os.path.isfile(os.path.join(cwd, "conftest.py")):
         shutil.copy(os.path.join(saunter_installed_at, "_defaults", "conftest.py"), cwd)
