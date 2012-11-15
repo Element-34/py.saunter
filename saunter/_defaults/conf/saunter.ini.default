@@ -52,7 +52,7 @@ key: your-key
 # These can likely just be left alone, but in case the Sauce entry point changes they are
 # here
 server_host: ondemand.saucelabs.com 
-server_port: 4444
+server_port: 80
 
 # Which OS/Browser/Version do you want to run in OnDemand. Much like with the browser key
 # in the [Selenium] section, you can use the RC format if you want. Saunter will convert
