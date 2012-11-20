@@ -18,8 +18,50 @@ import time
 import urllib2
 import os
 import os.path
+from _pytest.mark import MarkInfo
+import json
 
 class BaseTestCase(unittest.TestCase):
+    def _saucelabs(self, method):
+        # session couldn't be established for some reason
+        if not hasattr(self, "sauce_session"):
+           return
+        sauce_session = self.sauce_session
+
+        j = {}
+
+        # name
+        j["name"] = self._testMethodName
+
+        # result
+        if self._resultForDoCleanups._excinfo == None and not self.verificationErrors:
+            # print("pass")
+            j["passed"] = True
+        else:
+            # print("fail")
+            j["passed"] = False
+
+        # tags
+        j["tags"] = []
+        for keyword in self._resultForDoCleanups.keywords:
+            if isinstance(self._resultForDoCleanups.keywords[keyword], MarkInfo):
+                j["tags"].append(keyword)
+
+        # update
+        which_url = "https://saucelabs.com/rest/v1/%s/jobs/%s" % (self.cf.get("SauceLabs", "username"), sauce_session)
+        r = requests.put(which_url,
+                         data=json.dumps(j),
+                         headers={"Content-Type": "application/json"},
+                         auth=(self.cf.get("SauceLabs", "username"), self.cf.get("SauceLabs", "key")))
+        r.raise_for_status()
+
+        if self.cf.getboolean("SauceLabs", "get_video"):
+            self.fetch_sauce_artifact("video.flv")
+
+        if self.cf.getboolean("SauceLabs", "get_log"):
+            self.fetch_sauce_artifact("selenium-server.log")
+        
+    
     def fetch_sauce_artifact(self, which):
         sauce_session = self.sauce_session
         which_url = "https://saucelabs.com/rest/%s/jobs/%s/results/%s" % (self.cf.get("SauceLabs", "username"), sauce_session, which)

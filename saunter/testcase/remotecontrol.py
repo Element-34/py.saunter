@@ -37,7 +37,7 @@ class SaunterTestCase(BaseTestCase):
     Parent class of all script classes used for custom asserts (usually 'soft' asserts) and shared fixture setup
     and teardown
     """
-    def setUp(self):
+    def setup_method(self, method):
         """
         Default setup method for all scripts. Connects either to the RC server configured in conf/selenium.ini
         or to Sauce Labs OnDemand
@@ -66,19 +66,18 @@ class SaunterTestCase(BaseTestCase):
         self.selenium.start()
         
         if self.cf.getboolean("SauceLabs", "ondemand"):
-            self.selenium.sauce_session = self.selenium.get_eval("selenium.sessionId")
+            self.sauce_session = self.selenium.get_eval("selenium.sessionId")
         
         self.selenium.window_maximize()
         if self.cf.has_option("Selenium", "timeout"):
             self.selenium.set_timeout(self.cf.getint("Selenium", "timeout") * 1000)
         self.selenium.open(self.cf.get("Selenium", "base_url"));
 
-    def tearDown(self):
-        """
-        Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags
-        are updated. Also the video and server log are downloaded if so configured.
-        """
-        if not self.cf.getboolean("SauceLabs", "ondemand"):
+    def teardown_method(self, method):
+        if hasattr(self, "cf") and not self.cf.getboolean("SauceLabs", "ondemand"):
             self.selenium.take_named_screenshot("final")
+        
         self.selenium.stop()
-        self.assertEqual([], self.verificationErrors)
+        
+        if hasattr(self, "cf") and self.cf.getboolean("SauceLabs", "ondemand"):
+            self._saucelabs(method)
