@@ -80,6 +80,13 @@ class BaseTestCase(unittest.TestCase):
         artifact.close()
     
     def verify_equal(self, want, got, message = ""):
+        """
+        Soft assert for equal
+
+        :params want: the value to compare against
+        :params want: the value to compare wait
+        :params message: (Optional) message explaining the difference
+        """
         try:
             self.assertEqual(want, got)
         except AssertionError, e:
@@ -90,6 +97,12 @@ class BaseTestCase(unittest.TestCase):
             self.verificationErrors.append(m)
 
     def verify_text_present(self, text, message = ""):
+        """
+        Soft assert for whether the text if visible in the current window/frame
+
+        :params text: the string to search for
+        :params message: (Optional) message explaining the difference
+        """
         try:
             self.assertTrue(self.selenium.is_text_present(text))
         except AssertionError, e:
@@ -100,6 +113,12 @@ class BaseTestCase(unittest.TestCase):
             self.verificationErrors.append(m)
 
     def verify_element_present(self, locator, message = ""):
+        """
+        Soft assert for whether and element is present in the current window/frame
+
+        :params locator: the locator of the element to search for
+        :params message: (Optional) message explaining the difference
+        """
         try:
             self.assertTrue(self.selenium.is_element_present(locator))
         except AssertionError, e:
@@ -110,6 +129,12 @@ class BaseTestCase(unittest.TestCase):
             self.verificationErrors.append(m)
 
     def verify_visible(self, locator, message = ""):
+        """
+        Soft assert for whether and element is present and visible in the current window/frame
+
+        :params locator: the locator of the element to search for
+        :params message: (Optional) message explaining the difference
+        """
         try:
             self.assertTrue(self.selenium.is_visible(locator))
         except AssertionError, e:
@@ -120,6 +145,12 @@ class BaseTestCase(unittest.TestCase):
             self.verificationErrors.append(m)
 
     def verify_true(self, condition, message = ""):
+        """
+        Soft assert for whether the condition is true
+
+        :params condition: the statement to evaluate
+        :params message: (Optional) message explaining the difference
+        """
         try:
             self.assertTrue(condition)
         except AssertionError, e:
