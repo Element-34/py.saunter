@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest2 as unittest
 import requests
 import time
 import urllib2
@@ -20,8 +19,9 @@ import os
 import os.path
 from _pytest.mark import MarkInfo
 import json
+import saunter.matchers as matchers
 
-class BaseTestCase(unittest.TestCase):
+class BaseTestCase(object):
     def _saucelabs(self, method):
         # session couldn't be established for some reason
         if not hasattr(self, "sauce_session"):
@@ -31,7 +31,7 @@ class BaseTestCase(unittest.TestCase):
         j = {}
 
         # name
-        j["name"] = self._testMethodName
+        j["name"] = method.__name__
 
         # result
         if self._resultForDoCleanups._excinfo == None and not self.verificationErrors:
@@ -78,84 +78,45 @@ class BaseTestCase(unittest.TestCase):
         artifact = open(os.path.join(self.cf.get("Saunter", "base"), "logs", which), "wb")
         artifact.write(r.content)
         artifact.close()
+
+    def assertEqual(self, first, second, msg=None):
+        self.matchers.assert_equal(first, second, msg)
+
+    def assertNotEqual(self, first, second, msg=None):
+        self.matchers.assert_not_equal(first, second, msg)
+
+    def assertTrue(self, expr, msg=None):
+        self.matchers.assert_true(expr, msg)
+
+    def assertFalse(self, expr, msg=None):
+        self.matchers.assert_false(expr, msg)
+
+    def assertIs(self, first, second, msg=None):
+        self.matchers.assert_is(first, second, msg)
+
+    def assertIsNot(self, first, second, msg=None):
+        self.matchers.assert_is_not(first, second, msg)
+
+    def assertIsNone(self, expr, msg=None):
+        self.matchers.assert_is_none(expr, msg)
+
+    def assertIsNotNone(self, expr, msg=None):
+        self.matchers.assert_is_not_none(expr, msg)
+
+    def assertIn(self, first, second, msg=None):
+        self.matchers.assert_in(first, second, msg)
+
+    def assertNotIn(self, first, second, msg=None):
+        self.matchers.assert_not_in(first, second, msg)
+
+    def assertIsInstance(self, obj, cls, msg=None):
+        self.matchers.assert_is_instance(obj, cls, msg)
+
+    def assertIsNotInstance(self, obj, cls, msg=None):
+        self.matchers.assert_is_not_instance(obj, cls, msg)
     
-    def verify_equal(self, want, got, message = ""):
-        """
-        Soft assert for equal
-
-        :params want: the value to compare against
-        :params want: the value to compare wait
-        :params message: (Optional) message explaining the difference
-        """
-        try:
-            self.assertEqual(want, got)
-        except AssertionError, e:
-            if message:
-                m = "%s:\n%s" % (message, str(e))
-            else:
-                m = str(e)
-            self.verificationErrors.append(m)
-
-    def verify_text_present(self, text, message = ""):
-        """
-        Soft assert for whether the text if visible in the current window/frame
-
-        :params text: the string to search for
-        :params message: (Optional) message explaining the difference
-        """
-        try:
-            self.assertTrue(self.selenium.is_text_present(text))
-        except AssertionError, e:
-            if message:
-                m = "%s:\n%s" % (message, str(e))
-            else:
-                m = str(e)
-            self.verificationErrors.append(m)
-
-    def verify_element_present(self, locator, message = ""):
-        """
-        Soft assert for whether and element is present in the current window/frame
-
-        :params locator: the locator of the element to search for
-        :params message: (Optional) message explaining the difference
-        """
-        try:
-            self.assertTrue(self.selenium.is_element_present(locator))
-        except AssertionError, e:
-            if message:
-                m = "%s:\n%s" % (message, str(e))
-            else:
-                m = str(e)
-            self.verificationErrors.append(m)
-
-    def verify_visible(self, locator, message = ""):
-        """
-        Soft assert for whether and element is present and visible in the current window/frame
-
-        :params locator: the locator of the element to search for
-        :params message: (Optional) message explaining the difference
-        """
-        try:
-            self.assertTrue(self.selenium.is_visible(locator))
-        except AssertionError, e:
-            if message:
-                m = "%s:\n%s" % (message, str(e))
-            else:
-                m = str(e)
-            self.verificationErrors.append(m)
-
-    def verify_true(self, condition, message = ""):
-        """
-        Soft assert for whether the condition is true
-
-        :params condition: the statement to evaluate
-        :params message: (Optional) message explaining the difference
-        """
-        try:
-            self.assertTrue(condition)
-        except AssertionError, e:
-            if message:
-                m = "%s:\n%s" % (message, str(e))
-            else:
-                m = str(e)
-            self.verificationErrors.append(m)
+    
+        
+        
+        
+        

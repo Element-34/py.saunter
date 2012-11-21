@@ -23,6 +23,8 @@ import os
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 
 import saunter.ConfigWrapper
+from saunter.matchers import Matchers
+
 try:
     if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
         import json
@@ -42,9 +44,8 @@ class SaunterTestCase(BaseTestCase):
         Default setup method for all scripts. Connects either to the RC server configured in conf/selenium.ini
         or to Sauce Labs OnDemand
         """
-        self.verificationErrors = []
         self.cf = saunter.ConfigWrapper.ConfigWrapper().config
-        self.cf.set("Saunter", "name", self._testMethodName)
+        self.cf.set("Saunter", "name", method.__name__)
         if self.cf.getboolean("SauceLabs", "ondemand"):
             host = self.cf.get("SauceLabs", "server_host")
             port = self.cf.get("SauceLabs", "server_port")
@@ -64,6 +65,9 @@ class SaunterTestCase(BaseTestCase):
 
         self.selenium = wrapper().remote_control(host, port, browser, self.cf.get("Selenium", "base_url"))
         self.selenium.start()
+
+        self.verificationErrors = []
+        self.matchers = Matchers(self.selenium, self.verificationErrors)
         
         if self.cf.getboolean("SauceLabs", "ondemand"):
             self.sauce_session = self.selenium.get_eval("selenium.sessionId")

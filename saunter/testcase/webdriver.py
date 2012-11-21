@@ -46,6 +46,8 @@ from saunter.SaunterWebDriver import SaunterWebDriver
 import py.test
 from _pytest.mark import MarkInfo
 
+from saunter.matchers import Matchers
+
 capabilities_map = {
     "firefox": DesiredCapabilities.FIREFOX,
     "internet explorer": DesiredCapabilities.INTERNETEXPLORER,
@@ -120,6 +122,9 @@ class SaunterTestCase(BaseTestCase):
             command_executor = "http://%s:%s/wd/hub" % (self.cf.get("Selenium", "server_host"), self.cf.get("Selenium", "server_port"))
         self.driver = WebDriver(desired_capabilities = desired_capabilities, command_executor = command_executor)
 
+        self.verificationErrors = []
+        self.matchers = Matchers(self.driver, self.verificationErrors)
+        
         if self.cf.getboolean("Saunter", "use_implicit_wait"):
             self.driver.implicitly_wait(self.cf.getint("Saunter", "implicit_wait"))
         
