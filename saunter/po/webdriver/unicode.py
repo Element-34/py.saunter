@@ -30,14 +30,7 @@ class Unicode(Element):
         e.send_keys(val)
 
     def __get__(self, obj, cls=None):
-        try:
-            e = obj.driver.find_element_by_locator(self.locator)
-            return e.text
-        except AttributeError as e:
-            if str(e) == "'SeleniumWrapper' object has no attribute 'connection'":
-                pass
-            else:
-                raise e
-        except ElementNotFound as e:
-            msg = "Element %s was not found. It is used in the %s page object in the %s module." % (self.locator, obj.__class__.__name__, self.__module__)
-            raise ElementNotFound(msg)
+        e = obj.driver.find_element_by_locator(self.locator)
+        if e.tag_name in ["input", "textarea"]:
+            return e.get_attribute("value")
+        return e.text

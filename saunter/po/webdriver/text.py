@@ -16,28 +16,10 @@
 Text
 ====
 """
-from saunter.po.webdriver.element import Element
+from saunter.po.webdriver.unicode import Unicode
 from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 from saunter.exceptions import ElementNotFound
-from saunter.SaunterWebDriver import SaunterWebDriver
 
-class Text(Element):
-    """
-    Base element class for Text fields
-    """
-    def __set__(self, obj, val):
-        e = obj.driver.find_element_by_locator(self.locator)
-        e.send_keys(val)
-
+class Text(Unicode):
     def __get__(self, obj, cls=None):
-        try:
-            e = obj.driver.find_element_by_locator(self.locator)
-            return str(e.text)
-        except AttributeError as e:
-            if str(e) == "'SeleniumWrapper' object has no attribute 'connection'":
-                pass
-            else:
-                raise e
-        except ElementNotFound as e:
-            msg = "Element %s was not found. It is used in the %s page object in the %s module." % (self.locator, obj.__class__.__name__, self.__module__)
-            raise ElementNotFound(msg)
+        return str(super(Text, self).__get__(obj, cls))
