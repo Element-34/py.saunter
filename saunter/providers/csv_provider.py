@@ -31,7 +31,7 @@ class CSVProvider(object):
     def __init__(self, c):
         cf = saunter.ConfigWrapper.ConfigWrapper().config
         f = os.path.join(cf.get("Saunter", "base"), 'support', 'csv', c)
-        self.data = csv.DictReader(open(f, 'r'))
+        self.data = csv.DictReader(open(f, 'rU'))
         
     def randomRow(self):
         """
