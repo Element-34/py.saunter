@@ -29,7 +29,6 @@ setup(
     description="An opinionated Selenium framework",
     long_description="An opinionated test framework",
     url='https://github.com/Element-34/py.saunter',
-    scripts=['bin/pysaunter.py'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -40,5 +39,11 @@ setup(
         'Topic :: Software Development :: Testing',
         'Topic :: Software Development :: Quality Assurance',
         'Programming Language :: Python'
-    ]
+    ],
+    entry_points = {
+        "console_scripts": [
+            "pysaunter = saunter.main",
+        ],
+    }
+    
 )
