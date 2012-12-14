@@ -22,7 +22,7 @@ setup(
                         'pytest-marks>=0.3',
                         'pytest-xdist',
                         'requests',
-                        'selenium>=2.27.0',
+                        'selenium>=2.28.0',
                         'browsermob-proxy>=0.2',
                         'harpy>=0.2.0'],
     license="LICENSE.txt",
