@@ -25,6 +25,12 @@ class Page(object):
     """
     Top of the PO page tree
     """
+    def __getattribute__(self, name):
+        attr = object.__getattribute__(self, name)
+        if hasattr(attr, '__get__'):
+            return attr.__get__(self, type(self))
+        return attr
+
     def is_element_available(self, locator):
         """
         Synchronization method for making sure the element we're looking for is not only on the page,
