@@ -11,13 +11,6 @@ implicit_wait: 30
 take_screenshots: false
 
 [Selenium]
-# Should Saunter try to start/stop the server if it is not running?
-manage_server: true
-
-# The path on disk to the Selenium server jar. If Saunter is managing the server and the
-# jar is not there it will download one
-server_path: /path/to/selenium-server.jar
-
 # Where is the server that Saunter will connect to
 server_host: localhost
 server_port: 4444
