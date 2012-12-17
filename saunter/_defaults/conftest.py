@@ -16,6 +16,7 @@ import os
 import os.path
 import py
 import sys
+import random
 
 def pytest_configure(config):
     sys.path.append(os.path.join(os.getcwd(), "modules"))
@@ -28,3 +29,6 @@ def pytest_runtest_makereport(__multicall__, item, call):
             call.excinfo = py.code.ExceptionInfo()
     rep = __multicall__.execute()
     return rep
+
+def pytest_collection_modifyitems(items):
+    random.shuffle(items)
