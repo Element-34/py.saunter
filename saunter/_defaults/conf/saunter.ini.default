@@ -2,10 +2,6 @@
 # options contained.
 
 [Saunter]
-# Whether or not Saunter should wait for elements on the page. And for how many seconds.
-use_implicit_wait: true
-implicit_wait: 30
-
 # With this true, Saunter will take a screenshot after most interactions with the
 # application such as click, submit, type, etc.
 take_screenshots: false

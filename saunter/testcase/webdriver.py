@@ -125,9 +125,6 @@ class SaunterTestCase(BaseTestCase):
         self.verificationErrors = []
         self.matchers = Matchers(self.driver, self.verificationErrors)
         
-        if self.cf.getboolean("Saunter", "use_implicit_wait"):
-            self.driver.implicitly_wait(self.cf.getint("Saunter", "implicit_wait"))
-        
         if self.cf.getboolean("SauceLabs", "ondemand"):
             self.sauce_session = self.driver.session_id
             

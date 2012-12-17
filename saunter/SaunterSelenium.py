@@ -22,7 +22,7 @@ from saunter.exceptions import ElementNotFound, WindowNotFound
 
 class SaunterSelenium(selenium):
     """
-    Extending the regular selenium class to add implicit waits
+    Extending the Se-RC driver
     """
     def __init__(self, *args):
         super(SaunterSelenium, self).__init__(*args)
@@ -34,40 +34,19 @@ class SaunterSelenium(selenium):
         os.makedirs(self.screenshots_where)
         self.screenshot_number = 1
         
-        try:
-            if cf.getboolean("Saunter", "use_implicit_wait"):
-                self.implicit_wait = cf.getint("Saunter", "implicit_wait")
-            else:
-                self.implicit_wait = 0
-        except:
-            self.implicit_wait = 0
-        
     def stop(self):
         super(SaunterSelenium, self).stop()
         self.running = False
 
-    def do_command(self, verb, args, implicit_wait = None):
-        if implicit_wait == None:
-            implicit_wait = self.implicit_wait
-            
+    def do_command(self, verb, args):
         try:
             return super(SaunterSelenium, self).do_command(verb, args)
         except Exception, e:
             if (re.match("ERROR: Element .* not found", unicode(e))
-                and implicit_wait > 0):
-                time.sleep(1)
-                return self.do_command(verb, args, implicit_wait - 1)
-            elif (re.match("ERROR: Element .* not found", unicode(e))
-                and implicit_wait == 0):
                 self.take_numbered_screenshot()
                 raise ElementNotFound(e)
                 
             if (re.match("ERROR: Could not find window with .*", unicode(e))
-                and implicit_wait > 0):
-                time.sleep(1)
-                return self.do_command(verb, args, implicit_wait - 1)
-            elif (re.match("ERROR: Could not find window with .*", unicode(e))
-                and implicit_wait == 0):
                 self.take_numbered_screenshot()
                 raise WindowNotFound(e)
             raise Exception(unicode(e))
