@@ -1,4 +1,4 @@
-conf/*.ini
+conf/*.ini 
 *.pyc
 logs/*.xml
 logs/*.vlc
