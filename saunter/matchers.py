@@ -47,7 +47,7 @@ class Matchers(object):
         """
         assert first != second
 
-    def verify_equal(self, first, second, msg=""):
+    def verify_not_equal(self, first, second, msg=""):
         """
         Soft assert for inequality
 
