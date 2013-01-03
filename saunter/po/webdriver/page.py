@@ -34,9 +34,9 @@ class Page(object):
             self.config = ConfigWrapper().config
 
         if not hasattr(self, 'short_wait'):
-            setattr(type(self), 'short_wait', WebDriverWait(self.driver, self.config.getint('Selenium', 'timeout') / 2))
-            setattr(type(self), 'wait', WebDriverWait(self.config.getint('Selenium', 'timeout')))
-            setattr(type(self), 'long_wait', WebDriverWait(self.driver, self.config.getint('Selenium', 'timeout') * 2))
+            setattr(self, 'short_wait', WebDriverWait(self.driver, self.config.getint('Selenium', 'timeout') / 2))
+            setattr(self, 'wait', WebDriverWait(self.config.getint('Selenium', 'timeout')))
+            setattr(self, 'long_wait', WebDriverWait(self.driver, self.config.getint('Selenium', 'timeout') * 2))
 
 
     def __getattribute__(self, name):
