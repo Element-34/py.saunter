@@ -14,11 +14,13 @@
 
 import saunter.exceptions
 from selenium import webdriver
-from saunter.SeleniumWrapper import SeleniumWrapper as se_wrapper
 from selenium.common.exceptions import NoSuchElementException
 from saunter.web_element import WebElement
 
 class SaunterWebDriver(webdriver.Remote):
+    def __init__(self, **kwargs):
+        super(SaunterWebDriver, self).__init__(**kwargs)
+
     def find_element_by_locator(self, locator):
         locator_type = locator[:locator.find("=")]
         if locator_type == "":
@@ -86,3 +88,4 @@ class SaunterWebDriver(webdriver.Remote):
     
     def is_visible(self, locator):
         return self.find_element_by_locator(locator).is_displayed()
+
