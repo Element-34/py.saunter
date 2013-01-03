@@ -129,6 +129,8 @@ class SaunterTestCase(BaseTestCase):
         
         if self.cf.getboolean("SauceLabs", "ondemand"):
             self.sauce_session = self.driver.session_id
+
+        self._screenshot_number = 1
             
     def teardown_method(self, method):
         """
@@ -153,11 +155,13 @@ class SaunterTestCase(BaseTestCase):
 
         return method_dir
 
-    # def take_numbered_screenshot(self):
-    #     if self.config.has_option("Saunter", "take_screenshots"):
-    #         if self.cf.getboolean("Saunter", "take_screenshots"):
-    #             super(SaunterSelenium, self).capture_screenshot(os.path.join(self.screenshots_where, str(self.screenshot_number).zfill(3) + ".png"))
-    #             self.screenshot_number = self.screenshot_number + 1
+    def take_numbered_screenshot(self):
+        if self.config.has_option("Saunter", "take_screenshots"):
+            if self.cf.getboolean("Saunter", "take_screenshots"):
+                method_dir = self._screenshot_prep_dirs()
+
+                self.driver.get_screenshot_as_file(os.path.join(method_dir, str(self._screenshot_number).zfill(3) + ".png"))
+                self._screenshot_number = self._screenshot_number + 1
 
     def take_named_screenshot(self, name):
         method_dir = self._screenshot_prep_dirs()
