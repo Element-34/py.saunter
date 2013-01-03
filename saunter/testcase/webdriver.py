@@ -86,13 +86,14 @@ class SaunterTestCase(BaseTestCase):
         """
         self.verificationErrors = []
         self.cf = saunter.ConfigWrapper.ConfigWrapper().config
+        self.cf.set("Saunter", "name", method.__name__)
         self.config = self.cf
         if self.cf.getboolean("SauceLabs", "ondemand"):
             desired_capabilities = {
                 "platform": self.cf.get("SauceLabs", "os"),
                 "browserName": self.cf.get("SauceLabs", "browser"),
                 "version": self.cf.get("SauceLabs", "browser_version"),
-                "name": self._testMethodName
+                "name": method.__name__
             }
             if desired_capabilities["browserName"][0] == "*":
                 desired_capabilities["browserName"] = desired_capabilities["browserName"][1:]
