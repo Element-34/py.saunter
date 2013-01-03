@@ -42,11 +42,11 @@ class SaunterSelenium(selenium):
         try:
             return super(SaunterSelenium, self).do_command(verb, args)
         except Exception, e:
-            if (re.match("ERROR: Element .* not found", unicode(e))
+            if (re.match("ERROR: Element .* not found", unicode(e))):
                 self.take_numbered_screenshot()
                 raise ElementNotFound(e)
                 
-            if (re.match("ERROR: Could not find window with .*", unicode(e))
+            if (re.match("ERROR: Could not find window with .*", unicode(e))):
                 self.take_numbered_screenshot()
                 raise WindowNotFound(e)
             raise Exception(unicode(e))
