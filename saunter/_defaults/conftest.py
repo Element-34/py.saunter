@@ -21,6 +21,16 @@ import random
 def pytest_configure(config):
     sys.path.append(os.path.join(os.getcwd(), "modules"))
 
+# Comment or remove to disable auto screenshotting on error
+# - WebDriver only for now
+# def pytest_runtest_call(item, __multicall__):
+#     try:
+#         __multicall__.execute()
+#     except Exception as e:
+#         if hasattr(item.parent.obj, 'driver'):
+#             item.parent.obj.take_named_screenshot('exception')
+#         raise(e)
+
 def pytest_runtest_makereport(__multicall__, item, call):
     if call.when == "call":
         try:

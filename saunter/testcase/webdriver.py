@@ -86,8 +86,10 @@ class SaunterTestCase(BaseTestCase):
         """
         self.verificationErrors = []
         self.cf = saunter.ConfigWrapper.ConfigWrapper().config
-        self.cf.set("Saunter", "name", method.__name__)
         self.config = self.cf
+
+        self.current_method_name = method.__name__
+
         if self.cf.getboolean("SauceLabs", "ondemand"):
             desired_capabilities = {
                 "platform": self.cf.get("SauceLabs", "os"),
@@ -140,18 +142,25 @@ class SaunterTestCase(BaseTestCase):
 
         if hasattr(self, "cf") and self.cf.getboolean("SauceLabs", "ondemand"):
             self._saucelabs(method)
-                
-    # def fetch_artifact(session, which):
-    #     which_url = "https://saucelabs.com/rest/%s/jobs/%s/results/%s" % (self.cf.get("SauceLabs", "username"), session, which)
-    #     code = 404
-    #     timeout = 0
-    #     while code in [401, 404]:
-    #         r = requests.get(which_url, auth = (cf.get("SauceLabs", "username"), self.cf.get("SauceLabs", "key")))
-    #         try:
-    #             code = r.status_code
-    #             r.raise_for_status()
-    #         except urllib2.HTTPError, e:
-    #             time.sleep(4)
-    # 
-    #     artifact = open(os.path.join(os.path.dirname(__file__), "logs", which), "wb")
-    #     artifact.write(r.content)
+
+    def _screenshot_prep_dirs(self):
+        class_dir = os.path.join(os.path.join(self.config.get('Saunter', 'log_dir'), self.__class__.__name__))
+        if not os.path.exists(class_dir):
+            os.makedirs(class_dir)
+
+        method_dir = os.path.join(class_dir, self.current_method_name)
+        if not os.path.exists(method_dir):
+            os.makedirs(method_dir)
+
+        return method_dir
+
+    # def take_numbered_screenshot(self):
+    #     if self.config.has_option("Saunter", "take_screenshots"):
+    #         if self.cf.getboolean("Saunter", "take_screenshots"):
+    #             super(SaunterSelenium, self).capture_screenshot(os.path.join(self.screenshots_where, str(self.screenshot_number).zfill(3) + ".png"))
+    #             self.screenshot_number = self.screenshot_number + 1
+
+    def take_named_screenshot(self, name):
+        method_dir = self._screenshot_prep_dirs()
+
+        self.driver.get_screenshot_as_file(os.path.join(method_dir, str(name) + ".png"))
