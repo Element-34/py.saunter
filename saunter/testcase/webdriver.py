@@ -84,7 +84,6 @@ class SaunterTestCase(BaseTestCase):
         Parent class of all script classes used for custom asserts (usually 'soft' asserts) and shared fixture setup
         and teardown
         """
-        self.verificationErrors = []
         self.cf = saunter.ConfigWrapper.ConfigWrapper().config
         self.config = self.cf
 
