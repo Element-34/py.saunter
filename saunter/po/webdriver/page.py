@@ -20,11 +20,25 @@ from saunter.po import timeout_seconds
 from saunter.exceptions import ElementVisiblityTimeout, ElementTextTimeout
 import time
 from selenium.common.exceptions import StaleElementReferenceException
+from saunter.ConfigWrapper import ConfigWrapper
+from selenium.webdriver.support.wait import WebDriverWait
 
 class Page(object):
     """
     Top of the PO page tree
     """
+
+    def __init__(self, driver):
+        self.driver = driver
+        if not hasattr(self, 'config'):
+            self.config = ConfigWrapper().config
+
+        if not hasattr(self, 'short_wait'):
+            setattr(type(self), 'short_wait', WebDriverWait(self.driver, self.config.getint('Selenium', 'timeout') / 2))
+            setattr(type(self), 'wait', WebDriverWait(self.config.getint('Selenium', 'timeout')))
+            setattr(type(self), 'long_wait', WebDriverWait(self.driver, self.config.getint('Selenium', 'timeout') * 2))
+
+
     def __getattribute__(self, name):
         attr = object.__getattribute__(self, name)
         if hasattr(attr, '__get__'):
