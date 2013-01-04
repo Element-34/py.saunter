@@ -33,6 +33,8 @@ class BaseTestCase(object):
         # name
         j["name"] = method.__name__
 
+        # print(self.__dict__)
+        # print(method.__dict__)
         # result
         if self._resultForDoCleanups._excinfo == None and not self.verificationErrors:
             # print("pass")
@@ -115,8 +117,14 @@ class BaseTestCase(object):
     def assertIsNotInstance(self, obj, cls, msg=None):
         self.matchers.assert_is_not_instance(obj, cls, msg)
     
-    
-        
-        
-        
+    def _screenshot_prep_dirs(self):
+        class_dir = os.path.join(os.path.join(self.config.get('Saunter', 'log_dir'), self.__class__.__name__))
+        if not os.path.exists(class_dir):
+            os.makedirs(class_dir)
+
+        method_dir = os.path.join(class_dir, self.current_method_name)
+        if not os.path.exists(method_dir):
+            os.makedirs(method_dir)
+
+        return method_dir
         

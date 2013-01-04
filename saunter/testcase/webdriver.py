@@ -137,23 +137,14 @@ class SaunterTestCase(BaseTestCase):
         Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags
         are updated. Also the video and server log are downloaded if so configured.
         """
-        
+        if hasattr(self, "config") and not self.config.getboolean("SauceLabs", "ondemand"):
+            self.take_named_screenshot("final")
+
         if hasattr(self, "driver"):
             self.driver.quit()
 
-        if hasattr(self, "cf") and self.cf.getboolean("SauceLabs", "ondemand"):
+        if hasattr(self, "config") and self.config.getboolean("SauceLabs", "ondemand"):
             self._saucelabs(method)
-
-    def _screenshot_prep_dirs(self):
-        class_dir = os.path.join(os.path.join(self.config.get('Saunter', 'log_dir'), self.__class__.__name__))
-        if not os.path.exists(class_dir):
-            os.makedirs(class_dir)
-
-        method_dir = os.path.join(class_dir, self.current_method_name)
-        if not os.path.exists(method_dir):
-            os.makedirs(method_dir)
-
-        return method_dir
 
     def take_numbered_screenshot(self):
         if self.config.has_option("Saunter", "take_screenshots"):

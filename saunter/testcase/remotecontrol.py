@@ -44,8 +44,11 @@ class SaunterTestCase(BaseTestCase):
         Default setup method for all scripts. Connects either to the RC server configured in conf/selenium.ini
         or to Sauce Labs OnDemand
         """
-        self.cf = saunter.ConfigWrapper.ConfigWrapper().config
-        self.cf.set("Saunter", "name", method.__name__)
+        self.config = saunter.ConfigWrapper.ConfigWrapper().config
+        self.cf = self.config
+
+        self.current_method_name = method.__name__
+
         if self.cf.getboolean("SauceLabs", "ondemand"):
             host = self.cf.get("SauceLabs", "server_host")
             port = self.cf.get("SauceLabs", "server_port")
@@ -77,11 +80,26 @@ class SaunterTestCase(BaseTestCase):
             self.selenium.set_timeout(self.cf.getint("Selenium", "timeout") * 1000)
         self.selenium.open(self.cf.get("Selenium", "base_url"));
 
+        self._screenshot_number = 1
+
     def teardown_method(self, method):
         if hasattr(self, "cf") and not self.cf.getboolean("SauceLabs", "ondemand"):
-            self.selenium.take_named_screenshot("final")
+            self.take_named_screenshot("final")
         
         self.selenium.stop()
         
         if hasattr(self, "cf") and self.cf.getboolean("SauceLabs", "ondemand"):
             self._saucelabs(method)
+
+    def take_numbered_screenshot(self):
+        if self.config.has_option("Saunter", "take_screenshots"):
+            if self.cf.getboolean("Saunter", "take_screenshots"):
+                method_dir = self._screenshot_prep_dirs()
+
+                self.selenium.capture_screenshot(os.path.join(method_dir, str(self._screenshot_number).zfill(3) + ".png"))
+                self._screenshot_number = self._screenshot_number + 1
+
+    def take_named_screenshot(self, name):
+        method_dir = self._screenshot_prep_dirs()
+
+        self.selenium.capture_screenshot(os.path.join(method_dir, str(name) + ".png"))
