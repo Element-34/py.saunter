@@ -143,9 +143,6 @@ class SaunterTestCase(BaseTestCase):
         if hasattr(self, "driver"):
             self.driver.quit()
 
-        if hasattr(self, "config") and self.config.getboolean("SauceLabs", "ondemand"):
-            self._saucelabs(method)
-
     def take_numbered_screenshot(self):
         if self.config.has_option("Saunter", "take_screenshots"):
             if self.cf.getboolean("Saunter", "take_screenshots"):

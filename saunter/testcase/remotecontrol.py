@@ -74,6 +74,7 @@ class SaunterTestCase(BaseTestCase):
         
         if self.cf.getboolean("SauceLabs", "ondemand"):
             self.sauce_session = self.selenium.get_eval("selenium.sessionId")
+            
         
         self.selenium.window_maximize()
         if self.cf.has_option("Selenium", "timeout"):
@@ -87,9 +88,6 @@ class SaunterTestCase(BaseTestCase):
             self.take_named_screenshot("final")
         
         self.selenium.stop()
-        
-        if hasattr(self, "cf") and self.cf.getboolean("SauceLabs", "ondemand"):
-            self._saucelabs(method)
 
     def take_numbered_screenshot(self):
         if self.config.has_option("Saunter", "take_screenshots"):
