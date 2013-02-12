@@ -115,6 +115,7 @@ p.add_argument('-s', action='store_true', default=None, help="don't capture outp
 p.add_argument('--tb', action='store', default="native", help='traceback print mode (long/short/line/native/no)')
 p.add_argument('-p', action='append', default=[], help="early-load given plugin (multi-allowed)")
 p.add_argument('-m', action='append', default=[], help="filter based on marks")
+p.add_argument('-k', action='append', default=[], help="filter based is expr")
 p.add_argument('-n', action='store', default=None, help="number of processes to fork")
 p.add_argument('--traceconfig', action='store_true', default=None, help="trace considerations of conftest.py files")
 p.add_argument('--pdb', action='store_true', default=None, help="start the interactive Python debugger on errors")
@@ -140,9 +141,22 @@ elif len(results.m) > 1:
     for markers in results.m:
         arguments.append("-m")
         arguments.append(markers)
+elif len(results.k) >= 1:
+    pass  # if there is no -m but there is -k, don't add shallow tag
 else:
     arguments.append("-m")
     arguments.append("shallow")
+
+# likewise for the -k arguments
+if len(results.k) == 1:
+    arguments.append("-k")
+    arguments.append(results.k[0])
+elif len(results.k) > 1:
+    for keywords in results.k:
+        arguments.append("-k")
+        arguments.append(keywords)
+else:
+    pass
 
 # this are either true or false
 for noneable in ['v', 's']:
