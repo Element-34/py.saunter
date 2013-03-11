@@ -36,6 +36,13 @@ class SauceLabs(object):
             if isinstance(item.keywords[keyword], MarkInfo):
                 j["tags"].append(keyword)
 
+        # global custom data
+        j["custom-data"] = {}
+        if item.parent._obj.config.has_section('SauceLabs CustomData'):
+            for option in item.parent._obj.config.options('SauceLabs CustomData'):
+                j["custom-data"][option] = item.parent._obj.config.get('SauceLabs CustomData', option)
+        print(json.dumps(j))
+
         # update
         which_url = "https://saucelabs.com/rest/v1/%s/jobs/%s" % (self.username, self.sauce_session)
         r = requests.put(which_url,
