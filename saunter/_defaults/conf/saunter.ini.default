@@ -50,6 +50,10 @@ os: Windows 2003
 browser: *firefox
 browser_version: 3.6.
 
+# Extra information added to a SauceLabs job - optional
+#[SauceLabs CustomData]
+#orange: peel
+
 [Django]
 # Saunter can interact with Django models if it knows where they are
 installation: /path/to/django/install
