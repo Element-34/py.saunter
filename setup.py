@@ -23,7 +23,7 @@ setup(
                         'pytest-xdist',
                         'requests',
                         'selenium>=2.31.0',
-                        'browsermob-proxy>=0.2',
+                        'browsermob-proxy>=0.4.0',
                         'harpy>=0.2.0'],
     license="LICENSE.txt",
     description="An opinionated Selenium framework",
