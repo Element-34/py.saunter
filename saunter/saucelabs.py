@@ -31,17 +31,23 @@ class SauceLabs(object):
 
         # tags
         j["tags"] = []
-
+        j["custom-data"] = {}
         for keyword in item.keywords:
             if isinstance(item.keywords[keyword], MarkInfo):
-                j["tags"].append(keyword)
+                # per item custom data
+                if keyword == "saucelabs_customdata":
+                    for key, value in item.keywords[keyword].kwargs.iteritems():
+                        j["custom-data"][key] = value
+                # tags
+                else:
+                    j["tags"].append(keyword)
 
         # global custom data
-        j["custom-data"] = {}
         if item.parent._obj.config.has_section('SauceLabs CustomData'):
             for option in item.parent._obj.config.options('SauceLabs CustomData'):
                 j["custom-data"][option] = item.parent._obj.config.get('SauceLabs CustomData', option)
-        print(json.dumps(j))
+
+        # print(json.dumps(j))
 
         # update
         which_url = "https://saucelabs.com/rest/v1/%s/jobs/%s" % (self.username, self.sauce_session)
