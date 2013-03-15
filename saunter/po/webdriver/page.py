@@ -35,7 +35,7 @@ class Page(object):
 
         if not hasattr(self, 'short_wait'):
             setattr(self, 'short_wait', WebDriverWait(self.driver, self.config.getint('Selenium', 'timeout') / 2))
-            setattr(self, 'wait', WebDriverWait(self.config.getint('Selenium', 'timeout')))
+            setattr(self, 'wait', WebDriverWait(self.driver, self.config.getint('Selenium', 'timeout')))
             setattr(self, 'long_wait', WebDriverWait(self.driver, self.config.getint('Selenium', 'timeout') * 2))
 
 
