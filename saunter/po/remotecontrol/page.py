@@ -19,11 +19,21 @@ Page
 from saunter.po import timeout_seconds
 from saunter.exceptions import ElementVisiblityTimeout, ElementTextTimeout
 import time
+from saunter.SeleniumWrapper import SeleniumWrapper
+from saunter.ConfigWrapper import ConfigWrapper
 
 class Page(object):
     """
     Top of the PO page tree
     """
+    def __init__(self):
+        if not hasattr(self, 'selenium'):
+            self.selenium = SeleniumWrapper().connection
+            self.se = self.selenium
+
+        if not hasattr(self, 'config'):
+            self.config = ConfigWrapper().config
+
     def is_element_available(self, locator):
         """
         Synchronization method for making sure the element we're looking for is not only on the page,
