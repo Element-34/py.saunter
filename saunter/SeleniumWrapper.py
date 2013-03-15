@@ -23,7 +23,7 @@ from selenium import webdriver
 
 class SeleniumWrapper(object):
     """
-    Singleton reference to the config information
+    Singleton reference to the rc instance
     """
     _instance = None
     
