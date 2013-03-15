@@ -17,6 +17,7 @@ import os.path
 import py
 import sys
 import random
+import saunter.saucelabs
 
 def pytest_configure(config):
     sys.path.append(os.path.join(os.getcwd(), "modules"))
@@ -43,7 +44,7 @@ def pytest_runtest_makereport(__multicall__, item, call):
 
     if call.when == "call":
         if hasattr(item.parent.obj, 'config') and item.parent.obj.config.getboolean('SauceLabs', 'ondemand'):
-            s = saunter.saucelabs.SauceLabs(item, report)
+            s = saunter.saucelabs.SauceLabs(item)
 
     return report
 
