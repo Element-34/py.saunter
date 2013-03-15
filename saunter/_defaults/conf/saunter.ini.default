@@ -16,7 +16,7 @@ server_port: 4444
 browser: *firefox
 
 # The first URL that is going to be opened in the browser
-base_url: https://fashion.ebay.com/
+base_url: https://change_to_your_url
 
 # To drive the chrome browser with WebDriver you need the external chromedriver. And Saunter needs
 # to know where to find it.
