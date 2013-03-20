@@ -61,7 +61,8 @@ capabilities_map = {
     "htmlunit": DesiredCapabilities.HTMLUNIT,
     "iphone": DesiredCapabilities.IPHONE,
     "ipad": DesiredCapabilities.IPAD,
-    "android": DesiredCapabilities.ANDROID
+    "android": DesiredCapabilities.ANDROID,
+    "phantomjs": DesiredCapabilities.PHANTOMJS,
 }
 
 os_map = {
