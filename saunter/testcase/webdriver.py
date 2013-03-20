@@ -39,10 +39,12 @@ except ImportError as e:
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 from selenium.common.exceptions import TimeoutException
+from saunter.exceptions import ProfileNotFound
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from saunter.testcase.base import BaseTestCase
 from saunter.SaunterWebDriver import SaunterWebDriver
+from selenium.webdriver import FirefoxProfile
 import py.test
 from _pytest.mark import MarkInfo
 
@@ -90,6 +92,19 @@ class SaunterTestCase(BaseTestCase):
 
         self.current_method_name = method.__name__
 
+        browser = self.cf.get("Selenium", "browser")
+        if browser[0] == "*":
+            browser = browser[1:]
+
+        profile = None
+        if browser == 'firefox':
+            if self.cf.has_option("Selenium", "profile"):
+                profile_path = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', self.cf.get("Selenium", "profile"))
+                if os.path.isdir(profile_path):
+                    profile = FirefoxProfile(profile_path)
+                else:
+                    raise ProfileNotFound("Profile not found at %s/support/profiles/%s" % (self.cf.get("Saunter", "base"), self.cf.get("Selenium", "profile")))
+
         if self.cf.getboolean("SauceLabs", "ondemand"):
             desired_capabilities = {
                 "platform": self.cf.get("SauceLabs", "os"),
@@ -103,9 +118,7 @@ class SaunterTestCase(BaseTestCase):
                 desired_capabilities["platform"] = os_map[desired_capabilities["platform"]]
             command_executor = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub" % (self.cf.get("SauceLabs", "username"), self.cf.get("SauceLabs", "key"))
         else:
-            browser = self.cf.get("Selenium", "browser")
-            if browser[0] == "*":
-                browser = browser[1:]
+
             if browser == "chrome":
                 os.environ["webdriver.chrome.driver"] = self.cf.get("Selenium", "chromedriver_path")
             desired_capabilities = capabilities_map[browser]
@@ -123,7 +136,8 @@ class SaunterTestCase(BaseTestCase):
                         desired_capabilities["version"] = str(self.cf.get("Grid", "browser_version"))
 
             command_executor = "http://%s:%s/wd/hub" % (self.cf.get("Selenium", "server_host"), self.cf.get("Selenium", "server_port"))
-        self.driver = WebDriver(desired_capabilities = desired_capabilities, command_executor = command_executor)
+
+        self.driver = WebDriver(desired_capabilities = desired_capabilities, command_executor = command_executor, browser_profile=profile)
 
         self.verificationErrors = []
         self.matchers = Matchers(self.driver, self.verificationErrors)
