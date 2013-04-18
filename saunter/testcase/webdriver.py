@@ -99,12 +99,15 @@ class SaunterTestCase(BaseTestCase):
 
         profile = None
         if browser == 'firefox':
-            if self.cf.has_option("Selenium", "profile"):
+            if self.cf.has_option("Selenium", "profile-%s" % sys.platform):
+                profile_path = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', self.cf.get("Selenium", "profile-%s" % sys.platform))
+            elif self.cf.has_option("Selenium", "profile"):
                 profile_path = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', self.cf.get("Selenium", "profile"))
-                if os.path.isdir(profile_path):
-                    profile = FirefoxProfile(profile_path)
-                else:
-                    raise ProfileNotFound("Profile not found at %s/support/profiles/%s" % (self.cf.get("Saunter", "base"), self.cf.get("Selenium", "profile")))
+            
+            if os.path.isdir(profile_path):
+                profile = FirefoxProfile(profile_path)
+            else:
+                raise ProfileNotFound("Profile not found at %s/support/profiles/%s" % (self.cf.get("Saunter", "base"), self.cf.get("Selenium", "profile")))
 
         if self.cf.getboolean("SauceLabs", "ondemand"):
             desired_capabilities = {
@@ -178,9 +181,9 @@ class SaunterTestCase(BaseTestCase):
     def take_named_screenshot(self, name):
         method_dir = self._screenshot_prep_dirs()
 
-        self.driver.get_screenshot_as_file(os.path.join(method_dir, str(name) + ".png"))
+        image_path = os.path.join(method_dir, str(name) + ".png")
+        self.driver.get_screenshot_as_file(image_path)
 
         if self.config.has_option("Saunter", "jenkins"):
             if self.cf.getboolean("Saunter", "jenkins"):
                 sys.stdout.write(os.linesep + "[[ATTACHMENT|%s]]" % image_path + os.linesep)
-

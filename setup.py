@@ -15,7 +15,7 @@ setup(
                               "_defaults/tailored/remotecontrol.py",
                               "_defaults/tailored/page.py",
                               "_defaults/tailored/webdriver.py"]},
-    version = "0.60",
+    version = "0.61",
     author = "adam goucher",
     author_email = "adam@element34.ca",
     install_requires = ['pytest>=2.3.4',
