@@ -21,6 +21,7 @@ import logging
 import os
 import os.path
 import requests
+import sys
 
 import saunter.ConfigWrapper
 try:
@@ -170,7 +171,16 @@ class SaunterTestCase(BaseTestCase):
                 self.driver.get_screenshot_as_file(os.path.join(method_dir, str(self._screenshot_number).zfill(3) + ".png"))
                 self._screenshot_number = self._screenshot_number + 1
 
+                if self.config.has_option("Saunter", "jenkins"):
+                    if self.cf.getboolean("Saunter", "jenkins"):
+                        sys.stdout.write(os.linesep + "[[ATTACHMENT|%s]]" % image_path + os.linesep)
+
     def take_named_screenshot(self, name):
         method_dir = self._screenshot_prep_dirs()
 
         self.driver.get_screenshot_as_file(os.path.join(method_dir, str(name) + ".png"))
+
+        if self.config.has_option("Saunter", "jenkins"):
+            if self.cf.getboolean("Saunter", "jenkins"):
+                sys.stdout.write(os.linesep + "[[ATTACHMENT|%s]]" % image_path + os.linesep)
+

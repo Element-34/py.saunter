@@ -6,6 +6,10 @@
 # application such as click, submit, type, etc.
 take_screenshots: false
 
+# If you are using Jenkins with the JUnit Attachments plugin, set this to true to
+# attach screenshots to the test results
+jenkins: false
+
 [Selenium]
 # Where is the server that Saunter will connect to
 server_host: localhost
