@@ -50,6 +50,9 @@ os: Windows 2003
 browser: *firefox
 browser_version: 3.6.
 
+# if you want to specific a version of Se to use in the Sauce cloud
+#selenium-version: 2.0.32
+
 # Extra information added to a SauceLabs job - optional
 #[SauceLabs CustomData]
 #orange: peel

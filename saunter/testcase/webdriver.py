@@ -116,6 +116,10 @@ class SaunterTestCase(BaseTestCase):
                 desired_capabilities["browserName"] = desired_capabilities["browserName"][1:]
             if desired_capabilities["platform"] in os_map:
                 desired_capabilities["platform"] = os_map[desired_capabilities["platform"]]
+
+            if self.cf.has_option("SauceLabs", "selenium_version"):
+                desired_capabilities['selenium-version'] = self.cf.get('SauceLabs', 'selenium_version')
+
             command_executor = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub" % (self.cf.get("SauceLabs", "username"), self.cf.get("SauceLabs", "key"))
         else:
 

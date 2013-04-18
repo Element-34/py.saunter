@@ -60,6 +60,10 @@ class SaunterTestCase(BaseTestCase):
             if j['browser'][0] == "*":
                 j['browser'] = j['browser'][1:]
             j['browser-version'] = self.cf.get("SauceLabs", "browser_version")
+
+            if self.cf.has_option("SauceLabs", "selenium_version"):
+                j['selenium-version'] = self.cf.get('SauceLabs', 'selenium_version')
+
             browser = json.dumps(j)
         else:
             host = self.cf.get("Selenium", "server_host")
