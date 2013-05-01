@@ -87,7 +87,7 @@ class SaunterTestCase(BaseTestCase):
                             zipped.write(filename, filename[path_root:])
                     zipped.close()
                 else:
-                    raise ProfileNotFound("Profile not found at %s/support/profiles/%s" % (self.cf.get("Saunter", "base"), self.cf.get("Selenium", "profile")))
+                    raise ProfileNotFound("Profile not found at %s" % profile_path)
                 j['firefox-profile-url'] = "%s/profiles/%s.zip" % (self.cf.get("YourCompany", "file_server_base"), self.cf.get("Selenium", "profile"))
             j['browser-version'] = self.cf.get("SauceLabs", "browser_version")
 
