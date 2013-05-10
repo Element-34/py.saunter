@@ -103,11 +103,14 @@ class SaunterTestCase(BaseTestCase):
                 profile_path = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', self.cf.get("Selenium", "profile-%s" % sys.platform))
             elif self.cf.has_option("Selenium", "profile"):
                 profile_path = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', self.cf.get("Selenium", "profile"))
-            
-            if os.path.isdir(profile_path):
-                profile = FirefoxProfile(profile_path)
             else:
-                raise ProfileNotFound("Profile not found at %s" % profile_path)
+                profile_path = None
+
+            if profile_path:
+                if os.path.isdir(profile_path):
+                    profile = FirefoxProfile(profile_path)
+                else:
+                    raise ProfileNotFound("Profile not found at %s" % profile_path)
 
         if self.cf.getboolean("SauceLabs", "ondemand"):
             desired_capabilities = {

@@ -75,20 +75,23 @@ class SaunterTestCase(BaseTestCase):
                     profile_path = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', self.cf.get("Selenium", "profile-%s" % sys.platform))
                 elif self.cf.has_option("Selenium", "profile"):
                     profile_path = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', self.cf.get("Selenium", "profile"))
-
-                if os.path.isdir(profile_path):
-                    profile_zip = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', "%s.zip" % self.cf.get("Selenium", "profile"))
-                    
-                    zipped = zipfile.ZipFile(profile_zip, 'w', zipfile.ZIP_DEFLATED)
-                    path_root = len(profile_path) + 1 # account for trailing slash
-                    for base, dirs, files in os.walk(profile_path):
-                        for fyle in files:
-                            filename = os.path.join(base, fyle)
-                            zipped.write(filename, filename[path_root:])
-                    zipped.close()
                 else:
-                    raise ProfileNotFound("Profile not found at %s" % profile_path)
-                j['firefox-profile-url'] = "%s/profiles/%s.zip" % (self.cf.get("YourCompany", "file_server_base"), self.cf.get("Selenium", "profile"))
+                    profile_path = None
+
+                if profile_path:
+                    if os.path.isdir(profile_path):
+                        profile_zip = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', "%s.zip" % self.cf.get("Selenium", "profile"))
+                        
+                        zipped = zipfile.ZipFile(profile_zip, 'w', zipfile.ZIP_DEFLATED)
+                        path_root = len(profile_path) + 1 # account for trailing slash
+                        for base, dirs, files in os.walk(profile_path):
+                            for fyle in files:
+                                filename = os.path.join(base, fyle)
+                                zipped.write(filename, filename[path_root:])
+                        zipped.close()
+                    else:
+                        raise ProfileNotFound("Profile not found at %s" % profile_path)
+                    j['firefox-profile-url'] = "%s/profiles/%s.zip" % (self.cf.get("YourCompany", "file_server_base"), self.cf.get("Selenium", "profile"))
             j['browser-version'] = self.cf.get("SauceLabs", "browser_version")
 
             if self.cf.has_option("SauceLabs", "selenium_version"):
