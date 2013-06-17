@@ -117,6 +117,8 @@ class SaunterTestCase(BaseTestCase):
                 "platform": self.cf.get("SauceLabs", "os"),
                 "browserName": self.cf.get("SauceLabs", "browser"),
                 "version": self.cf.get("SauceLabs", "browser_version"),
+                "record-video": self.cf.get("SauceLabs", "record_video"),
+                "video-upload-on-pass": self.cf.get("SauceLabs", "video_upload_on_pass"),
                 "name": method.__name__
             }
             if desired_capabilities["browserName"][0] == "*":
