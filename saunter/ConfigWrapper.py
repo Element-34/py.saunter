@@ -19,6 +19,7 @@ ConfigWrapper
 import ConfigParser
 import os
 import os.path
+import sys
 
 class ConfigWrapper(object):
     """
@@ -31,9 +32,13 @@ class ConfigWrapper(object):
             cls._instance = super(ConfigWrapper, cls).__new__(cls, *args, **kwargs)
         return cls._instance
 
-    def configure(self, config = "saunter.ini"):
-        self.config = ConfigParser.SafeConfigParser()
-        self.config.readfp(open(os.path.join("conf", config)))
+    def configure(self, config = "saunter.yaml"):
+        try:
+            self.config = ConfigParser.SafeConfigParser()
+            self.config.readfp(open(os.path.join("conf", config)))
+        except IOError:
+            print("Could not find %s; are you sure you remembered to create one?" % os.path.join("conf", config))
+            sys.exit(1)
 
 # initialize the singleton
 try:
