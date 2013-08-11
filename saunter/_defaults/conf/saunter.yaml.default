@@ -1,0 +1,9 @@
+%YAML 1.3
+---
+default_browser: rabbit
+
+ci_type: jenkins
+
+screenshots:
+    on_failure: true
+    on_error: true
