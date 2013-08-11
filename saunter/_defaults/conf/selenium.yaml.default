@@ -1,0 +1,7 @@
+%YAML 1.3
+---
+timeout: 30
+
+executor:
+    host: localhost
+    port: 4444

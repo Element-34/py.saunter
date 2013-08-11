@@ -35,7 +35,10 @@ def new():
     if not os.path.isfile(os.path.join(cwd, "conf", "saunter.yaml.default")):
         shutil.copy(os.path.join(saunter_installed_at, "_defaults", "conf", "saunter.yaml.default"),
                     os.path.join(cwd, "conf"))
- 
+     if not os.path.isfile(os.path.join(cwd, "conf", "selenium.yaml.default")):
+        shutil.copy(os.path.join(saunter_installed_at, "_defaults", "conf", "selenium.yaml.default"),
+                    os.path.join(cwd, "conf"))
+
     # browsers
     if not os.path.isdir(os.path.join(cwd, "conf", "browers")):
         os.mkdir(os.path.join(cwd, "conf", "browsers"))

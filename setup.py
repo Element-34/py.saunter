@@ -12,6 +12,7 @@ setup(
     package_data={"saunter": ["_defaults/conftest.py",
                               "_defaults/pytest.ini",
                               "_defaults/conf/saunter.yaml.default",
+                              "_defaults/conf/selenium.yaml.default",
                               "_defaults/conf/browsers/browser.yaml.default",
                               "_defaults/tailored/remotecontrol.py",
                               "_defaults/tailored/page.py",
