@@ -16,10 +16,10 @@
 ConfigWrapper
 =============
 """
-import ConfigParser
 import os
 import os.path
 import sys
+import yaml
 
 class ConfigWrapper(object):
     """
@@ -32,17 +32,41 @@ class ConfigWrapper(object):
             cls._instance = super(ConfigWrapper, cls).__new__(cls, *args, **kwargs)
         return cls._instance
 
+    def __init__(self):
+        self._data = {}
+
+    def __str__(self):
+        return yaml.dump(self._data, default_flow_style=False)
+
+    def __getitem__(self, key):
+        return self._data[key]
+
+    def __setitem__(self, key, value):
+        self._data[key] = value
+
+    def __contains__(self, item):
+        if item in self._data:
+            return True
+        return False
+
     def configure(self, config = "saunter.yaml"):
-        try:
-            self.config = ConfigParser.SafeConfigParser()
-            self.config.readfp(open(os.path.join("conf", config)))
-        except IOError:
+        if not os.path.exists(os.path.join("conf", config)):
             print("Could not find %s; are you sure you remembered to create one?" % os.path.join("conf", config))
             sys.exit(1)
 
-# initialize the singleton
-try:
-    cf = ConfigWrapper().configure()
-except IOError as e:
-    if "DOCGENERATION" not in os.environ:
-        raise
+        # this should exist since configure() is only called in main.py
+        config_dir = os.path.join(self._data["saunter"]["base"], "conf")
+        for root, dirs, files in os.walk(config_dir):
+            for f in files:
+                if f.endswith(".yaml"):
+                    file_path = os.path.join(root, f)
+                    relative_path = file_path[len(config_dir) + 1:]
+                    head, tail = os.path.split(relative_path)
+                    o = open(file_path, "r")
+                    if head:
+                        if head not in self._data.keys():
+                            self._data[head] = {}
+                        self._data[head][f[:-5]] = yaml.load(o)
+                    else:
+                        self._data[f[:-5]] = yaml.load(o)
+                    o.close()

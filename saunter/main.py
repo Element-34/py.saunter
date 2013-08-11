@@ -179,8 +179,10 @@ else:
         arguments.append(p)
 
 import saunter.ConfigWrapper
-config = saunter.ConfigWrapper.ConfigWrapper().config
-config.set("Saunter", "base", cwd)
+config = saunter.ConfigWrapper.ConfigWrapper()
+config["saunter"] = {}
+config["saunter"]["base"] = cwd
+config.configure()
 
 # logging
 timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
@@ -190,7 +192,7 @@ os.makedirs(log_dir)
 log_name = os.path.join(log_dir, "%s.xml" % timestamp)
 arguments.append('--junitxml=%s' %log_name)
 
-config.set("Saunter", "log_dir", log_dir)
+config["saunter"]["log_dir"] = log_dir
 
 arguments.append('--tb=%s' % results.__dict__["tb"])
 
