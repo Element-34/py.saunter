@@ -16,7 +16,6 @@
 SaunterTestCase
 ===============
 """
-import ConfigParser
 import logging
 import os
 import os.path
@@ -24,12 +23,10 @@ import requests
 import sys
 
 import saunter.ConfigWrapper
-try:
-    if saunter.ConfigWrapper.ConfigWrapper().config.getboolean("SauceLabs", "ondemand"):
-        import json
-except ConfigParser.NoSectionError as e:
-    if "DOCGENERATION" not in os.environ:
-        raise
+
+config = saunter.ConfigWrapper.ConfigWrapper()
+if "SauceLabs" in config and config["SauceLabs"]["ondemand"]:
+    import json
 
 try:
     from tailored.webdriver import WebDriver
@@ -88,21 +85,20 @@ class SaunterTestCase(BaseTestCase):
         Parent class of all script classes used for custom asserts (usually 'soft' asserts) and shared fixture setup
         and teardown
         """
-        self.cf = saunter.ConfigWrapper.ConfigWrapper().config
-        self.config = self.cf
+        self.cf = self.config = saunter.ConfigWrapper.ConfigWrapper()
 
         self.current_method_name = method.__name__
 
-        browser = self.cf.get("Selenium", "browser")
-        if browser[0] == "*":
-            browser = browser[1:]
+        browser = self.cf["browsers"][self.cf["saunter"]["default_browser"]]
+        if browser["type"][0] == "*":
+            browser = browser["type"] = browser["type"][1:]
 
         profile = None
-        if browser == 'firefox':
-            if self.cf.has_option("Selenium", "profile-%s" % sys.platform):
-                profile_path = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', self.cf.get("Selenium", "profile-%s" % sys.platform))
-            elif self.cf.has_option("Selenium", "profile"):
-                profile_path = os.path.join(self.cf.get("Saunter", "base"), 'support', 'profiles', self.cf.get("Selenium", "profile"))
+        if browser["type"] == 'firefox':
+            if browser["profiles"][sys.platform]:
+                profile_path = os.path.join(self.cf["saunter"]["base"], 'support', 'profiles', browser["profiles"][sys.platform])
+            elif browser["profiles"]["profile"]:
+                profile_path = os.path.join(self.cf["saunter"]["base"], 'support', 'profiles', browser["profiles"]["profile"])
             else:
                 profile_path = None
 
@@ -112,10 +108,10 @@ class SaunterTestCase(BaseTestCase):
                 else:
                     raise ProfileNotFound("Profile not found at %s" % profile_path)
 
-        if self.cf.getboolean("SauceLabs", "ondemand"):
+        if "saucelabs" in browser and browser["saucelabs"]["ondemand"]:
             desired_capabilities = {
-                "platform": self.cf.get("SauceLabs", "os"),
-                "browserName": self.cf.get("SauceLabs", "browser"),
+                "platform": self.cf["sauceLabs"]["os"],
+                "browserName": self.cf["sauceLabs"]["browser"],
                 "version": self.cf.get("SauceLabs", "browser_version"),
                 "name": method.__name__
             }
@@ -129,31 +125,28 @@ class SaunterTestCase(BaseTestCase):
 
             command_executor = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub" % (self.cf.get("SauceLabs", "username"), self.cf.get("SauceLabs", "key"))
         else:
+            desired_capabilities = capabilities_map[browser["type"]]
 
-            if browser == "chrome":
-                os.environ["webdriver.chrome.driver"] = self.cf.get("Selenium", "chromedriver_path")
-            desired_capabilities = capabilities_map[browser]
-            if self.cf.has_section("Proxy") \
-                and self.cf.has_option("Proxy", "proxy_url") \
-                and (self.cf.has_option("Proxy", "browsermob") and self.cf.getboolean("Proxy", "browsermob")):
+            if browser["proxy"]["type"] and browser["proxy"]["type"].lower() == "browsermob":
                 from browsermobproxy import Client
                 self.client = Client(self.cf.get("Proxy", "proxy_url"))
                 self.client.add_to_webdriver_capabilities(desired_capabilities)
-            if self.cf.has_section("Grid"):
+
+            if "grid" in self.cf["selenium"]:
                 if self.cf.getboolean("Grid", "use_grid") and self.cf.get("Grid", "type") == "selenium":
                     if self.cf.has_option("Grid", "platform"):
                         desired_capabilities["platform"] = self.cf.get("Grid", "platform").upper()
                     if self.cf.has_option("Grid", "version"):
                         desired_capabilities["version"] = str(self.cf.get("Grid", "browser_version"))
 
-            command_executor = "http://%s:%s/wd/hub" % (self.cf.get("Selenium", "server_host"), self.cf.get("Selenium", "server_port"))
+            command_executor = "http://%s:%s/wd/hub" % (self.cf["selenium"]["executor"]["host"], self.cf["selenium"]["executor"]["port"])
 
         self.driver = WebDriver(desired_capabilities = desired_capabilities, command_executor = command_executor, browser_profile=profile)
 
         self.verificationErrors = []
         self.matchers = Matchers(self.driver, self.verificationErrors)
         
-        if self.cf.getboolean("SauceLabs", "ondemand"):
+        if "saucelabs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and self.cf["browsers"][self.cf["saunter"]["default_browser"]]["saucelabs"]["ondemand"]:
             self.sauce_session = self.driver.session_id
 
         self._screenshot_number = 1
@@ -163,8 +156,9 @@ class SaunterTestCase(BaseTestCase):
         Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags
         are updated. Also the video and server log are downloaded if so configured.
         """
-        if hasattr(self, "config") and not self.config.getboolean("SauceLabs", "ondemand"):
-            self.take_named_screenshot("final")
+        if hasattr(self, "config"):
+            if "saucelabs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and not self.cf["browsers"][self.cf["saunter"]["default_browser"]]["saucelabs"]["ondemand"]:
+                self.take_named_screenshot("final")
 
         if hasattr(self, "driver"):
             self.driver.quit()
@@ -187,6 +181,5 @@ class SaunterTestCase(BaseTestCase):
         image_path = os.path.join(method_dir, str(name) + ".png")
         self.driver.get_screenshot_as_file(image_path)
 
-        if self.config.has_option("Saunter", "jenkins"):
-            if self.cf.getboolean("Saunter", "jenkins"):
-                sys.stdout.write(os.linesep + "[[ATTACHMENT|%s]]" % image_path + os.linesep)
+        if "ci_type" in self.cf and self.cf["ci_type"].lower() == "jenkins":
+            sys.stdout.write(os.linesep + "[[ATTACHMENT|%s]]" % image_path + os.linesep)
