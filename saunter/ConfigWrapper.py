@@ -30,10 +30,8 @@ class ConfigWrapper(object):
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             cls._instance = super(ConfigWrapper, cls).__new__(cls, *args, **kwargs)
+            cls._instance._data = {}
         return cls._instance
-
-    def __init__(self):
-        self._data = {}
 
     def __str__(self):
         return yaml.dump(self._data, default_flow_style=False)
@@ -62,11 +60,18 @@ class ConfigWrapper(object):
                     file_path = os.path.join(root, f)
                     relative_path = file_path[len(config_dir) + 1:]
                     head, tail = os.path.split(relative_path)
+                    section_name = f[:-5]
                     o = open(file_path, "r")
                     if head:
                         if head not in self._data.keys():
                             self._data[head] = {}
-                        self._data[head][f[:-5]] = yaml.load(o)
+                        if section_name in self._data[head]:
+                            self._data[head][section_name] = dict(self._data[head][section_name].items() + yaml.load(o).items())
+                        else:
+                            self._data[head][section_name] = yaml.load(o)
                     else:
-                        self._data[f[:-5]] = yaml.load(o)
+                        if section_name in self._data:
+                            self._data[section_name] = dict(self._data[section_name].items() + yaml.load(o).items())
+                        else:
+                            self._data[section_name] = yaml.load(o)
                     o.close()
