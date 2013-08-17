@@ -20,12 +20,14 @@ Common
 
 import saunter.ConfigWrapper
 
-cf = saunter.ConfigWrapper.ConfigWrapper().config
+cf = saunter.ConfigWrapper.ConfigWrapper()
+
 #: timeout value in s as an integer
-if cf.has_option("Selenium", "timeout"):
-    timeout_seconds = cf.getint("Selenium", "timeout")
+if "timeout" in cf["selenium"]:
+    timeout_seconds = cf["selenium"]["timeout"]
 else:
     timeout_seconds = 30
+
 #: timout value in ms as an integer
 timeout_microseconds = timeout_seconds * 1000
 #: timout value in ms as a string
