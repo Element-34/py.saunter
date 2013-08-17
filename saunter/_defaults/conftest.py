@@ -51,8 +51,8 @@ def pytest_runtest_makereport(__multicall__, item, call):
 def pytest_runtest_teardown(__multicall__, item):
     __multicall__.execute()
 
-    if hasattr(item.parent.obj, 'config') and item.parent.obj.config.getboolean('SauceLabs', 'ondemand'):
-        s = saunter.saucelabs.SauceLabs(item)
+    # if hasattr(item.parent.obj, 'config') and item.parent.obj.config.getboolean('SauceLabs', 'ondemand'):
+    #     s = saunter.saucelabs.SauceLabs(item)
 
 def pytest_collection_modifyitems(items):
     random.shuffle(items)
