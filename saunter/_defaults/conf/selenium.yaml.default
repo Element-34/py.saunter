@@ -5,3 +5,4 @@ timeout: 30
 executor:
     host: localhost
     port: 4444
+    is grid: false

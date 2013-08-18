@@ -132,12 +132,11 @@ class SaunterTestCase(BaseTestCase):
                 self.client = Client(self.cf.get("Proxy", "proxy_url"))
                 self.client.add_to_webdriver_capabilities(desired_capabilities)
 
-            if "grid" in self.cf["selenium"]:
-                if self.cf.getboolean("Grid", "use_grid") and self.cf.get("Grid", "type") == "selenium":
-                    if self.cf.has_option("Grid", "platform"):
-                        desired_capabilities["platform"] = self.cf.get("Grid", "platform").upper()
-                    if self.cf.has_option("Grid", "version"):
-                        desired_capabilities["version"] = str(self.cf.get("Grid", "browser_version"))
+            if "is grid" in self.cf["selenium"] and self.cf["selenium"]["executor"]["is grid"]:
+                    if browser["grid filters"]["platform"]:
+                        desired_capabilities["platform"] = browser["grid filters"]["platform"].upper()
+                    if browser["grid filters"]["version"]:
+                        desired_capabilities["platform"] = str(browser["grid filters"]["version"])
 
             command_executor = "http://%s:%s/wd/hub" % (self.cf["selenium"]["executor"]["host"], self.cf["selenium"]["executor"]["port"])
 

@@ -24,3 +24,8 @@ sauce:
         images: false
     selenium-version:
     sauce_connect: true
+
+# filtering of nodes with grid
+grid filters:
+    platform: mac
+    version: 23.0.1
