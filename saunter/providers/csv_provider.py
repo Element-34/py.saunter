@@ -29,8 +29,8 @@ class CSVProvider(object):
     :params c: name of csv file located in support/csv directory
     """
     def __init__(self, c):
-        cf = saunter.ConfigWrapper.ConfigWrapper().config
-        f = os.path.join(cf.get("Saunter", "base"), 'support', 'csv', c)
+        cf = saunter.ConfigWrapper.ConfigWrapper()
+        f = os.path.join(cf["saunter"]["base"], 'support', 'csv', c)
         self.data = csv.DictReader(open(f, 'rU'))
         
     def randomRow(self):
