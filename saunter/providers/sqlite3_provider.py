@@ -29,10 +29,10 @@ class DBProvider(object):
     """
     def __init__(self, db):
         try:
-            cf = saunter.ConfigWrapper.ConfigWrapper().config
+            cf = saunter.ConfigWrapper.ConfigWrapper()
         except:
             print('ooooo')
-        self.db = sqlite3.connect(os.path.join(cf.get("Saunter", "base"), 'support', 'db', db))
+        self.db = sqlite3.connect(os.path.join(cf["saunter"]["base"], 'support', 'db', db))
         
     def __del__(self):
         self.db.close()
