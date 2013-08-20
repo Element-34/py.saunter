@@ -25,8 +25,8 @@ class DjangoProvider(object):
     Uses Django's Models to access the database
     """
     def __init__(self):
-        cf = saunter.ConfigWrapper.ConfigWrapper().config
-        django_where = cf.get("Django", "installation")
+        cf = saunter.ConfigWrapper.ConfigWrapper()
+        django_where = cf["django"]["installation"]
         if django_where not in sys.path:
             sys.path.append(django_where)
 
