@@ -17,7 +17,7 @@ setup(
                               "_defaults/tailored/remotecontrol.py",
                               "_defaults/tailored/page.py",
                               "_defaults/tailored/webdriver.py"]},
-    version = "0.63",
+    version = "2.0.0a1",
     author = "adam goucher",
     author_email = "adam@element34.ca",
     install_requires = ['pytest>=2.3.5',
@@ -32,7 +32,7 @@ setup(
     long_description="An opinionated test framework",
     url='https://github.com/Element-34/py.saunter',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: POSIX',
