@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name="py.saunter",
+    name="saunter",
     packages=['saunter',
               'saunter.generators',
               'saunter.po',
@@ -44,7 +44,7 @@ setup(
     ],
     entry_points = {
         "console_scripts": [
-            "pysaunter = saunter.main",
+            "saunter = saunter.main",
         ],
     }
     

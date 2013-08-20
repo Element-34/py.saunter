@@ -6,7 +6,7 @@ logs/*.flv
 logs/*.log
 build/*
 dist/*
-py.saunter.egg-info/*
+saunter.egg-info/*
 examples/**/logs/*.xml
 examples/**/logs/*.log
 examples/**/logs/*.flv

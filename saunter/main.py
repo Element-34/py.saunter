@@ -119,7 +119,7 @@ def new():
     sys.exit()
 
 p = argparse.ArgumentParser()
-p.add_argument('--new', action='store_true', default=False, help="creates a new Py.Saunter environment")
+p.add_argument('--new', action='store_true', default=False, help="creates a new Saunter environment")
 p.add_argument('-v', action='store_true', default=None, help="increase verbosity")
 p.add_argument('-s', action='store_true', default=None, help="don't capture output")
 p.add_argument('--tb', action='store', default="native", help='traceback print mode (long/short/line/native/no)')
@@ -132,7 +132,7 @@ p.add_argument('--maxfail', action='store', default=None, help="exit after first
 p.add_argument('--collectonly', action='store_true', default=None, help="only collect tests, don't execute them")
 p.add_argument('--durations', action='store', default=None, help='show N slowest setup/test durations (N=0 for all)')
 p.add_argument('--debug', action='store', default=None, help="store internal tracing debug information in 'pytestdebug.log'.")
-p.add_argument('--version', action='version', version='Py.Saunter %s' % saunter.__version__)
+p.add_argument('--version', action='version', version='Saunter %s' % saunter.__version__)
 
 results = p.parse_args()
 

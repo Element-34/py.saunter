@@ -53,7 +53,7 @@ class CouchProvider(object):
 # for when I figure out how to test this stuff
 
 # if __name__ == '__main__':
-#     # in a py.saunter context, this is stored in the config
+#     # in a saunter context, this is stored in the config
 #     config = ConfigParser.ConfigParser()
 #     config.add_section('couchdb')
 #     config.set('couchdb', 'url', 'http://localhost:5984/')
