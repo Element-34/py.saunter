@@ -56,7 +56,7 @@ class BaseTestCase(object):
         self.matchers.assert_is_not_instance(obj, cls, msg)
     
     def _screenshot_prep_dirs(self):
-        class_dir = os.path.join(os.path.join(self.config.get('Saunter', 'log_dir'), self.__class__.__name__))
+        class_dir = os.path.join(os.path.join(self.config['saunter']['log_dir'], self.__class__.__name__))
         if not os.path.exists(class_dir):
             os.makedirs(class_dir)
 
