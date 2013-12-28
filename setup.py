@@ -15,17 +15,17 @@ setup(
                               "_defaults/conf/browsers/browser.yaml.default",
                               "_defaults/tailored/page.py",
                               "_defaults/tailored/webdriver.py"]},
-    version = "2.0.0a2",
-    author = "adam goucher",
-    author_email = "adam@element34.ca",
-    install_requires = ['pytest>=2.5.1',
-                        'pytest-marks>=0.3',
-                        'pytest-xdist',
-                        'requests',
-                        'selenium>=2.39.0',
-                        'browsermob-proxy>=0.5.0',
-                        'harpy>=0.2.0',
-                        'pyyaml'],
+    version="2.0.0a2",
+    author="adam goucher",
+    author_email="adam@element34.ca",
+    install_requires=['pytest>=2.5.1',
+                      'pytest-marks>=0.3',
+                      'pytest-xdist',
+                      'requests',
+                      'selenium>=2.39.0',
+                      'browsermob-proxy>=0.5.0',
+                      'harpy>=0.2.0',
+                      'pyyaml'],
     license="LICENSE.txt",
     description="An opinionated WebDriver-based framework",
     long_description="An opinionated WebDriver-based framework",
@@ -41,10 +41,9 @@ setup(
         'Topic :: Software Development :: Quality Assurance',
         'Programming Language :: Python'
     ],
-    entry_points = {
+    entry_points={
         "console_scripts": [
             "saunter = saunter.main",
         ],
     }
-    
 )

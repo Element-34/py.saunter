@@ -1,11 +1,11 @@
 # Copyright 2011 Element 34
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -75,6 +75,7 @@ os_map = {
     "MAC": "MAC"
 }
 
+
 class SaunterTestCase(BaseTestCase):
     """
     Parent class of all script classes used for custom asserts (usually 'soft' asserts) and shared fixture setup
@@ -140,16 +141,16 @@ class SaunterTestCase(BaseTestCase):
 
             command_executor = "http://%s:%s/wd/hub" % (self.cf["selenium"]["executor"]["host"], self.cf["selenium"]["executor"]["port"])
 
-        self.driver = WebDriver(desired_capabilities = desired_capabilities, command_executor = command_executor, browser_profile=profile)
+        self.driver = WebDriver(desired_capabilities=desired_capabilities, command_executor=command_executor, browser_profile=profile)
 
         self.verificationErrors = []
         self.matchers = Matchers(self.driver, self.verificationErrors)
-        
+
         if "saucelabs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and self.cf["browsers"][self.cf["saunter"]["default_browser"]]["saucelabs"]["ondemand"]:
             self.sauce_session = self.driver.session_id
 
         self._screenshot_number = 1
-            
+
     def teardown_method(self, method):
         """
         Default teardown method for all scripts. If run through Sauce Labs OnDemand, the job name, status and tags

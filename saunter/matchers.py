@@ -1,5 +1,6 @@
 import sys
 
+
 class Matchers(object):
     def __init__(self, driver, verification_errors):
         self.driver = driver
@@ -86,7 +87,6 @@ class Matchers(object):
             else:
                 m = str(e)
             self.verification_erorrs.append(m)
-
 
     def assert_false(self, expr, msg=None):
         """
@@ -330,7 +330,7 @@ class Matchers(object):
     #
     # selenium specific
     #
-    def assert_text_present(self, text, msg=None):    
+    def assert_text_present(self, text, msg=None):
         """
         Hard assert for whether the text if visible in the current window/frame
 
@@ -394,7 +394,7 @@ class Matchers(object):
         if len(e) == 0:
             raise AssertionError("Element at %s was not found" % locator)
         assert e.is_displayed()
-            
+
     def verify_visible(self, locator, msg=None):
         """
         Soft assert for whether and element is present and visible in the current window/frame

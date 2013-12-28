@@ -5,6 +5,7 @@ import socket
 import saunter.ConfigWrapper
 from saunter.exceptions import ProviderException
 
+
 # as will this
 class CouchProvider(object):
     def __init__(self, database):
@@ -14,7 +15,7 @@ class CouchProvider(object):
         if "couchdb" in cf and "url" in cf["couch"]:
             url = cf["saunter"]["couchdb"]["url"]
         else:
-            url  = None
+            url = None
 
         # make sure we can connect to the server
         server = couchdb.client.Server(url=url)

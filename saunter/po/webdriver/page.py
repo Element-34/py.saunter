@@ -1,11 +1,11 @@
 # Copyright 2011 Element 34
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,6 +23,7 @@ from selenium.common.exceptions import StaleElementReferenceException
 import saunter.ConfigWrapper
 from selenium.webdriver.support.wait import WebDriverWait
 
+
 class Page(object):
     """
     Top of the PO page tree
@@ -34,7 +35,7 @@ class Page(object):
             self.cf = saunter.ConfigWrapper.ConfigWrapper()
             self.config = self.cf
 
-        if not self.cf["selenium"].has_key("short wait"):
+        if not "short_wait" in self.cf["selenium"]:
             setattr(self, 'short_wait', WebDriverWait(self.driver, self.cf['selenium']['timeout'] / 2))
             setattr(self, 'wait', WebDriverWait(self.driver, self.cf['selenium']['timeout']))
             setattr(self, 'long_wait', WebDriverWait(self.driver, self.cf['selenium']['timeout'] * 2))
@@ -43,7 +44,7 @@ class Page(object):
         """
         Synchronization method for making sure the element we're looking for is not only on the page,
         but also visible -- since Se will happily deal with things that aren't visible.
-        
+
         Use this instead of is_element_present most of the time.
         """
         if self.driver.is_element_present(locator):
@@ -58,7 +59,7 @@ class Page(object):
         """
         Synchronization to deal with elements that are present, and are visible
 
-        :raises: ElementVisiblityTimeout        
+        :raises: ElementVisiblityTimeout
         """
         for i in range(timeout_seconds):
             try:
@@ -70,13 +71,13 @@ class Page(object):
         else:
             raise ElementVisiblityTimeout("%s availability timed out" % locator)
         return True
-            
+
     def wait_for_visible(self, locator):
         """
         Synchronization to deal with elements that are present, but are disabled until some action
         triggers their visibility.
-        
-        :raises: ElementVisiblityTimeout        
+
+        :raises: ElementVisiblityTimeout
         """
         for i in range(timeout_seconds):
             try:
@@ -104,7 +105,7 @@ class Page(object):
         else:
             raise ElementVisiblityTimeout("%s visibility timed out" % locator)
         return True
-            
+
     def wait_for_text(self, locator, text):
         """
         Synchronization on some text being displayed in a particular element.
@@ -133,7 +134,7 @@ class Page(object):
         for i in range(timeout_seconds):
             try:
                 e = self.driver.find_element_by_locator(locator)
-                if e.value ==text:
+                if e.value == text:
                     break
             except:
                 pass
@@ -157,7 +158,7 @@ class Page(object):
 
     def wait_for_element_not_present(self, locator):
         """
-        Synchronization helper to wait until some element is removed from the page 
+        Synchronization helper to wait until some element is removed from the page
 
         :raises: ElementVisiblityTimeout
         """

@@ -1,11 +1,11 @@
 # Copyright 2013 Element 34
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,6 +20,7 @@ import mysql.connector
 
 import saunter.ConfigWrapper
 
+
 class DBProvider(object):
     """
     MySQL powered provider
@@ -32,16 +33,16 @@ class DBProvider(object):
         except:
             print('ooooo')
 
-        self.mysql = mysql.connector.connect( \
+        self.mysql = mysql.connector.connect(
             user=cf["saunter"]["mysql"]["user"],
             password=cf["saunter"]["mysql"]["password"],
             host=cf["saunter"]["mysql"]["host"],
             database=cf["saunter"]["mysql"]["database"]
         )
-        
+
     def __del__(self):
         self.mysql.close()
-    
+
     # this would sit in the client side implementation
 
     # def get_random_user(self):

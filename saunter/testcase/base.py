@@ -1,11 +1,11 @@
 # Copyright 2011 Element 34
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,7 @@ import urllib2
 import os
 import os.path
 import saunter.matchers as matchers
+
 
 class BaseTestCase(object):
     def assertEqual(self, first, second, msg=None):
@@ -54,7 +55,7 @@ class BaseTestCase(object):
 
     def assertIsNotInstance(self, obj, cls, msg=None):
         self.matchers.assert_is_not_instance(obj, cls, msg)
-    
+
     def _screenshot_prep_dirs(self):
         class_dir = os.path.join(os.path.join(self.config['saunter']['log_dir'], self.__class__.__name__))
         if not os.path.exists(class_dir):
@@ -65,4 +66,3 @@ class BaseTestCase(object):
             os.makedirs(method_dir)
 
         return method_dir
-        

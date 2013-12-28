@@ -1,11 +1,11 @@
 # Copyright 2011 Element 34
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,7 @@ import saunter.exceptions
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from saunter.web_element import WebElement
+
 
 class SaunterWebDriver(webdriver.Remote):
     def __init__(self, **kwargs):
@@ -68,24 +69,23 @@ class SaunterWebDriver(webdriver.Remote):
             elements = self.find_elements_by_xpath(locator_value)
         else:
             raise saunter.exceptions.InvalidLocatorString(locator)
-        
+
         return [WebElement(e) for e in elements]
 
     # @deprecated
     @classmethod
     def click(cls, locator):
         driver = se_wrapper().connection
-        
+
         e = cls.find_element_by_locator(locator)
         e.click()
-        
+
     def is_element_present(self, locator):
         try:
             self.find_element_by_locator(locator)
             return True
         except NoSuchElementException:
             return False
-    
+
     def is_visible(self, locator):
         return self.find_element_by_locator(locator).is_displayed()
-

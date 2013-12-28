@@ -1,10 +1,11 @@
 from selenium.webdriver.remote.webelement import WebElement
 import saunter.exceptions
 
+
 class WebElement(WebElement):
     def __init__(self, element):
         self.__dict__.update(element.__dict__)
-        
+
     def find_element_by_locator(self, locator):
         locator_type = locator[:locator.find("=")]
         if locator_type == "":
@@ -28,7 +29,7 @@ class WebElement(WebElement):
             return WebElement(self.find_element_by_xpath(locator_value))
         else:
             raise saunter.exceptions.InvalidLocatorString(locator)
-            
+
     def find_elements_by_locator(self, locator):
         locator_type = locator[:locator.find("=")]
         if locator_type == "":

@@ -1,11 +1,11 @@
 # Copyright 2011 Element 34
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,10 +23,11 @@ from saunter.SaunterWebDriver import SaunterWebDriver
 from selenium.webdriver.support.select import Select as WebDriverSelect
 import saunter.exceptions
 
+
 class Select(Element, WebDriverSelect):
     """
     Base element class for Select fields
-    """    
+    """
     def __set__(self, obj, val):
         s = WebDriverSelect(obj.driver.find_element_by_locator(self.locator))
         method = val[:val.find("=")]
@@ -39,7 +40,7 @@ class Select(Element, WebDriverSelect):
             s.select_by_visible_text(value)
         else:
             raise saunter.exceptions.InvalidLocatorString(val)
-    
+
     def __get__(self, obj, cls=None):
         try:
             s = WebDriverSelect(obj.driver.find_element_by_locator(self.locator))
@@ -51,11 +52,12 @@ class Select(Element, WebDriverSelect):
             else:
                 raise e
 
+
 class Select2(Element, WebDriverSelect):
     def __init__(self, driver, locator):
         self.driver = driver
         self.locator = locator
-    
+
     @property
     def selected(self):
         s = WebDriverSelect(self.driver.find_element_by_locator(self.locator))

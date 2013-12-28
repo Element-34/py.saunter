@@ -1,11 +1,11 @@
 # Copyright 2011 Element 34
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,6 +27,7 @@ import types
 import saunter
 saunter_installed_at = os.path.dirname(saunter.__file__)
 cwd = os.getcwd()
+
 
 def new():
     # conf
@@ -153,19 +154,19 @@ else:
 
 # this are either true or false
 for noneable in ['v', 's']:
-    if noneable in results.__dict__ and results.__dict__[noneable] != None:
+    if noneable in results.__dict__ and results.__dict__[noneable] is not None:
         arguments.append("-%s" % noneable)
 
 for noneable in ['traceconfig', 'pdb', 'collectonly', "debug"]:
-    if noneable in results.__dict__ and results.__dict__[noneable] != None:
+    if noneable in results.__dict__ and results.__dict__[noneable] is not None:
         arguments.append("--%s" % noneable)
 
 for has_value in ['maxfail', 'durations']:
-    if has_value in results.__dict__ and results.__dict__[has_value] != None:
+    if has_value in results.__dict__ and results.__dict__[has_value] is not None:
         arguments.append("--%s=%s" % (has_value, results.__dict__[has_value][0]))
-        # arguments.append(results.__dict__[has_value][0])        
+        # arguments.append(results.__dict__[has_value][0])
 
-if 'n' in results.__dict__ and results.__dict__['n'] != None:
+if 'n' in results.__dict__ and results.__dict__['n'] is not None:
     arguments.append("--dist=load")
     arguments.append("--tx=%s*popen" % results.__dict__['n'])
 
@@ -190,7 +191,7 @@ log_dir = os.path.join(cwd, 'logs', timestamp)
 os.makedirs(log_dir)
 
 log_name = os.path.join(log_dir, "%s.xml" % timestamp)
-arguments.append('--junitxml=%s' %log_name)
+arguments.append('--junitxml=%s' % log_name)
 
 config["saunter"]["log_dir"] = log_dir
 

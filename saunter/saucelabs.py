@@ -4,13 +4,13 @@ import requests
 import time
 import os.path
 
+
 class SauceLabs(object):
     def __init__(self, item):
-
         # session couldn't be established for some reason
         if not hasattr(item.parent._obj, "sauce_session"):
-           return
-        
+            return
+
         self.sauce_session = item.parent._obj.sauce_session
         self.username = item.parent._obj.config.get("SauceLabs", "username")
         self.key = item.parent._obj.config.get("SauceLabs", "key")
@@ -62,15 +62,14 @@ class SauceLabs(object):
 
         if item.parent._obj.config.getboolean("SauceLabs", "get_log"):
             self._fetch_sauce_artifact("selenium-server.log")
-        
-    
+
     def _fetch_sauce_artifact(self, which):
         sauce_session = self.sauce_session
         which_url = "https://saucelabs.com/rest/%s/jobs/%s/results/%s" % (self.username, self.sauce_session, which)
         code = 404
         timeout = 0
         while code in [401, 404]:
-            r = requests.get(which_url, auth = (self.username, self.key))
+            r = requests.get(which_url, auth=(self.username, self.key))
             try:
                 code = r.status_code
                 r.raise_for_status()

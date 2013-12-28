@@ -6,6 +6,6 @@ from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchElementException
 import time
 
+
 class Page(SaunterPage):
-    pass    
-        
+    pass
