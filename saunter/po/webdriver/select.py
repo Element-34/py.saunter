@@ -18,7 +18,6 @@ Select
 """
 from saunter.po.webdriver.element import Element
 from saunter.web_element import WebElement
-from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 from saunter.exceptions import ElementNotFound
 from saunter.SaunterWebDriver import SaunterWebDriver
 from selenium.webdriver.support.select import Select as WebDriverSelect
