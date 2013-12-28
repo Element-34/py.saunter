@@ -80,9 +80,6 @@ def new():
     if not os.path.isfile(os.path.join(cwd, "modules", "tailored", "__init__.py")):
         f = open(os.path.join(cwd, "modules", "tailored", "__init__.py"), "w")
         f.close()
-        
-    if not os.path.isfile(os.path.join(cwd, "modules", "tailored", "remotecontrol.py")):
-        shutil.copy(os.path.join(saunter_installed_at, "_defaults", "tailored", "remotecontrol.py"), os.path.join(cwd, "modules", "tailored"))
 
     if not os.path.isfile(os.path.join(cwd, "modules", "tailored", "webdriver.py")):
         shutil.copy(os.path.join(saunter_installed_at, "_defaults", "tailored", "webdriver.py"), os.path.join(cwd, "modules", "tailored"))

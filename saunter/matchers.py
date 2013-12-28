@@ -1,7 +1,5 @@
 import sys
 
-import tailored.remotecontrol
-
 class Matchers(object):
     def __init__(self, driver, verification_errors):
         self.driver = driver
@@ -339,11 +337,8 @@ class Matchers(object):
         :params text: the string to search for
         :params msg: (Optional) msg explaining the difference
         """
-        if isinstance(self.driver, tailored.remotecontrol.RemoteControl):
-            assert self.driver.is_text_present(text)
-        else:
-            e = driver.find_element_by_tag_name('body')
-            assert text in e.text
+        e = driver.find_element_by_tag_name('body')
+        assert text in e.text
 
     def verify_text_present(self, text, msg=None):
         """
@@ -368,12 +363,9 @@ class Matchers(object):
         :params locator: the locator of the element to search for
         :params msg: (Optional) msg explaining the difference
         """
-        if isinstance(self.driver, tailored.remotecontrol.RemoteControl):
-            assert self.driver.is_element_present(locator)
-        else:
-            e = driver.find_elements_by_locator(locator)
-            if len(e) == 0:
-                raise AssertionError("Element at %s was not found" % locator)
+        e = driver.find_elements_by_locator(locator)
+        if len(e) == 0:
+            raise AssertionError("Element at %s was not found" % locator)
 
     def verify_element_present(self, locator, msg=None):
         """
@@ -398,13 +390,10 @@ class Matchers(object):
         :params locator: the locator of the element to search for
         :params msg: (Optional) msg explaining the difference
         """
-        if isinstance(self.driver, tailored.remotecontrol.RemoteControl):
-            assert self.driver.is_visible(locator)
-        else:
-            e = driver.find_elements_by_locator(locator)
-            if len(e) == 0:
-                raise AssertionError("Element at %s was not found" % locator)
-            assert e.is_displayed()
+        e = driver.find_elements_by_locator(locator)
+        if len(e) == 0:
+            raise AssertionError("Element at %s was not found" % locator)
+        assert e.is_displayed()
             
     def verify_visible(self, locator, msg=None):
         """
