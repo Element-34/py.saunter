@@ -20,7 +20,7 @@ setup(
     version = "2.0.0a1",
     author = "adam goucher",
     author_email = "adam@element34.ca",
-    install_requires = ['pytest>=2.3.5',
+    install_requires = ['pytest>=2.5.1',
                         'pytest-marks>=0.3',
                         'pytest-xdist',
                         'requests',
