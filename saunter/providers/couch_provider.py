@@ -11,7 +11,7 @@ class CouchProvider(object):
         cf = saunter.ConfigWrapper.ConfigWrapper()
 
         # read url from the config
-        if "couchdb" in cf and "url" in cf["couch"]
+        if "couchdb" in cf and "url" in cf["couch"]:
             url = cf["saunter"]["couchdb"]["url"]
         else:
             url  = None
