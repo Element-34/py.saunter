@@ -15,7 +15,7 @@ setup(
                               "_defaults/conf/browsers/browser.yaml.default",
                               "_defaults/tailored/page.py",
                               "_defaults/tailored/webdriver.py"]},
-    version = "2.0.0a1",
+    version = "2.0.0a2",
     author = "adam goucher",
     author_email = "adam@element34.ca",
     install_requires = ['pytest>=2.5.1',
