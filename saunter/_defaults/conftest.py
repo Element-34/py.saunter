@@ -1,11 +1,11 @@
 # Copyright 2011 Element 34
-#
+# 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+# 
 #     http://www.apache.org/licenses/LICENSE-2.0
-#
+# 
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,7 +18,6 @@ import py
 import sys
 import random
 import saunter.saucelabs
-
 
 def pytest_configure(config):
     sys.path.append(os.path.join(os.getcwd(), "modules"))
@@ -50,7 +49,8 @@ def pytest_runtest_makereport(__multicall__, item, call):
 
     if call.when == "call":
         if hasattr(item.parent.obj, 'config') and item.parent.obj.config["browsers"][item.parent.obj.config["saunter"]["default_browser"]]["sauce labs"]["ondemand"]:
-            s = saunter.saucelabs.SauceLabs(item)
+            s = saunter.saucelabs.SauceLabs(item.parent.obj.config["sauce labs"]["username"], item.parent.obj.config["sauce labs"]["key"])
+            s.update_job_from_item(item)
 
     return report
 
@@ -58,7 +58,8 @@ def pytest_runtest_teardown(__multicall__, item):
     __multicall__.execute()
 
     if hasattr(item.parent.obj, 'config') and item.parent.obj.config["browsers"][item.parent.obj.config["saunter"]["default_browser"]]["sauce labs"]["ondemand"]:
-        s = saunter.saucelabs.SauceLabs(item)
+        s = saunter.saucelabs.SauceLabs(item.parent.obj.config["sauce labs"]["username"], item.parent.obj.config["sauce labs"]["key"])
+        s.update_job_from_item(item)
 
 def pytest_collection_modifyitems(items):
     random.shuffle(items)

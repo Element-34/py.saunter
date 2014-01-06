@@ -6,14 +6,15 @@ import os.path
 
 
 class SauceLabs(object):
-    def __init__(self, item):
+    def __init__(self, username, key):
+        self.username = username
+        self.key = key
+
+    def update_job_from_item(self, item):
         # session couldn't be established for some reason
-        if not hasattr(item.parent._obj, "sauce_session"):
+        if not hasattr(item.parent._obj.driver, "session_id"):
             return
 
-        self.sauce_session = item.parent._obj.sauce_session
-        self.username = item.parent._obj.config["sauce labs"]["username"]
-        self.key = item.parent._obj.config["sauce labs"]["key"]
         self.log_dir = item.parent._obj.config["saunter"]["log_dir"]
 
         j = {}
@@ -58,7 +59,7 @@ class SauceLabs(object):
         # print(json.dumps(j))
 
         # update
-        which_url = "https://saucelabs.com/rest/v1/%s/jobs/%s" % (self.username, self.sauce_session)
+        which_url = "https://saucelabs.com/rest/v1/%s/jobs/%s" % (self.username, item.parent._obj.driver.session_id)
         r = requests.put(which_url,
                          data=json.dumps(j),
                          headers={"Content-Type": "application/json"},
@@ -87,3 +88,13 @@ class SauceLabs(object):
         artifact = open(os.path.join(self.log_dir, which), "wb")
         artifact.write(r.content)
         artifact.close()
+
+    def update_name(self, session_id, name):
+        j = {"name": name}
+
+        which_url = "https://saucelabs.com/rest/v1/%s/jobs/%s" % (self.username, session_id)
+        r = requests.put(which_url,
+                         data=json.dumps(j),
+                         headers={"Content-Type": "application/json"},
+                         auth=(self.username, self.key))
+        r.raise_for_status()
