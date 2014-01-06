@@ -12,9 +12,9 @@ class SauceLabs(object):
             return
 
         self.sauce_session = item.parent._obj.sauce_session
-        self.username = item.parent._obj.config.get("SauceLabs", "username")
-        self.key = item.parent._obj.config.get("SauceLabs", "key")
-        self.log_dir = item.parent._obj.config.get("Saunter", "log_dir")
+        self.username = item.parent._obj.config["sauce labs"]["username"]
+        self.key = item.parent._obj.config["sauce labs"]["key"]
+        self.log_dir = item.parent._obj.config["saunter"]["log_dir"]
 
         j = {}
 
@@ -42,11 +42,19 @@ class SauceLabs(object):
                 else:
                     j["tags"].append(keyword)
 
-        # global custom data
-        if item.parent._obj.config.has_section('SauceLabs CustomData'):
-            for option in item.parent._obj.config.options('SauceLabs CustomData'):
-                j["custom-data"][option] = item.parent._obj.config.get('SauceLabs CustomData', option)
+        # browser custom data
+        if "custom data" in item.parent._obj.config["browsers"][item.parent._obj.config["saunter"]["default_browser"]]["sauce labs"]:
+                for option in item.parent._obj.config["browsers"][item.parent._obj.config["saunter"]["default_browser"]]["sauce labs"]["custom data"]:
+                    j["custom-data"][option] = item.parent._obj.config["browsers"][item.parent._obj.config["saunter"]["default_browser"]]["sauce labs"]["custom data"][option]
 
+        # global custom data
+        if "custom data" in item.parent._obj.config["sauce labs"]:
+            for option in item.parent._obj.config["sauce labs"]["custom data"]:
+                j["custom-data"][option] = item.parent._obj.config["sauce labs"]["custom data"][option]
+
+        # build
+        if item.parent._obj.config['sauce labs']['build']:
+            j["build"] = item.parent._obj.config['sauce labs']['build']
         # print(json.dumps(j))
 
         # update
@@ -57,11 +65,11 @@ class SauceLabs(object):
                          auth=(self.username, self.key))
         r.raise_for_status()
 
-        if item.parent._obj.config.getboolean("SauceLabs", "get_video"):
-            self._fetch_sauce_artifact("video.flv")
+        # if item.parent._obj.config.getboolean("SauceLabs", "get_video"):
+        #     self._fetch_sauce_artifact("video.flv")
 
-        if item.parent._obj.config.getboolean("SauceLabs", "get_log"):
-            self._fetch_sauce_artifact("selenium-server.log")
+        # if item.parent._obj.config.getboolean("SauceLabs", "get_log"):
+        #     self._fetch_sauce_artifact("selenium-server.log")
 
     def _fetch_sauce_artifact(self, which):
         sauce_session = self.sauce_session

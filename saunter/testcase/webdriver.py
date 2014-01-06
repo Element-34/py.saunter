@@ -16,6 +16,7 @@
 SaunterTestCase
 ===============
 """
+import json
 import logging
 import os
 import os.path
@@ -23,10 +24,6 @@ import requests
 import sys
 
 import saunter.ConfigWrapper
-
-config = saunter.ConfigWrapper.ConfigWrapper()
-if "SauceLabs" in config and config["SauceLabs"]["ondemand"]:
-    import json
 
 try:
     from tailored.webdriver import WebDriver
@@ -41,7 +38,6 @@ from saunter.exceptions import ProfileNotFound
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from saunter.testcase.base import BaseTestCase
-from saunter.SaunterWebDriver import SaunterWebDriver
 from selenium.webdriver import FirefoxProfile
 import py.test
 from _pytest.mark import MarkInfo
@@ -109,22 +105,42 @@ class SaunterTestCase(BaseTestCase):
                 else:
                     raise ProfileNotFound("Profile not found at %s" % profile_path)
 
-        if "saucelabs" in browser and browser["saucelabs"]["ondemand"]:
+        if browser["sauce labs"]["ondemand"]:
             desired_capabilities = {
-                "platform": self.cf["sauceLabs"]["os"],
-                "browserName": self.cf["sauceLabs"]["browser"],
-                "version": self.cf.get("SauceLabs", "browser_version"),
+                "platform": browser["sauce labs"]["os"],
+                "browserName": browser["type"],
+                "version": browser["sauce labs"]["version"],
                 "name": method.__name__
             }
-            if desired_capabilities["browserName"][0] == "*":
-                desired_capabilities["browserName"] = desired_capabilities["browserName"][1:]
             if desired_capabilities["platform"] in os_map:
                 desired_capabilities["platform"] = os_map[desired_capabilities["platform"]]
 
-            if self.cf.has_option("SauceLabs", "selenium_version"):
-                desired_capabilities['selenium-version'] = self.cf.get('SauceLabs', 'selenium_version')
+            if browser['sauce labs']['selenium version']:
+                desired_capabilities['selenium-version'] = browser['sauce labs']['selenium version']
 
-            command_executor = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub" % (self.cf.get("SauceLabs", "username"), self.cf.get("SauceLabs", "key"))
+            if "disable" in self.cf["sauce labs"]:
+                if "record video" in self.cf["sauce labs"]["disable"]:
+                    if self.cf["sauce labs"]["disable"]["record video"] == True:
+                        desired_capabilities['record-video'] = False
+                if "upload video on pass" in self.cf["sauce labs"]["disable"]:
+                    if self.cf["sauce labs"]["disable"]["upload video on pass"] == True:
+                        desired_capabilities['video-upload-on-pass'] = False
+                if "step screenshots" in self.cf["sauce labs"]["disable"]:
+                    if self.cf["sauce labs"]["disable"]["step screenshots"] == True:
+                        desired_capabilities['record-screenshots'] = False
+                if "sauce advisor" in self.cf["sauce labs"]["disable"]:
+                    if self.cf["sauce labs"]["disable"]["sauce advisor"] == True:
+                        desired_capabilities['sauce-advisor'] = False
+
+            if "enable" in self.cf["sauce labs"]:
+                if "source capture" in self.cf["sauce labs"]["enable"]:
+                    if self.cf["sauce labs"]["enable"]["source capture"] == True:
+                        desired_capabilities['source capture'] = True
+                if "error screenshots" in self.cf["sauce labs"]["enable"]:
+                    if self.cf["sauce labs"]["enable"]["error screenshots"] == True:
+                        desired_capabilities['webdriver.remote.quietExceptions'] = True
+
+            command_executor = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub" % (self.cf["sauce labs"]["username"], self.cf["sauce labs"]["key"])
         else:
             desired_capabilities = capabilities_map[browser["type"]]
 
@@ -141,12 +157,13 @@ class SaunterTestCase(BaseTestCase):
 
             command_executor = "http://%s:%s/wd/hub" % (self.cf["selenium"]["executor"]["host"], self.cf["selenium"]["executor"]["port"])
 
+        # print(desired_capabilities)
         self.driver = WebDriver(desired_capabilities=desired_capabilities, command_executor=command_executor, browser_profile=profile)
 
         self.verificationErrors = []
         self.matchers = Matchers(self.driver, self.verificationErrors)
 
-        if "saucelabs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and self.cf["browsers"][self.cf["saunter"]["default_browser"]]["saucelabs"]["ondemand"]:
+        if browser["sauce labs"]["ondemand"]:
             self.sauce_session = self.driver.session_id
 
         self._screenshot_number = 1
@@ -157,7 +174,7 @@ class SaunterTestCase(BaseTestCase):
         are updated. Also the video and server log are downloaded if so configured.
         """
         if hasattr(self, "config"):
-            if "saucelabs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and not self.cf["browsers"][self.cf["saunter"]["default_browser"]]["saucelabs"]["ondemand"]:
+            if "sauce labs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and not self.cf["browsers"][self.cf["saunter"]["default_browser"]]["sauce labs"]["ondemand"]:
                 self.take_named_screenshot("final")
 
         if hasattr(self, "driver"):
