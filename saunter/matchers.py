@@ -363,7 +363,7 @@ class Matchers(object):
                 m = str(e)
             self.verification_erorrs.append(m)
 
-    def asset_element_present(self, locator, msg=None):
+    def assert_element_present(self, locator, msg=None):
         """
         Hard assert for whether and element is present in the current window/frame
 
@@ -382,7 +382,7 @@ class Matchers(object):
         :params msg: (Optional) msg explaining the difference
         """
         try:
-            self.asset_element_present(locator, msg)
+            self.assert_element_present(locator, msg)
         except AssertionError, e:
             if msg:
                 m = "%s:\n%s" % (msg, str(e))
