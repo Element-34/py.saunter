@@ -337,18 +337,15 @@ class Matchers(object):
         :params text: the string to search for
         :params msg: (Optional) msg explaining the difference
         """
-        if isinstance(self.driver, tailored.remotecontrol.RemoteControl):
-            assert self.driver.is_text_present(text)
-        else:
-            try:
-                locator = ("xpath=//*[contains(text(), '%s')]") % text
-                self.driver.find_element_by_locator(locator)
-                return True
-            except:
-                if len(msg) == 0:
-                    raise AssertionError('Text "%s" was not found.' % text)
-                else:
-                    raise AssertionError('Text "%s" was not found.  %s' % (text,msg))
+        try:
+            locator = ("xpath=//*[contains(text(), '%s')]") % text
+            self.driver.find_element_by_locator(locator)
+            return True
+        except:
+            if len(msg) == 0:
+                raise AssertionError('Text "%s" was not found.' % text)
+            else:
+                raise AssertionError('Text "%s" was not found.  %s' % (text,msg))
 
     def verify_text_present(self, text, msg=None):
         """
