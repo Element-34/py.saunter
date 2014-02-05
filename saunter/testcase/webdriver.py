@@ -56,7 +56,7 @@ capabilities_map = {
     "ie": DesiredCapabilities.INTERNETEXPLORER,
     "chrome": DesiredCapabilities.CHROME,
     "opera": DesiredCapabilities.OPERA,
-    "chrome": DesiredCapabilities.CHROME,
+    "safari": DesiredCapabilities.SAFARI,
     "htmlunitjs": DesiredCapabilities.HTMLUNITWITHJS,
     "htmlunit": DesiredCapabilities.HTMLUNIT,
     "iphone": DesiredCapabilities.IPHONE,
