@@ -38,6 +38,12 @@ ondemand: false
 get_video: true
 get_log: true
 
+# If your tests on SauceLabs run more than 3x as long as local test runs, 
+# disable the option to upload video on passing tests and gauge the performance impact. 
+# If no different, disable recording the video altogether and guage the performance impact.
+record_video: true
+video_upload_on_pass: false
+
 # Your Sauce Labs username and API key
 username: your_username
 key: your-key
