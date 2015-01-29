@@ -17,9 +17,6 @@ Text
 ====
 """
 from saunter.po.webdriver.unicode import Unicode
-from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
-from saunter.exceptions import ElementNotFound
-
 
 class Text(Unicode):
     def __get__(self, obj, cls=None):

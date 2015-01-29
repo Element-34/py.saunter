@@ -14,7 +14,7 @@ proxy:
     type:
 
 # sauce labs
-sauce:
+sauce labs:
     ondemand: false
     os:
     version:

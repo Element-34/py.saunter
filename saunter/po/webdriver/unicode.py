@@ -17,7 +17,6 @@ Unicode
 =======
 """
 from saunter.po.webdriver.element import Element
-from saunter.SeleniumWrapper import SeleniumWrapper as wrapper
 from saunter.exceptions import ElementNotFound
 from saunter.SaunterWebDriver import SaunterWebDriver
 

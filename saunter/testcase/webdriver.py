@@ -59,7 +59,9 @@ class SaunterTestCase(BaseTestCase):
         b = saunter.browser.Browser(default_browser, self.cf)
 
         self.driver = b.driver
-        if hasattr(self.driver, "session_id"):
+        if "sauce labs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and \
+            self.cf["browsers"][self.cf["saunter"]["default_browser"]]["sauce labs"]["ondemand"] and \
+            hasattr(self.driver, "session_id"):
             s = saunter.saucelabs.SauceLabs(self.cf["sauce labs"]["username"], self.cf["sauce labs"]["key"])
             s.update_name(self.driver.session_id, self.current_method_name)
 
@@ -74,7 +76,9 @@ class SaunterTestCase(BaseTestCase):
         are updated. Also the video and server log are downloaded if so configured.
         """
         if hasattr(self, "config"):
-            if "sauce labs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and not self.cf["browsers"][self.cf["saunter"]["default_browser"]]["sauce labs"]["ondemand"]:
+            if "sauce labs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and \
+            not self.cf["browsers"][self.cf["saunter"]["default_browser"]]["sauce labs"]["ondemand"] \
+            and self.cf["saunter"]["screenshots"]["on_finish"]:
                 self.take_named_screenshot("final")
 
         if hasattr(self, "driver"):
