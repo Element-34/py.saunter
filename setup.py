@@ -6,7 +6,7 @@ setup(
               'saunter.generators',
               'saunter.po',
               'saunter.po.webdriver',
-              # 'saunter.po.webdriver.jquery',
+              'saunter.po.webdriver.jquery',
               'saunter.providers',
               'saunter.testcase'],
     package_data={"saunter": ["_defaults/conftest.py",
