@@ -24,7 +24,7 @@ setup(
                       'pytest-marks>=0.3',
                       'pytest-xdist',
                       'requests',
-                      'selenium>=2.45.0',
+                      'selenium>=2.46.0',
                       'browsermob-proxy>=0.6.0',
                       'harpy>=0.2.0',
                       'pyyaml'],
