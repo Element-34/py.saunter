@@ -7,3 +7,4 @@ ci_type: jenkins
 screenshots:
     on_failure: true
     on_error: true
+    on_finish: false

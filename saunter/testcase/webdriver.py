@@ -56,9 +56,12 @@ class SaunterTestCase(BaseTestCase):
         self.current_method_name = method.__name__
 
         default_browser = self.cf["browsers"][self.cf["saunter"]["default_browser"]]
-        b = saunter.browser.Browser(default_browser, self.cf)
+        self.browser = saunter.browser.Browser(default_browser, self.cf)
+        self.driver = self.browser.driver
 
-        self.driver = b.driver
+        if hasattr(self.browser, 'proxy'):
+            self.proxy = self.browser.proxy
+
         if "sauce labs" in self.cf["browsers"][self.cf["saunter"]["default_browser"]] and \
             self.cf["browsers"][self.cf["saunter"]["default_browser"]]["sauce labs"]["ondemand"] and \
             hasattr(self.driver, "session_id"):
@@ -83,6 +86,9 @@ class SaunterTestCase(BaseTestCase):
 
         if hasattr(self, "driver"):
             self.driver.quit()
+
+        if hasattr(self.browser, 'proxy'):
+            self.config['saunter']['proxies'].append(self.proxy)
 
     def take_numbered_screenshot(self):
         if self.config.has_option("Saunter", "take_screenshots"):

@@ -18,9 +18,28 @@ import py
 import sys
 import random
 import saunter.saucelabs
+import saunter.ConfigWrapper
 
 def pytest_configure(config):
-    sys.path.append(os.path.join(os.getcwd(), "modules"))
+    cwd = os.getcwd()
+    sys.path.append(os.path.join(cwd, "modules"))
+    saunter_config = saunter.ConfigWrapper.ConfigWrapper()
+    saunter_config["saunter"] = {}
+    saunter_config["saunter"]["base"] = cwd
+    saunter_config["saunter"]["log_dir"] = os.environ["SAUNTER_LOG_DIR"]
+    saunter_config.configure()
+
+    # create the proxy instances we'll need; one per instance
+    saunter_config['saunter']['proxies'] = []
+    if saunter_config['selenium']['proxy']['url'] != '' and saunter_config['selenium']['proxy']['type'].lower() == 'browsermob':
+        from browsermobproxy import Client
+        for x in range(0, int(os.environ["SAUNTER_PARALLEL"])):
+            saunter_config['saunter']['proxies'].append(Client(saunter_config['selenium']['proxy']['url']))
+
+def pytest_unconfigure(config):
+    saunter_config = saunter.ConfigWrapper.ConfigWrapper()
+    for proxy in saunter_config['saunter']['proxies']:
+        proxy.close()
 
 # Comment or remove to disable auto screenshotting on error
 def pytest_runtest_call(item, __multicall__):

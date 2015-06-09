@@ -61,7 +61,8 @@ class Browser(TailoredWebDriver):
             if desired_capabilities["platform"] in os_map:
                 desired_capabilities["platform"] = os_map[desired_capabilities["platform"]]
 
-            if browser_config['sauce labs']['selenium version']:
+            if 'selenium version' in browser_config['sauce labs'] and \
+                len(browser_config['sauce labs']['selenium version']) > 0:
                 desired_capabilities['selenium-version'] = browser['sauce labs']['selenium version']
 
             if "disable" in self.config["sauce labs"] and self.config["sauce labs"]["disable"] is not None:
@@ -90,10 +91,9 @@ class Browser(TailoredWebDriver):
         else:
             desired_capabilities = capabilities_map[browser_config["type"]]
 
-            if browser_config["proxy"]["type"] and browser_config["proxy"]["type"].lower() == "browsermob":
-                from browsermobproxy import Client
-                self.client = Client(self.config.get("Proxy", "proxy_url"))
-                self.client.add_to_webdriver_capabilities(desired_capabilities)
+            if 'type' in self.config['selenium']['proxy'] and self.config['selenium']['proxy']['type'].lower() == "browsermob":
+                self.proxy = self.config['saunter']['proxies'].pop()
+                self.proxy.add_to_webdriver_capabilities(desired_capabilities)
 
             if "is grid" in self.config["selenium"] and self.config["selenium"]["executor"]["is grid"]:
                     if browser_config["grid filters"]["platform"]:

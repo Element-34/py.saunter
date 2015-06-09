@@ -6,3 +6,8 @@ executor:
     host: localhost
     port: 4444
     is grid: false
+
+# proxy
+proxy:
+    url:
+    type:

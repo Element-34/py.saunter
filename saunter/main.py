@@ -25,6 +25,7 @@ import time
 import tempfile
 import types
 import saunter
+import yaml
 saunter_installed_at = os.path.dirname(saunter.__file__)
 cwd = os.getcwd()
 
@@ -172,6 +173,9 @@ for has_value in ['maxfail', 'durations']:
 if 'n' in results.__dict__ and results.__dict__['n'] is not None:
     arguments.append("--dist=load")
     arguments.append("--tx=%s*popen" % results.__dict__['n'])
+    os.environ["SAUNTER_PARALLEL"] = str(results.__dict__['n'])
+else:
+    os.environ["SAUNTER_PARALLEL"] = "1"
 
 # plugin control
 if len(results.p) == 1:
@@ -182,21 +186,24 @@ else:
         arguments.append("-p")
         arguments.append(p)
 
-import saunter.ConfigWrapper
-config = saunter.ConfigWrapper.ConfigWrapper()
-config["saunter"] = {}
-config["saunter"]["base"] = cwd
-config.configure()
+# import saunter.ConfigWrapper
+# config = saunter.ConfigWrapper.ConfigWrapper()
+# config["saunter"] = {}
+# config["saunter"]["base"] = cwd
+# config.configure()
 
 # logging
 timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
-log_dir = os.path.join(cwd, 'logs', timestamp)
-os.makedirs(log_dir)
+saunter_log_dir = os.path.join(cwd, 'logs', timestamp)
 
-log_name = os.path.join(log_dir, "%s.xml" % timestamp)
+os.environ["SAUNTER_LOG_DIR"] = saunter_log_dir
+
+os.makedirs(saunter_log_dir)
+
+log_name = os.path.join(saunter_log_dir, "%s.xml" % timestamp)
 arguments.append('--junitxml=%s' % log_name)
 
-config["saunter"]["log_dir"] = log_dir
+# config["saunter"]["log_dir"] = log_dir
 
 arguments.append('--tb=%s' % results.__dict__["tb"])
 

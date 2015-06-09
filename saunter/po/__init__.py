@@ -21,7 +21,8 @@ Common
 import saunter.ConfigWrapper
 
 cf = saunter.ConfigWrapper.ConfigWrapper()
-
+cf.configure()
+# print(cf.__dict__)
 #: timeout value in s as an integer
 if "timeout" in cf["selenium"]:
     timeout_seconds = cf["selenium"]["timeout"]

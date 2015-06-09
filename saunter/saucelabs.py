@@ -54,7 +54,8 @@ class SauceLabs(object):
                 j["custom-data"][option] = item.parent._obj.config["sauce labs"]["custom data"][option]
 
         # build
-        if item.parent._obj.config['sauce labs']['build']:
+        if 'build' in item.parent._obj.config['sauce labs'] and \
+            item.parent._obj.config['sauce labs']['build']:
             j["build"] = item.parent._obj.config['sauce labs']['build']
         # print(json.dumps(j))
 
