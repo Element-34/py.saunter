@@ -17,7 +17,7 @@ setup(
                               "_defaults/conf/browsers/browser.yaml.default",
                               "_defaults/tailored/page.py",
                               "_defaults/tailored/webdriver.py"]},
-    version="2.0.0a4",
+    version="2.0.0",
     author="adam goucher",
     author_email="adam@element34.ca",
     install_requires=['pytest>=2.7.0',
@@ -33,7 +33,7 @@ setup(
     long_description="An opinionated WebDriver-based framework",
     url='https://github.com/Element-34/py.saunter',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: POSIX',
