@@ -91,7 +91,10 @@ class Browser(TailoredWebDriver):
         else:
             desired_capabilities = capabilities_map[browser_config["type"]]
 
-            if 'type' in self.config['selenium']['proxy'] and self.config['selenium']['proxy']['type'].lower() == "browsermob":
+            if 'type' in self.config['selenium']['proxy'] and \
+                self.config['selenium']['proxy']['type'] is not None and \
+                self.config['selenium']['proxy']['type'].lower() == "browsermob":
+                
                 self.proxy = self.config['saunter']['proxies'].pop()
                 self.proxy.add_to_webdriver_capabilities(desired_capabilities)
 
