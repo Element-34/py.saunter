@@ -337,8 +337,15 @@ class Matchers(object):
         :params text: the string to search for
         :params msg: (Optional) msg explaining the difference
         """
-        e = driver.find_element_by_tag_name('body')
-        assert text in e.text
+        try:
+            locator = ("xpath=//*[contains(text(), '%s')]") % text
+            self.driver.find_element_by_locator(locator)
+            return True
+        except:
+            if len(msg) == 0:
+                raise AssertionError('Text "%s" was not found.' % text)
+            else:
+                raise AssertionError('Text "%s" was not found.  %s' % (text,msg))
 
     def verify_text_present(self, text, msg=None):
         """
@@ -356,7 +363,7 @@ class Matchers(object):
                 m = str(e)
             self.verification_erorrs.append(m)
 
-    def asset_element_present(self, locator, msg=None):
+    def assert_element_present(self, locator, msg=None):
         """
         Hard assert for whether and element is present in the current window/frame
 
@@ -375,7 +382,7 @@ class Matchers(object):
         :params msg: (Optional) msg explaining the difference
         """
         try:
-            self.asset_element_present(locator, msg)
+            self.assert_element_present(locator, msg)
         except AssertionError, e:
             if msg:
                 m = "%s:\n%s" % (msg, str(e))
