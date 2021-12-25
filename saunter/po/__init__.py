@@ -29,7 +29,7 @@ if "timeout" in cf["selenium"]:
 else:
     timeout_seconds = 30
 
-#: timout value in ms as an integer
+#: timeout value in ms as an integer
 timeout_microseconds = timeout_seconds * 1000
-#: timout value in ms as a string
+#: timeout value in ms as a string
 string_timeout = str(timeout_microseconds)
